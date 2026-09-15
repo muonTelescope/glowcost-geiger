@@ -5,6 +5,14 @@ JLC parts are preferred. Parts below are candidates, and U1/U2 in the schematic
 are behavioral blocks, not orderable ICs. Pin-level controller implementation,
 qualified protection components, PCB routing, ERC/DRC and bench verification remain.
 
+## Latest part decisions
+
+See [part-selection.md](part-selection.md) for the current exact selections.
+J2/J3 are C142864, DNP at JLC. Drawn passives now have MPNs; controller parts
+are selected for implementation. Earlier open-part notes below are superseded
+by that document. External anode-resistor procurement and physical validation
+remain open.
+
 ## Requirements
 
 - Supply: **3.3 V**, replacing the initial 5 V request; test supply ±5%.
@@ -13,7 +21,7 @@ qualified protection components, PCB routing, ERC/DRC and bench verification rem
 - Same CTC-5 / STS-5 (СТС-5) tube as geiger2; ~400 V bias.
 - No MCU, firmware, radio, battery, display or external HV/sense connector.
 - Connector: locking 4-pin SMT from JLC; JST GH BM04B-GHS-TBT(LF)(SN) candidate.
-- Tube: user already owns the tubes; mounted on-board with clips; clip MPN and mounting geometry remain open.
+- Tube: user already owns the tubes; mounted on-board with clips; C142864 selected, DNP at JLC; mounting geometry still needs verification.
 - Use: indoor background monitoring, beta retained; raw counts primary, µSv approximate.
 - Assembly: 25–50 boards, optimize JLC cost; future coating/potting requires requalification.
 - Accepted passives: 0603 low voltage; choose larger HV packages for ratings and stock.
@@ -38,7 +46,7 @@ Parts are not locked until their datasheets and footprints are qualified.
 | 3.3 V pulse conditioning | TI SN74LVC1G14DBVR | C7835 | SOT-23-5 | Candidate only; extra blanking logic required |
 | Passive bleeder, 4×10 MΩ | UNI-ROYAL 1206W4F1005T5E | C26119 | 1206 | Catalog 200 V / 0.25 W / 1%; 23,028 stock; replaces 27-stock Yageo candidate |
 | Locking SMT connector | JST BM04B-GHS-TBT(LF)(SN) | C161692 | 1.25 mm pitch | 36,168 catalog stock; mating GHR-04V-S housing; verify pin-1 orientation in final footprint |
-| Divider, anode resistors, protection diode, tube clips | TBD | — | — | Exact MPNs remain open |
+| Divider, anode resistors, protection diode, tube clips | See current selections | — | — | Resolved MPNs in [part selection](part-selection.md); anode sourcing remains open |
 
 The previously searched **SN74HCT14 is rejected for this 3.3 V design**: its
 recommended supply starts at 4.5 V. The JLC search also confused MΩ with mΩ;

@@ -10,7 +10,8 @@
     "check": "python3 scripts/check_schematic.py",
     "sim:plots": "python3 scripts/analyze_tsci.py",
     "render:schematic": "python3 scripts/render_schematic.py",
-    "analyze:performance": "python3 scripts/analyze_performance.py"
+    "analyze:performance": "python3 scripts/analyze_performance.py",
+    "bom:review": "bun scripts/export-review-bom.ts"
   },
   "dependencies": {
     "circuit-json": "0.0.491",

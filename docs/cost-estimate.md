@@ -1,5 +1,10 @@
 # Expected production cost
 
+**Current revision:** J2/J3 C142864 are DNP at JLC. The anode resistors now
+require external sourcing; earlier 25/50-board budgets below are historical
+baselines pending that quote. The revised five-board allowance is $150–250.
+See [part selections](part-selection.md).
+
 Budget dated 2026-09-15, USD. **Allow $14–19 per assembled electronics board at
 25 units, or $12–16 at 50 units.** This is a planning estimate, not a supplier
 quote. It excludes the NOS tube, clips, mating cable, enclosure, coating/potting,
@@ -81,23 +86,23 @@ Two separately shipped prototype/production orders incur separate setup and frei
 
 ## Five-board prototype batch — tubes already owned
 
-Use **$130–190 for five assembled electronics boards ($26–38 each)**.
-Adding provisional clips/cables and one shipping allowance gives **$165–275**
+Use **$150–250 for five assembled electronics boards ($30–50 each)**.
+Adding provisional clips/cables and one shipping allowance gives **$185–335**
 before tax, enclosure, coating and test/assembly labor. Tube purchase cost is $0.
 This assumes Economic one-sided SMT is available for the final design.
 
 | Cost for the entire five-board batch | USD |
 |---|---:|
 | Catalog-priced candidate parts, exact 5-board tier calculation | $49.34 |
-| Remaining physical circuitry and HV parts allowance | $8–18 |
+| Remaining physical circuitry and external HV parts allowance (unquoted) | $20–50 |
 | Purchased excess, attrition minima and pricing reserve | $10–25 |
 | Bare PCB allowance, assumed approximately 125 × 35 mm | $10–25 |
-| Setup, stencil, 12–18 extended types and SMT placement | $48–67 |
-| Calculated electronics total | $125–185 |
-| **Rounded electronics budget** | **$130–190** |
+| Setup, stencil, additional extended types and SMT placement allowance | $60–85 |
+| Calculated electronics total | $149–235 |
+| **Rounded electronics budget** | **$150–250** |
 | Clips and mating cables, provisional materials reserve | $10–25 |
 | Shipping, provisional reserve | $25–60 |
-| **Budget including clips/cables and shipping** | **$165–275** |
+| **Budget including clips/cables and shipping** | **$185–335** |
 
 The candidate subtotal is $9.8686 per board: capacitors $3.1064, diodes $0.3712,
 inductor $0.6445, two comparator/references $4.8562, timer $0.3049, switch $0.0404,
@@ -107,7 +112,17 @@ quantities can be larger than five boards consume. At this batch size, setup and
 feeder charges contribute roughly $10–13 per board, so dividing the 50-board
 price by ten would significantly underbudget the prototype order.
 
-### Parts and implementation still to resolve
+J2/J3 are DNP and incur no JLC clip procurement/placement charge. If purchased
+separately, ten clips for five boards cost approximately $1.90 at the catalog
+one-piece price, before vendor pack minima and freight. The existing $10–25
+clips/cable reserve includes this; do not add it twice. External anode resistor
+prices are not verified, so the $20–50 line is an allowance, not a quote.
+
+### Original open-items list — superseded by current selections
+
+Exact MPN decisions are now recorded in [part-selection.md](part-selection.md).
+The following list records why those selections and physical checks were needed.
+
 
 | Item | What remains |
 |---|---|

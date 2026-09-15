@@ -34,7 +34,7 @@ width is stimulus-dependent and is not a measured tube specification.
 No MCU, radio, firmware, battery or display. Tube contacts are internal to the
 module. The tube will mount on-board with clips. J1 is a locking SMT JST GH candidate
 from JLC; 0603 low-voltage passives are accepted. Target batch: 25–50 boards,
-indoor use, beta sensitivity retained. Tube clip MPN and cable length remain open.
+indoor use, beta sensitivity retained. Tube clips are Littelfuse 10207101009 / C142864, **J2/J3 DNP at JLC**; cable length remains open.
 
 ## Circuit
 
@@ -72,7 +72,7 @@ main feedback, independent overvoltage cutoff, tube/pulse input and discharge.
 Named nets connect the sections without wires crossing the notes. Open the SVG
 to zoom into component values and pin labels. The drawing shows all eight
 multiplier diodes/capacitors, feedback and protection dividers, bleeder and tube interface. U1/U2 are explicitly labeled behavioral
-blocks. Their symbols are not real IC pinouts. The checker compares 45 components
+blocks. Their symbols are not real IC pinouts. The checker compares 47 components
 and 30 exposed nets against SPICE, including diode polarity and passive values.
 
 ## Tube and HV protection
@@ -122,14 +122,27 @@ spike, so physical soft-start and Pi rail-droop tests remain necessary.
 [Detailed calculations, source references, pulse-pair charts and current budget](docs/performance.md)
 · [Machine-readable results](docs/performance/results.json)
 
+## Selected parts
+
+J2/J3 use **Littelfuse 10207101009 / C142864**, marked **DNP** for JLC assembly.
+The remaining drawn passives now carry exact part numbers. The 33 MΩ dividers
+use stocked 2512 parts; the sensing bottoms use 0.1% thin-film 0603 parts.
+The 2.49 MΩ anode resistors use a Vishay HV part requiring external sourcing.
+[Selections and rating checks](docs/part-selection.md) ·
+[Generated review inventory, including DNP](docs/review-bom.csv).
+
+Physical controller parts are selected separately; U1/U2 remain behavioral.
+The selected slew-control switch is not yet implemented in the simulated circuit.
+
 ## Expected cost
 
-**Five-board prototype batch, tubes already owned:** allow **$130–190** for
-assembled electronics, or **$165–275** including provisional clips/cables and
-shipping. Taxes, enclosure and test labor are extra. See the
+**Five-board prototype batch, tubes already owned:** allow **$150–250** for
+assembled electronics with a provisional allowance for externally sourced HV
+resistors, or **$185–335** including clips/cables and shipping. Taxes, enclosure and test labor are extra. See the
 [five-board breakdown and unresolved parts](docs/cost-estimate.md#five-board-prototype-batch--tubes-already-owned).
 
-Budget **$14–19 per assembled electronics board at 25 units** ($350–475 total),
+Earlier planning baseline, before the external HV-resistor selection:
+**$14–19 per assembled electronics board at 25 units** ($350–475 total),
 or **$12–16 at 50 units** ($600–800 total), in USD. These estimates include PCB,
 SMT assembly and allowances for the unfinished physical circuitry. They exclude
 the tube, clips/cable, enclosure, shipping, tax and functional testing.
@@ -145,7 +158,7 @@ comparator/reference ICs and eight HV capacitors dominate.
 - **Pi connector:** locking SMT JST GH, BM04B-GHS-TBT(LF)(SN), JLC C161692.
   The mating cable is separate; its length remains to be specified.
 - **Tube:** on-board clips; install the NOS tube after reflow and cleaning.
-  Clip selection and mechanical retention remain to be finalized.
+  J2/J3 use C142864, DNP at JLC; fit and mechanical retention still need checking.
 - **Environment:** dry indoor enclosure initially. Future conformal coating or
   potting requires rechecking HV leakage, pulse recovery and beta response.
   Keep coating out of connector and tube-clip contact surfaces.
@@ -226,6 +239,7 @@ bun install --frozen-lockfile
 python3 -m pip install -r requirements-sim.txt
 bun run build
 bun run check
+bun run bom:review                   # review inventory with DNP, not production BOM
 bun run render:schematic             # full sheet and readable detail views
 bun run sim                         # native supply/load/fault sweep and plots
 bun run sim:sync                    # regenerate tscircuit SPICE subcircuit

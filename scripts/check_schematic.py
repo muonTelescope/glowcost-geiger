@@ -28,7 +28,7 @@ for line in (root/'sim/hv/converter.cir').read_text().splitlines():
         pins=[2,1] if ref[0]=='C' and ref[1:].isdigit() and int(ref[1:])%2==0 else [1,2]
         for net,pin in zip(f[1:3],pins):add('battery' if net=='vin' else net,refmap.get(ref,ref),pin)
 # Collapse only the modeled input source resistance into the driver boundary.
-for name,nets in {'J1':['battery','0','ttl','en'],'U1':['sw','0','battery','en','sense','ovp'],'U2':['collector','drive','battery','0','en','hv','ovp'],'Q1':['base','0','collector'],'GM1':['anode','cathode']}.items():
+for name,nets in {'J1':['battery','0','ttl','en'],'U1':['sw','0','battery','en','sense','ovp'],'U2':['collector','drive','battery','0','en','hv','ovp'],'Q1':['base','0','collector'],'GM1':['anode','cathode'],'J2':['anode','anode'],'J3':['cathode','cathode']}.items():
     for pin,net in enumerate(nets,1):add(net,name,pin)
 a={frozenset(s) for s in actual.values()};e={frozenset(s) for s in expected.values()}
 assert a==e, {'missing':[sorted(s) for s in e-a], 'extra':[sorted(s) for s in a-e]}

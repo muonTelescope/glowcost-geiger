@@ -8,8 +8,8 @@ const nodePorts: Record<string, string[]> = {
  TTL:['.J1 > .TTL','.R_OUT > .pin2'],
  DRIVE:['.U2 > .OUT','.R_OUT > .pin1'],
  ANODE_MID:['.R_A1 > .pin2','.R_A2 > .pin1'],
- ANODE:['.R_A2 > .pin2','.GM1 > .A'],
- CATHODE:['.GM1 > .K','.R_K > .pin1','.R_PROTECT > .pin1'],
+ ANODE:['.R_A2 > .pin2','.GM1 > .A','.J2 > .pin1','.J2 > .pin2'],
+ CATHODE:['.J3 > .pin1','.J3 > .pin2','.GM1 > .K','.R_K > .pin1','.R_PROTECT > .pin1'],
  BASE:['.R_PROTECT > .pin2','.Q1 > .B','.D_NEG > .cathode'],
  COLLECTOR:['.Q1 > .C','.R_COL > .pin2','.U2 > .IN'],
  OVP:['.R_OV4 > .pin2','.R_OVBOT > .pin1','.C_OV > .pin1','.U1 > .OVP','.U2 > .OVP'],
@@ -57,7 +57,7 @@ const notes = [
   [31, 13, "SW peak ~106 V nominal; HV ~399 V. Stage labels are electrical nets.", 0.43],
   [31, 11.5, "Diode DC rating 200 V: verify individual reverse stress and hot leakage.", 0.43],
   [0, 7, "03  MAIN HV FEEDBACK", 0.7],
-  [0, 5.5, "Four 33M legs share HV stress. Each leg ~100 V / 0.30 mW.", 0.43],
+  [0, 5.5, "Four 33M / 2512 / 1% legs share HV stress. Each leg ~100 V / 0.30 mW.", 0.43],
   [0, -3.5, "Vset = 1.242 x (132M + 412k) / 412k = 399.16 V.", 0.46],
   [0, -5, "Divider 3.02 uA at 400 V; C9 time constant ~41 us. Keep sense clean.", 0.43],
   [31, 7, "04  INDEPENDENT OVERVOLTAGE CUTOFF", 0.7],
@@ -68,6 +68,7 @@ const notes = [
   [0, -10.5, "R_A1/R_A2: EACH >=500 V working rating; mount close to the anode.", 0.43],
   [0, -25, "4.98M anode limit: <=88.4 uA at 440 V; Q1 emitter returns to GND.", 0.43],
   [0, -26.5, "D_NEG limits reverse VBE. U2: invert + EN / HV-ready / OVP blanking.", 0.43],
+  [0, -29.5, "J2/J3: C142864, DNP at JLC; two pads of each clip share one electrode net.", 0.43],
   [0, -28, "Assume tube dead time ~190 us; plan 250 us pending tube/pulse tests.", 0.43],
   [43, -9, "06  PASSIVE HV DISCHARGE", 0.7],
   [43, -10.5, "Four 10M legs: ~100 V / 1 mW each.", 0.43],
@@ -84,7 +85,7 @@ export default () => (
     {notes.map(([x,y,text,size],i)=><schematictext key={i} text={text} schX={x} schY={y} fontSize={size} anchor="left" color="#16324f" />)}
     <chip {...parts.connector} name="J1" schSectionName={panelOf(".J1 > pin1")} schX={3} schY={18} pinLabels={{pin1:'V3V3',pin2:'GND',pin3:'TTL',pin4:'EN'}} schPinArrangement={{rightSide:['V3V3','GND','TTL','EN']}} />
     <chip name="U1" schSectionName={panelOf(".U1 > pin1")} schX={17} schY={18} pinLabels={{pin1:'SW',pin2:'GND',pin3:'V3V3',pin4:'EN',pin5:'FB',pin6:'OVP'}} schPinArrangement={{leftSide:['V3V3','EN','FB','OVP','GND'],rightSide:['SW']}} />
-    <resistor name="R_EN" schSectionName={panelOf(".R_EN > pin1")} resistance="100k" schX={9} schY={16} schRotation={270} />
+    <resistor {...parts.r100k} name="R_EN" schSectionName={panelOf(".R_EN > pin1")} resistance="100k" footprint="0603" schX={9} schY={16} schRotation={270} />
     {Array.from({length:4},(_,i)=>{
       const n=i+1, x=34+i*6
       return <Fragment key={n}>
@@ -95,24 +96,28 @@ export default () => (
       </Fragment>
     })}
     {Array.from({length:4},(_,i)=><Fragment key={`div-${i}`}>
-      <resistor name={`R${i+1}`} schSectionName={panelOf("." + `R${i+1}` + " > pin1")} resistance="33M" footprint="1206" schX={3+i*5} schY={2} />
-      <resistor name={`R_OV${i+1}`} schSectionName={panelOf("." + `R_OV${i+1}` + " > pin1")} resistance="33M" footprint="1206" schX={34+i*5} schY={2} />
+      <resistor {...parts.dividerTop} name={`R${i+1}`} schSectionName={panelOf("." + `R${i+1}` + " > pin1")} resistance="33M" footprint="2512" schX={3+i*5} schY={2} />
+      <resistor {...parts.dividerTop} name={`R_OV${i+1}`} schSectionName={panelOf("." + `R_OV${i+1}` + " > pin1")} resistance="33M" footprint="2512" schX={34+i*5} schY={2} />
       <resistor {...parts.bleeder} footprint="1206" name={`R_BL${i+1}`} schSectionName={panelOf("." + `R_BL${i+1}` + " > pin1")} resistance="10M" schX={45+i*3.5} schY={-15} />
     </Fragment>)}
-    <resistor name="R5" schSectionName={panelOf(".R5 > pin1")} resistance="412k" footprint="0603" schX={23} schY={0} schRotation={270} />
-    <capacitor name="C9" schSectionName={panelOf(".C9 > pin1")} capacitance="100pF" footprint="0603" schX={27} schY={0} schRotation={270} />
-    <resistor name="R_OVBOT" schSectionName={panelOf(".R_OVBOT > pin1")} resistance="402k" schX={54} schY={0} schRotation={270} />
-    <capacitor name="C_OV" schSectionName={panelOf(".C_OV > pin1")} capacitance="10pF" schX={58} schY={0} schRotation={270} />
-    <resistor name="R_A1" schSectionName={panelOf(".R_A1 > pin1")} resistance="2.49M" schX={3} schY={-14} />
-    <resistor name="R_A2" schSectionName={panelOf(".R_A2 > pin1")} resistance="2.49M" schX={8} schY={-14} />
+    <resistor {...parts.senseBottom} name="R5" schSectionName={panelOf(".R5 > pin1")} resistance="412k" footprint="0603" schX={23} schY={0} schRotation={270} />
+    <capacitor {...parts.senseCap} name="C9" schSectionName={panelOf(".C9 > pin1")} capacitance="100pF" footprint="0603" schX={27} schY={0} schRotation={270} />
+    <resistor {...parts.ovpBottom} name="R_OVBOT" schSectionName={panelOf(".R_OVBOT > pin1")} resistance="402k" footprint="0603" schX={54} schY={0} schRotation={270} />
+    <capacitor {...parts.ovpCap} name="C_OV" schSectionName={panelOf(".C_OV > pin1")} capacitance="10pF" footprint="0603" schX={58} schY={0} schRotation={270} />
+    <resistor {...parts.anode} name="R_A1" schSectionName={panelOf(".R_A1 > pin1")} resistance="2.49M" footprint="1206" schX={3} schY={-14} />
+    <resistor {...parts.anode} name="R_A2" schSectionName={panelOf(".R_A2 > pin1")} resistance="2.49M" footprint="1206" schX={8} schY={-14} />
+    {['J2','J3'].map((name,i)=><chip {...parts.tubeClip} key={name} name={name} displayName={`${name} DNP`} schSectionName="tube-clips" schX={8+i*14} schY={-23} pinLabels={{pin1:'CONTACT1',pin2:'CONTACT2'}} schPinArrangement={{leftSide:['CONTACT1'],rightSide:['CONTACT2']}} footprint={<footprint>
+      <platedhole name="pad1" portHints={['pin1']} pcbX={-3.8} pcbY={0} shape="circle" holeDiameter={2.1} outerDiameter={3.5} />
+      <platedhole name="pad2" portHints={['pin2']} pcbX={3.8} pcbY={0} shape="circle" holeDiameter={2.1} outerDiameter={3.5} />
+    </footprint>} />)}
     <chip name="GM1" schSectionName={panelOf(".GM1 > pin1")} schX={13} schY={-14} pinLabels={{pin1:'A',pin2:'K'}} schPinArrangement={{leftSide:['A'],rightSide:['K']}} />
-    <resistor name="R_K" schSectionName={panelOf(".R_K > pin1")} resistance="100k" schX={17} schY={-17} schRotation={270} />
-    <resistor name="R_PROTECT" schSectionName={panelOf(".R_PROTECT > pin1")} resistance="100k" schX={21} schY={-14} />
+    <resistor {...parts.r100k} name="R_K" schSectionName={panelOf(".R_K > pin1")} resistance="100k" footprint="0603" schX={17} schY={-17} schRotation={270} />
+    <resistor {...parts.r100k} name="R_PROTECT" schSectionName={panelOf(".R_PROTECT > pin1")} resistance="100k" footprint="0603" schX={21} schY={-14} />
     <chip {...parts.pulseTransistor} footprint="sot23" name="Q1" schSectionName={panelOf(".Q1 > pin1")} schX={26} schY={-14} pinLabels={{pin1:'B',pin2:'E',pin3:'C'}} schPinArrangement={{leftSide:['B'],topSide:['C'],bottomSide:['E']}} />
-    <diode name="D_NEG" schSectionName={panelOf(".D_NEG > pin1")} schX={22} schY={-19} />
-    <resistor name="R_COL" schSectionName={panelOf(".R_COL > pin1")} resistance="47k" schX={29} schY={-13} schRotation={270} />
+    <diode {...parts.reverseClamp} footprint="sod123" name="D_NEG" schSectionName={panelOf(".D_NEG > pin1")} schX={22} schY={-19} />
+    <resistor {...parts.r47k} name="R_COL" schSectionName={panelOf(".R_COL > pin1")} resistance="47k" footprint="0603" schX={29} schY={-13} schRotation={270} />
     <chip name="U2" schSectionName={panelOf(".U2 > pin1")} schX={32} schY={-19} pinLabels={{pin1:'IN',pin2:'OUT',pin3:'V3V3',pin4:'GND',pin5:'EN',pin6:'HV_READY',pin7:'OVP'}} schPinArrangement={{leftSide:['IN','V3V3','GND','EN','HV_READY','OVP'],rightSide:['OUT']}} />
-    <resistor name="R_OUT" schSectionName={panelOf(".R_OUT > pin1")} resistance="1k" schX={37} schY={-19} />
+    <resistor {...parts.r1k} name="R_OUT" schSectionName={panelOf(".R_OUT > pin1")} resistance="1k" footprint="0603" schX={37} schY={-19} />
     {Object.entries(nodePorts).flatMap(([node,ports])=>{
       const groups = Object.groupBy(ports,panelOf)
       if (Object.keys(groups).length === 1) return ports.slice(1).map(port =>
