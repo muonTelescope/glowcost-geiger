@@ -11,7 +11,9 @@
     "sim:plots": "python3 scripts/analyze_tsci.py",
     "render:schematic": "python3 scripts/render_schematic.py",
     "analyze:performance": "python3 scripts/analyze_performance.py",
-    "bom:review": "bun scripts/export-review-bom.ts"
+    "bom:review": "bun scripts/export-review-bom.ts",
+    "build:layout": "tsci build board/layout.circuit.tsx --disable-parts-engine --pcb-svgs --3d-png",
+    "render:layout": "python3 scripts/export_layout.py"
   },
   "dependencies": {
     "circuit-json": "0.0.491",

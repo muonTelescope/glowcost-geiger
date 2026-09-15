@@ -1,0 +1,105 @@
+{
+  "status": "placement checks pass; NOT routing/clearance or electrical signoff",
+  "board_mm": [
+    140,
+    60,
+    1.6
+  ],
+  "placed_footprints": 44,
+  "dnp_retained_footprints": [
+    "J2",
+    "J3"
+  ],
+  "mounting_holes": 4,
+  "clip_plated_holes": 4,
+  "copper_traces": 0,
+  "vias": 0,
+  "planes": 0,
+  "checks": [
+    "schematic part identity",
+    "all courtyards present",
+    "courtyard AABB overlap",
+    "board bounds",
+    "tube and controller reserves",
+    "mounting hardware reserves",
+    "DNP clips and 7.6mm drill spacing"
+  ],
+  "warnings": [
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"Q\" prefix is being used with a <chip />, try using it with a <transistor />"
+    },
+    {
+      "type": "schematic_missing_sheet_warning",
+      "message": "No <schematicsheet> was found. Add a <schematicsheet> to define the schematic drawing area."
+    },
+    {
+      "type": "pcb_connector_not_in_accessible_orientation_warning",
+      "message": "component is facing y+ but should face x- so the connector is accessible from the board edge"
+    },
+    {
+      "type": "pcb_connector_not_in_accessible_orientation_warning",
+      "message": "component is facing x- but should face y+ so the connector is accessible from the board edge"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on J1 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on J2 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on J3 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on Q1 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "J1 has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "J2 has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "J3 has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "Q1 has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "J1 has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "J2 has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "J3 has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "Q1 has no pin with requires_ground=true"
+    }
+  ]
+}

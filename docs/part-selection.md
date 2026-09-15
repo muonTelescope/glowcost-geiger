@@ -18,10 +18,11 @@ Source footprint uses 7.6 mm spacing, 2.1 mm finished drill and 3.5 mm copper
 diameter. Final drill tolerance, courtyard and actual tube-end fit require
 mechanical review. DNP is encoded in `parts.tubeClip.doNotPlace` and the
 generated [review inventory](review-bom.csv), not merely a printed note.
-The present build disables PCB output. When producing a PCB, retain the clip
-holes/pads and exclude the clips from assembly procurement/placement; the current
-tscircuit `doNotPlace` flag also skips PCB-placement phases, so fabrication must
-use a separate population filter rather than blindly relying on that flag.
+The functional schematic build disables PCB output. The separate placement study
+retains clip holes/pads by generating their geometry before restoring DNP in the
+published circuit JSON. The tscircuit `doNotPlace` flag otherwise skips placement.
+The review inventory remains authoritative for population; J2/J3 must be excluded
+from assembly procurement and placement. See [layout notes](layout.md).
 
 DNP means the delivered JLC assembly lacks these clips. User installation is
 required before the tube can be connected. Do not silently order or populate them.

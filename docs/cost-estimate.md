@@ -163,3 +163,11 @@ whether the design is ready for the later 25–50-board run.
 The next accurate pricing milestone is a pin-complete BOM plus routed board,
 followed by JLC's actual fabrication/assembly quote. This document does not
 authorize purchasing or establish that the hardware is ready for manufacture.
+
+## Placement-size update
+
+The basic layout now measures **140 × 60 mm**, superseding the 125 × 35 mm
+assumption used in the PCB allowances above. The component estimates are
+unchanged; the bare-board and shipping allowances require a new supplier quote.
+Do not treat the earlier totals as a quote for this larger board or scale the
+entire assembly cost by board area. See [placement documentation](layout.md).

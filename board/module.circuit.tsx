@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import { parts } from "./parts"
 /** Review schematic of the simulated CW ladder. Not a fabrication board. */
-const nodePorts: Record<string, string[]> = {
+export const nodePorts: Record<string, string[]> = {
  SW:['.U1 > .SW','.C1 > .pin1'],
  V3V3:['.J1 > .V3V3','.U1 > .V3V3','.U2 > .V3V3','.R_COL > .pin1'],
  EN:['.J1 > .EN','.U1 > .EN','.U2 > .EN','.R_EN > .pin1'],

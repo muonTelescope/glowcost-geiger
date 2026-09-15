@@ -4,7 +4,7 @@
 3.3 V pulse output and power enable. Uses the same **CTC-5 / STS-5 (СТС-5)**
 Geiger–Müller tube as geiger2, biased near 400 V.
 
-**Status: functional tscircuit schematic and reproducible SPICE study.** The HV
+**Status: functional tscircuit schematic, reproducible SPICE study and basic unrouted placement.** The HV
 oscillator/switch, comparator timing and output blanking contain behavioral
 models. JLC component candidates are documented; this is not a routed PCB,
 complete pin-level production schematic or fabrication release. HV protection
@@ -74,6 +74,41 @@ to zoom into component values and pin labels. The drawing shows all eight
 multiplier diodes/capacitors, feedback and protection dividers, bleeder and tube interface. U1/U2 are explicitly labeled behavioral
 blocks. Their symbols are not real IC pinouts. The checker compares 47 components
 and 30 exposed nets against SPICE, including diode polarity and passive values.
+
+## PCB renders and layer views
+
+The **140 × 60 mm, two-layer placement study** holds 44 footprints, with all SMT
+parts on top. J2/J3 retain their holes and pads while remaining **C142864 DNP**.
+The controller area is reserved for the physical implementation of U1/U2.
+There are **no routed traces, vias or copper planes** yet.
+
+![Native tscircuit 3D placement preview](docs/layout/3d.png)
+
+This preview uses generic package models; the tube and accurate connector/clip
+bodies are absent. Red hatching marks the tube keepout, not copper.
+
+![Annotated top placement](docs/layout/placement.png)
+
+| Top copper pads | Bottom copper annuli |
+|---|---|
+| ![Top copper](docs/layout/top-copper.png) | ![Bottom copper](docs/layout/bottom-copper.png) |
+| Top silkscreen | Drill locations |
+| ![Silkscreen](docs/layout/silkscreen.png) | ![Drill locations](docs/layout/drill.png) |
+
+These are design-layer views, not manufacturing Gerbers. Bottom copper currently
+contains only the clip-hole annuli. The drill view includes annuli for context.
+
+![Courtyards and reserved tube space](docs/layout/courtyards.png)
+
+[Layout dimensions, assembly notes and remaining checks](docs/layout.md) ·
+[Placement checks](docs/layout/checks.json) ·
+[Review coordinates](docs/layout/placement.csv) ·
+[Published circuit JSON](docs/layout/circuit.json) ·
+[Layout source](board/layout.circuit.tsx)
+
+Courtyard and mechanical-reserve checks pass. HV creepage/clearance, routing,
+actual tube fit and enclosure interference still require review. The larger board
+supersedes the earlier 125 × 35 mm cost assumption; obtain a fresh PCB quote.
 
 ## Tube and HV protection
 
@@ -241,6 +276,8 @@ bun run build
 bun run check
 bun run bom:review                   # review inventory with DNP, not production BOM
 bun run render:schematic             # full sheet and readable detail views
+bun run build:layout                 # unrouted PCB SVG and native 3D preview
+bun run render:layout                # placement checks and published layer images
 bun run sim                         # native supply/load/fault sweep and plots
 bun run sim:sync                    # regenerate tscircuit SPICE subcircuit
 bun run sim:tsci > docs/hv/tsci-run.log 2>&1
