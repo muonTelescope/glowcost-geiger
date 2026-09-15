@@ -1,46 +1,27 @@
 {
-  "status": "routing study; two expected unconnected analog-control ports; NOT fabrication signoff",
+  "status": "routing study with testpoints; analog control still missing; NOT fabrication signoff",
   "board_mm": [
     120,
     40,
     1.6
   ],
-  "placed_footprints": 44,
+  "placed_footprints": 72,
   "dnp_retained_footprints": [
     "J2",
     "J3"
   ],
   "mounting_holes": 4,
   "clip_plated_holes": 4,
-  "copper_traces": 61,
-  "vias": 16,
+  "through_hole_testpoints": 22,
+  "led_bridge": {
+    "width_mm": 0.375,
+    "intact_connected": true,
+    "cut_disconnects_supply": true
+  },
+  "copper_traces": 93,
+  "vias": 41,
   "planes": 0,
-  "errors": [
-    {
-      "type": "pcb_port_not_connected_error",
-      "message": "Port [C1.pin1] is not connected to net [SW] by a PCB trace.",
-      "error_type": "pcb_port_not_connected_error",
-      "pcb_port_ids": [
-        "pcb_port_6"
-      ],
-      "pcb_component_ids": [
-        "pcb_component_2"
-      ],
-      "pcb_port_not_connected_error_id": "pcb_port_not_connected_error_0"
-    },
-    {
-      "type": "pcb_port_not_connected_error",
-      "message": "Port [R_OUT.pin1] is not connected to net [DRIVE] by a PCB trace.",
-      "error_type": "pcb_port_not_connected_error",
-      "pcb_port_ids": [
-        "pcb_port_89"
-      ],
-      "pcb_component_ids": [
-        "pcb_component_43"
-      ],
-      "pcb_port_not_connected_error_id": "pcb_port_not_connected_error_1"
-    }
-  ],
+  "errors": [],
   "checks": [
     "schematic part identity",
     "all courtyards present",
@@ -52,6 +33,98 @@
   ],
   "tube_vertical_clearance": "UNVERIFIED; component height and electrical spacing to tube require measurement",
   "warnings": [
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"Q\" prefix is being used with a <chip />, try using it with a <transistor />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
+    {
+      "type": "source_refdes_convention_warning",
+      "message": "The \"TP\" prefix is being used with a <chip />, try using it with a <testpoint />"
+    },
     {
       "type": "source_refdes_convention_warning",
       "message": "The \"J\" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />"
@@ -82,6 +155,102 @@
     },
     {
       "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on SJ_LED are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on Q_LED are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP1 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP2 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP3 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP4 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP5 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP6 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP7 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP8 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP9 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP10 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP11 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP12 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP13 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP14 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP15 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP16 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP17 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP18 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP19 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP20 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP21 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
+      "message": "All pins on TP22 are underspecified (no pinAttributes set)"
+    },
+    {
+      "type": "source_component_pins_underspecified_warning",
       "message": "All pins on J1 are underspecified (no pinAttributes set)"
     },
     {
@@ -98,6 +267,14 @@
     },
     {
       "type": "source_no_power_pin_defined_warning",
+      "message": "SJ_LED has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
+      "message": "Q_LED has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_power_pin_defined_warning",
       "message": "J1 has no pin with requires_power=true"
     },
     {
@@ -111,6 +288,14 @@
     {
       "type": "source_no_power_pin_defined_warning",
       "message": "Q1 has no pin with requires_power=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "SJ_LED has no pin with requires_ground=true"
+    },
+    {
+      "type": "source_no_ground_pin_defined_warning",
+      "message": "Q_LED has no pin with requires_ground=true"
     },
     {
       "type": "source_no_ground_pin_defined_warning",

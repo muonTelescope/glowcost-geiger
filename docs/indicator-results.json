@@ -1,0 +1,15 @@
+{
+  "enabled": {
+    "i_led_on": -0.00128095,
+    "v_ttl_on": 3.26733,
+    "v_ttl_off": 0.0,
+    "i_drive_on": -8.8778e-05
+  },
+  "cut": {
+    "i_led_on": -2.42495e-12,
+    "v_ttl_on": 3.26733,
+    "v_ttl_off": 0.0,
+    "i_drive_on": -9.02068e-05
+  },
+  "limitations": "Generic LED/BJT models, ideal 3.3 V pulse driver, 100 us pulses; no optical visibility or physical U2 validation. Cut modeled as 1 teraohm."
+}

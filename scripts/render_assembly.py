@@ -9,7 +9,7 @@ rows=json.loads((OUT/'circuit.json').read_text());source={r['source_component_id
 bpy.ops.wm.read_factory_settings(use_empty=True)
 def mat(name,color,metal=0):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True;p=m.node_tree.nodes['Principled BSDF'];p.inputs['Base Color'].default_value=(*color,1);p.inputs['Metallic'].default_value=metal;p.inputs['Roughness'].default_value=.35;return m
-mask=mat('Green soldermask',(.015,.11,.047));gold=mat('Exposed pads',(.6,.42,.12),.7);tin=mat('Tin clips',(.65,.69,.72),.8);ceramic=mat('Generic capacitors',(.45,.40,.28));black=mat('Generic bodies',(.06,.065,.07));tubeMat=mat('Recovered tube metal',(.48,.40,.20),.7);copper=mat('Copper routing under mask',(.025,.19,.075))
+mask=mat('Green soldermask',(.015,.11,.047));gold=mat('Exposed pads',(.6,.42,.12),.7);tin=mat('Tin clips',(.65,.69,.72),.8);ceramic=mat('Generic capacitors',(.45,.40,.28));black=mat('Generic bodies',(.06,.065,.07));tubeMat=mat('Recovered tube metal',(.48,.40,.20),.7);green=mat('Green LED',(.08,.5,.03));copper=mat('Copper routing under mask',(.025,.19,.075))
 def box(name,center,dims,material):
  bpy.ops.mesh.primitive_cube_add(size=1,location=center);o=bpy.context.object;o.name=name;o.dimensions=dims;bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);o.data.materials.append(material);return o
 board=next(r for r in rows if r['type']=='pcb_board');outline=board['outline'];n=len(outline);verts=[(p['x'],p['y'],z) for z in [-1.6,0] for p in outline];faces=[tuple(reversed(range(n))),tuple(range(n,2*n))]+[(i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n)]
@@ -27,14 +27,23 @@ for r in rows:
    if a['route_type']!='wire' or b['route_type']!='wire' or a['layer']!=b['layer']:continue
    z=.012 if a['layer']=='top' else -1.612
    curve=bpy.data.curves.new('Trace','CURVE');curve.dimensions='3D';curve.bevel_depth=a['width']/2;curve.bevel_resolution=1;sp=curve.splines.new('POLY');sp.points.add(1);sp.points[0].co=(a['x'],a['y'],z,1);sp.points[1].co=(b['x'],b['y'],z,1);obj=bpy.data.objects.new('Trace',curve);bpy.context.collection.objects.link(obj);obj.data.materials.append(copper)
+silk=mat('Silkscreen',(.85,.85,.76))
+for r in rows:
+ if r['type']!='pcb_silkscreen_text':continue
+ curve=bpy.data.curves.new('Label','FONT');curve.body=r['text'];curve.size=r['font_size'];curve.align_x='CENTER';curve.align_y='CENTER'
+ obj=bpy.data.objects.new('Silkscreen '+r['text'],curve);bpy.context.collection.objects.link(obj);p=r['anchor_position'];obj.location=(p['x'],p['y'],.035 if r['layer']=='top' else -1.635);obj.rotation_euler.z=math.radians(r.get('ccw_rotation',0));obj.data.materials.append(silk)
+ if r['layer']=='bottom':obj.rotation_euler.y=math.pi
 for r in rows:
  if r['type']!='pcb_component':continue
- name=source[r['source_component_id']]['name'];x=r['center']['x'];y=r['center']['y']
+ name=source[r['source_component_id']]['name']
+ if name.startswith('TP') or name=='SJ_LED':continue
+ x=r['center']['x'];y=r['center']['y']
  if name in ['J2','J3']:
   bpy.ops.wm.stl_import(filepath=str(ROOT/'cad/models/C142864/C142864.stl'));obj=bpy.context.object;obj.name=name+' datasheet clip';obj.location=(x,y,0);obj.rotation_euler.z=math.radians(r.get('rotation',0));obj.data.materials.append(tin);continue
  w,h=r['width']*.7,r['height']*.6;height=1.2 if name.startswith('C') else .6
  if name=='J1':w,h,height=8.25,4.25,4.25
- obj=box(name+' illustrative body',(x,y,height/2+.05),(w,h,height),ceramic if name.startswith('C') else black)
+ if name=='D_LED':w,h,height=2,1.25,.8
+ obj=box(name+' illustrative body',(x,y,height/2+.05),(w,h,height),green if name=='D_LED' else (ceramic if name.startswith('C') else black))
 bpy.ops.wm.stl_import(filepath=str(ROOT/'cad/models/tube.stl'));tube=bpy.context.object;tube.name='Recovered tube - nominal seating';tube.location.z=7.2;tube.data.materials.append(tubeMat)
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=32;scene.cycles.use_denoising=True;scene.world=bpy.data.worlds.new('World');scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.1,.12,.15,1)
 for loc,power,size in [((0,-60,110),220000,90),((-70,30,70),160000,80),((70,50,60),190000,60)]:

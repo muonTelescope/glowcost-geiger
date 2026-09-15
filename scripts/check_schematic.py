@@ -30,9 +30,18 @@ for line in (root/'sim/hv/converter.cir').read_text().splitlines():
 # Collapse only the modeled input source resistance into the driver boundary.
 for name,nets in {'J1':['battery','0','ttl','en'],'U1':['sw','0','battery','en','sense','ovp'],'U2':['collector','drive','battery','0','en','hv','ovp'],'Q1':['base','0','collector'],'GM1':['anode','cathode'],'J2':['anode','anode'],'J3':['cathode','cathode']}.items():
     for pin,net in enumerate(nets,1):add(net,name,pin)
+# Probe/indicator additions are separately checked; original SPICE remains unchanged.
+probe_nets=['battery','0','en','ttl','drive','base','collector','cathode','0','sw','p1','s1','p2','s2','p3','s3','p4','hv','sense','ovp','anode','0']
+for i,net in enumerate(probe_nets,1):add(net,f'TP{i}',1)
+for name,nets in {'SJ_LED':['battery','led_supply'],'R_LED':['led_supply','led_a'],'D_LED':['led_a','led_k'],'Q_LED':['led_base','0','led_k'],'R_LB':['drive','led_base'],'R_LPD':['led_base','0']}.items():
+    for pin,net in enumerate(nets,1):add(net,name,pin)
+sj=next(c for c in comps.values() if c['name']=='SJ_LED')
+assert len(sj.get('internally_connected_source_port_ids',[]))==1
+led=next(c for c in comps.values() if c['name']=='D_LED')
+assert led['manufacturer_part_number']=='KT-0805YG'
 a={frozenset(s) for s in actual.values()};e={frozenset(s) for s in expected.values()}
 assert a==e, {'missing':[sorted(s) for s in e-a], 'extra':[sorted(s) for s in a-e]}
-expected_values={'R1':33e6,'R2':33e6,'R3':33e6,'R4':33e6,'R5':412e3,'R_A1':2.49e6,'R_A2':2.49e6,'R_K':1e5,'R_EN':1e5,'R_PROTECT':1e5,'R_OUT':1000,'R_COL':47000,**{f'R_OV{i}':33e6 for i in range(1,5)},**{f'R_BL{i}':10e6 for i in range(1,5)},'R_OVBOT':402e3}
+expected_values={'R1':33e6,'R2':33e6,'R3':33e6,'R4':33e6,'R5':412e3,'R_A1':2.49e6,'R_A2':2.49e6,'R_K':1e5,'R_EN':1e5,'R_PROTECT':1e5,'R_OUT':1000,'R_COL':47000,'R_LED':1000,'R_LB':47000,'R_LPD':100000,**{f'R_OV{i}':33e6 for i in range(1,5)},**{f'R_BL{i}':10e6 for i in range(1,5)},'R_OVBOT':402e3}
 for c in comps.values():
     if c['name'] in expected_values:assert c['resistance']==expected_values[c['name']]
     if c['name'].startswith('C'):assert abs(c['capacitance']-(100e-12 if c['name']=='C9' else (10e-12 if c['name']=='C_OV' else 10e-9)))<1e-16

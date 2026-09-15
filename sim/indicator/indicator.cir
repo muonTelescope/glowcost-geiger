@@ -1,0 +1,20 @@
+* Pulse indicator validation, generic diode/BJT, not a photometric model.
+Vcc vcc 0 3.3
+Vdrive drive 0 PULSE(0 3.3 1m 1n 1n 100u 20m)
+Rbridge vcc led_supply 0.01
+Rled led_supply led_a 1k
+Dled led_a led_k GREEN
+Qled led_k led_base 0 NPN
+Rb drive led_base 47k
+Rpd led_base 0 100k
+Rout drive ttl 1k
+Rpi ttl 0 100k
+Cpi ttl 0 50p
+.model GREEN D(Is=1e-19 N=2 Rs=5)
+.model NPN NPN(Is=1e-14 BF=100 VAF=100)
+.tran .1u 2m
+.meas tran i_led_on AVG i(Vcc) FROM=1.02m TO=1.09m
+.meas tran v_ttl_on AVG v(ttl) FROM=1.02m TO=1.09m
+.meas tran v_ttl_off AVG v(ttl) FROM=.5m TO=.9m
+.meas tran i_drive_on AVG i(Vdrive) FROM=1.02m TO=1.09m
+.end

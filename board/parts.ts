@@ -1,5 +1,6 @@
 /** JLC candidates, not a released BOM. Models are generic; verify vendor ratings. */
 export const parts = {
+  pulseLed: { manufacturerPartNumber: 'KT-0805YG', supplierPartNumbers: { jlcpcb: ['C2292'] } },
   tubeClip: { manufacturerPartNumber: '10207101009', supplierPartNumbers: { jlcpcb: ['C142864'] }, doNotPlace: true },
   dividerTop: { manufacturerPartNumber: 'FRG2512F3305TS', supplierPartNumbers: { jlcpcb: ['C5126202'] } },
   senseBottom: { manufacturerPartNumber: 'PTFR0603B412KP9', supplierPartNumbers: { jlcpcb: ['C47115896'] } },

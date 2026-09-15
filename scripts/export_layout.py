@@ -11,11 +11,9 @@ pcb=[r for r in rows if r['type']=='pcb_component']
 name=lambda r:source[r['source_component_id']]['name']
 expected={r['name']:r.get('manufacturer_part_number') for r in schematic if r['type']=='source_component' and r['name'] not in ('U1','U2','GM1')}
 assert {name(r):source[r['source_component_id']].get('manufacturer_part_number') for r in pcb}==expected
-assert len(pcb)==44
+assert len(pcb)==72
 errors=[r for r in rows if r['type'].endswith('_error')]
-# Preserve the known missing analog-control connections; fail on new error types.
-assert len(errors)==2 and all(r['type']=='pcb_port_not_connected_error' for r in errors)
-assert all(any(token in r.get('message','') for token in ['C1.pin1','R_OUT.pin1']) for r in errors)
+assert not errors, errors
 assert any(r['type']=='pcb_trace' for r in rows)
 
 def bounds(r):
@@ -41,7 +39,7 @@ for i,a in enumerate(pcb):
 
 holes=[r for r in rows if r['type']=='pcb_plated_hole']
 mounts=[r for r in rows if r['type']=='pcb_hole']
-assert len(holes)==4 and len(mounts)==4
+assert len(holes)==26 and len(mounts)==4
 population={r['Reference']:r['DNP']=='Yes' for r in csv.DictReader((ROOT/'docs/review-bom.csv').open())}
 for ref in ('J2','J3'):
     c=next(r for r in pcb if name(r)==ref)
@@ -59,9 +57,31 @@ for h in mounts:
         dx=max(b[0]-h['x'],0,h['x']-b[2]);dy=max(b[1]-h['y'],0,h['y']-b[3])
         assert math.hypot(dx,dy)>3.2, f'{name(c)} overlaps mounting hardware reserve'
 
+# Confirm the cuttable link is the sole copper path into the LED supply branch.
+source_ports={r['source_port_id']:r for r in rows if r['type']=='source_port'}
+port_labels={r['pcb_port_id']:(source[source_ports[r['source_port_id']]['source_component_id']]['name'],source_ports[r['source_port_id']]['pin_number']) for r in rows if r['type']=='pcb_port'}
+sj=next(c for c in pcb if name(c)=='SJ_LED')
+bridges=[r for r in rows if r['type']=='pcb_trace' and r.get('pcb_component_id')==sj['pcb_component_id']]
+assert len(bridges)==1 and all(p['width']==.375 for p in bridges[0]['route'])
+def copper_connected(include_bridge):
+    parent={p:p for p in port_labels}
+    def find(p):
+        while parent[p]!=p:p=parent[p]
+        return p
+    for t in rows:
+        if t['type']!='pcb_trace' or (not include_bridge and t in bridges):continue
+        ports=t.get('connectsTo',[])+[p[k] for p in t['route'] for k in ['start_pcb_port_id','end_pcb_port_id'] if p.get(k)]
+        ports=[p for p in ports if p in parent]
+        for p in ports[1:]:parent[find(p)]=find(ports[0])
+    a=next(p for p,v in port_labels.items() if v==('R_LED',1))
+    b=next(p for p,v in port_labels.items() if v==('J1',1))
+    return find(a)==find(b)
+assert copper_connected(True), 'LED supply not connected with bridge intact'
+assert not copper_connected(False), 'LED jumper bypassed by another copper path'
+
 warnings=[{'type':r['type'],'message':r.get('message','')} for r in rows if r['type'].endswith('_warning')]
-report={'status':'routing study; two expected unconnected analog-control ports; NOT fabrication signoff','board_mm':[120,40,1.6],
-        'placed_footprints':44,'dnp_retained_footprints':['J2','J3'],'mounting_holes':4,'clip_plated_holes':4,
+report={'status':'routing study with testpoints; analog control still missing; NOT fabrication signoff','board_mm':[120,40,1.6],
+        'placed_footprints':72,'dnp_retained_footprints':['J2','J3'],'mounting_holes':4,'clip_plated_holes':4,'through_hole_testpoints':22,'led_bridge':{'width_mm':.375,'intact_connected':True,'cut_disconnects_supply':True},
         'copper_traces':sum(r['type']=='pcb_trace' for r in rows),'vias':sum(r['type']=='pcb_via' for r in rows),'planes':0,'errors':errors,'checks':['schematic part identity','all courtyards present','courtyard AABB overlap','board bounds','local clip access and controller reserves','mounting hardware reserves','DNP clips and 7.6mm drill spacing'],
         'tube_vertical_clearance':'UNVERIFIED; component height and electrical spacing to tube require measurement',
         'warnings':warnings}
@@ -80,6 +100,7 @@ views={
  'placement':None,
  'top-copper':{'pcb_smtpad','pcb_plated_hole','pcb_trace','pcb_via'},
  'bottom-copper':{'pcb_plated_hole','pcb_trace','pcb_via'},
+ 'bottom-silkscreen':{'pcb_silkscreen_text','pcb_silkscreen_path','pcb_silkscreen_rect'},
  'silkscreen':{'pcb_silkscreen_text','pcb_silkscreen_path','pcb_silkscreen_rect'},
  'drill':{'pcb_plated_hole','pcb_hole','pcb_via'},
  'courtyards':{'pcb_smtpad','pcb_plated_hole','pcb_hole','pcb_keepout'},
@@ -88,6 +109,10 @@ for view,types in views.items():
     root=ET.fromstring(ET.tostring(svg))
     for e in list(root):
         typ=e.get('data-type')
+        if view=='placement' and typ and typ.startswith('pcb_silkscreen') and e.get('data-pcb-layer')=='bottom':
+            root.remove(e);continue
+        if view in ('silkscreen','bottom-silkscreen') and typ and typ.startswith('pcb_silkscreen') and e.get('data-pcb-layer') != ('bottom' if view=='bottom-silkscreen' else 'top'):
+            root.remove(e);continue
         if typ in ('pcb_trace','pcb_smtpad','pcb_via') and view in ('top-copper','bottom-copper') and e.get('data-pcb-layer') not in (None,'through',view.split('-')[0]):
             root.remove(e);continue
         if typ in ('pcb_fabrication_note_text','pcb_fabrication_note_path') or (types is not None and typ and typ not in types|{'pcb_background','pcb_boundary','pcb_board'}):root.remove(e)
@@ -100,7 +125,7 @@ for view,types in views.items():
     path=OUT/f'{view}.svg'
     path.write_text('\n'.join(l.rstrip() for l in ET.tostring(root,encoding='unicode').splitlines())+'\n')
     subprocess.run(['rsvg-convert','-w','2400',str(path),'-o',str(OUT/f'{view}.png')],check=True)
-print(f'PASS: {len(pcb)} footprints, no courtyard overlaps, four DNP clip holes retained; six layer views exported')
+print(f'PASS: {len(pcb)} footprints, no courtyard overlaps, four DNP clip holes retained; seven layer views exported')
 
 shutil.copyfile(ROOT/'dist/board/layout/3d.png', OUT/'3d.png')
 

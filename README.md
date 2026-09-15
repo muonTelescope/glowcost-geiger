@@ -89,19 +89,19 @@ main feedback, independent overvoltage cutoff, tube/pulse input and discharge.
 Named nets connect the sections without wires crossing the notes. Open the SVG
 to zoom into component values and pin labels. The drawing shows all eight
 multiplier diodes/capacitors, feedback and protection dividers, bleeder and tube interface. U1/U2 are explicitly labeled behavioral
-blocks. Their symbols are not real IC pinouts. The checker compares 47 components
-and 30 exposed nets against SPICE, including diode polarity and passive values.
+blocks. Their symbols are not real IC pinouts. The checker compares 75 components
+and 34 exposed nets against SPICE, including diode polarity and passive values.
 
 ## PCB renders and layer views
 
-The **120 × 40 mm, two-layer routing study** holds 44 footprints, with all SMT
+The **120 × 40 mm, two-layer routing study** holds 72 footprints (including 22 bare test points), with all SMT
 parts on top. J2/J3 retain their holes and pads while remaining **C142864 DNP**.
 The reserved area is for analog HV control (timer, comparators and logic), with
 no microcontroller or board firmware. Circuitry now occupies the space beneath
 the tube; 120 × 40 mm is 43% less board area than the previous 140 × 60 mm study.
-There are **61 routed trace objects and 16 vias**, with no copper planes.
-Two open ports remain at the missing analog drive circuits; this is not a
-complete working board.
+There are **93 routed trace objects and 41 vias**, with no copper planes.
+The previously open SW and DRIVE ports now connect to test points. The physical
+analog control circuitry is still missing; this is not a complete working board.
 
 ![Assembled tube and clip routing study](docs/layout/assembled.png)
 
@@ -135,6 +135,60 @@ These are design-layer views, not manufacturing Gerbers. Bottom copper now inclu
 Courtyard and mechanical-reserve checks pass. HV creepage/clearance, route review,
 actual tube fit and enclosure interference still require review. The revised board
 supersedes the earlier 125 × 35 mm cost assumption; obtain a fresh PCB quote.
+
+## Test points, pulse LED and HV markings
+
+**D_LED is KT-0805YG / C2292**, the same yellow-green 0805 LED used as D4 in
+x.drop-beacon. R_LED = 1 kΩ limits current; Q_LED = MMBT3904 buffers the
+conditioned DRIVE signal through 47 kΩ, with a 100 kΩ base pulldown. The LED
+current comes from 3V3, rather than through the Pi output series resistor.
+
+**SJ_LED is a factory-connected, cuttable copper bridge.** Cut the exposed
+0.375 mm-wide neck between the pads to disable the LED; solder across the gap
+to re-enable it. Power off and discharge HV before cutting. No jumper component
+or assembly operation is needed. The branch connectivity check verifies that
+there is no alternative copper path around the bridge. Cutting it stops LED
+current but leaves the small transistor input load connected to DRIVE.
+
+The isolated generic-device SPICE check gives ~1.28 mA LED current while on,
+3.267 V at the modeled Pi input, and negligible LED current with the bridge cut.
+At 100 µs pulses and 50 counts/s, LED average current is about 6.4 µA. The actual
+LED forward voltage and brightness require measurement. There is **no pulse
+stretching**: individual background pulses can be difficult to see. The ideal
+DRIVE source in this test does not validate the unfinished physical U2 circuit.
+[Indicator SPICE deck](sim/indicator/indicator.cir) ·
+[Enabled/cut results](docs/indicator-results.json).
+
+![Indicator and probe schematic](docs/schematic-test.png)
+
+All **22 test points** are bare plated holes: 1.0 mm finished drill, 2.0 mm pad,
+accessible from either side. They are excluded from purchased assembly parts.
+They can accept a temporary probe wire; no fitted metal loop is assumed.
+
+| Test points | Signal |
+|---|---|
+| TP1 | 3V3 |
+| TP2, TP9, TP22 | GND |
+| TP3, TP4, TP5 | EN, PULSE/TTL, DRIVE |
+| TP6, TP7, TP8 | transistor BASE, COLLECTOR, tube CATHODE |
+| TP10 | SW switching node—HV pulses |
+| TP11–TP14 | multiplier P1, S1, P2, S2 |
+| TP15–TP18 | multiplier P3, S3, P4, S4/HV |
+| TP19, TP20 | SENSE and OVP divider outputs |
+| TP21 | tube ANODE, after current-limiting resistors |
+
+Silkscreen now states **DANGER 400V**, **DISCHARGE BEFORE TOUCH** and
+**HV MAY REMAIN AFTER POWER OFF**, with a warning on the bottom as well.
+Probe pads expose their nets: the multiplier/anode points are hazardous live
+nodes, and added pads/probes introduce capacitance and leakage not included in
+the old HV simulation. Use suitably rated high-impedance probes; an ordinary
+10 MΩ input materially loads this supply and the 33 MΩ dividers. The warning
+labels do not replace the unresolved HV-clearance and enclosure checks.
+
+![Bottom HV warning, viewed through board from top](docs/layout/bottom-silkscreen.png)
+
+The earlier cost estimates predate the LED branch; its components and any added
+extended-part feeder fees need inclusion in the final assembly quote.
 
 ## Tube and HV protection
 
@@ -975,7 +1029,7 @@ soft-start parts still need a complete pin-level schematic and placement.
 | Item | Current placement |
 |---|---|
 | Board | 120 × 40 × 1.6 mm, two copper layers, 2 mm corner chamfers |
-| Assembly | All SMT on top; 44 physical footprints |
+| Assembly | All SMT on top; 72 PCB footprints, including 22 bare test points |
 | Mounting | Four 3.2 mm nonplated holes at (±56, ±16) mm |
 | Tube envelope | Assumed 110 × 12 mm, centered at (0, 0) mm |
 | Clip centers | 105 mm apart; actual NOS tube contact fit must be measured |
@@ -1079,7 +1133,7 @@ now available above; loaded seating and installed tube height remain unverified;
 
 | Coverage | Finding |
 |---|---|
-| 41 passive/semiconductor bodies | Generic package models, not exact manufacturer height verification |
+| 46 passive/semiconductor bodies | Generic package models, not exact manufacturer height verification |
 | J1 JST GH | Placeholder only; connector body and mating cable absent |
 | J2/J3 C142864 | Datasheet-derived mesh in assembly renders; unloaded approximate spring shape |
 | Owned tube | Recovered mesh, user-confirmed match; approximately 108 × 11 mm |
@@ -1096,12 +1150,13 @@ beside the tube. No MCU or programming is required on this board.
 
 ### Verification and assembly data
 
-[Automated checks](docs/layout/checks.json) verify 44 part identities against the
+[Automated checks](docs/layout/checks.json) verify 72 part identities against the
 schematic, courtyard presence/non-overlap, board bounds, clip-access/controller reserves,
-mounting hardware reserves and DNP clip-hole retention. There are 61 trace objects and 16 vias, with no planes. The CAD build reports
-two unconnected ports: C1.pin1 (SW) and R_OUT.pin1 (DRIVE), both awaiting analog
-control circuitry. The export check accepts exactly these known errors and fails
-on any other error. This is not a clean electrical DRC result.
+mounting hardware reserves and DNP clip-hole retention. There are 93 trace objects and 41 vias, with no planes. The CAD build reports no errors for the instantiated components. Adding test
+points closes the previous two open-port checks, but does not implement U1/U2.
+The export check fails on any reported CAD error and separately verifies that
+cutting SJ_LED removes the only routed copper path to R_LED's supply side.
+This does not constitute complete circuit or HV insulation signoff.
 
 [Review coordinates](docs/layout/placement.csv) are for inspection, not production
 pick-and-place. [Published circuit JSON](docs/layout/circuit.json) retains the clip
@@ -1125,8 +1180,7 @@ especially between the multiplier, tube metal body and low-voltage circuitry.
 The 20 × 24 mm analog-control reserve excludes copper on both layers.
 Clip footprints are now aligned along the tube axis, matching the generated model.
 
-`bun run build:layout` exports the board despite reporting the two known open
-ports and returning a nonzero exit status. Then run `bun run render:layout` and
+`bun run build:layout` builds the instantiated routing study. Then run `bun run render:layout` and
 `Blender --background --python scripts/render_assembly.py` for layer and assembly
 renders. [Assembly assumptions](docs/layout/assembly-models.json) record model
 coverage and provisional seating. The generated Blender scene is
@@ -1172,8 +1226,9 @@ python3 -m pip install -r requirements-sim.txt
 bun run build
 bun run check
 bun run bom:review                   # review inventory with DNP, not production BOM
+python3 scripts/check_indicator.py   # LED on/cut loading and output-level check
 bun run render:schematic             # full sheet and readable detail views
-bun run build:layout                 # writes routing study; exits nonzero for two known open ports
+bun run build:layout                 # builds routing study, including probe holes and LED
 bun run render:layout                # placement checks and published layer images
 bun run sim                         # native supply/load/fault sweep and plots
 bun run sim:sync                    # regenerate tscircuit SPICE subcircuit

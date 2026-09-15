@@ -1,4 +1,5 @@
 import { Children, Fragment, cloneElement, isValidElement } from 'react'
+import { testpoints } from './testpoints'
 import Module, { nodePorts } from './module.circuit'
 
 /** Routing study only; analog control remains incomplete. Values, MPNs and exposed nets come from the schematic.
@@ -6,6 +7,8 @@ import Module, { nodePorts } from './module.circuit'
  * DNP clips retain PCB holes here. Assembly population comes from parts.ts/review BOM.
  */
 export const placement: Record<string, [number, number, number?]> = {
+  SJ_LED: [-47,16], D_LED: [-53,9,90], R_LED: [-51,14,90],
+  Q_LED: [-31,15], R_LB: [-27,15,90], R_LPD: [-23,15,90],
   J1: [-43,-13], J2: [52.5,0,0], J3: [-52.5,0,0],
   R_EN: [-36,-13], R_A1: [45,10], R_A2: [51,10],
   R5: [-8,-15,90], C9: [-12,-15,90], R_OVBOT: [-8,15,90], C_OV: [-12,15,90],
@@ -22,6 +25,8 @@ for (let i=0;i<4;i++) {
   placement[`R_OV${i+1}`]=[28-12*i,10]
   placement[`R_BL${i+1}`]=[40,12-8*i,90]
 }
+
+for (const [ref,,x,y] of testpoints) placement[ref]=[x,y]
 
 // JST GH vertical land pattern dimensions from the KiCad library/JST drawing.
 const jstFootprint = <footprint>
@@ -51,16 +56,19 @@ export default () => {
       .map(port=><trace key={`${net}-${port}`} from={port} to={`net.${net}`} />))}
     {[-56,56].flatMap(x=>[-16,16].map(y=><hole key={`${x}:${y}`} name={`M_${x}_${y}`} pcbX={x} pcbY={y} diameter={3.2} />))}
     <keepout shape="rect" pcbX={-24} pcbY={0} width={20} height={24} layers={["top","bottom"]} />
+    {testpoints.map(([ref,net,x,y])=><silkscreentext key={`label-${ref}`} pcbX={x} pcbY={y+(y>0?-2:2)} text={`${ref} ${net}`} fontSize={0.55} />)}
+    <silkscreentext pcbX={12} pcbY={0} layer="bottom" text="DANGER 400V - DISCHARGE AND VERIFY" fontSize={1.2} />
     {/* Local clip access only; no blanket copper/component keepout under tube. */}
     <silkscreenrect pcbX={0} pcbY={0} width={110} height={12} stroke="dashed" strokeWidth={0.15} />
-    <silkscreentext pcbX={0} pcbY={18} text="120 x 40 / ROUTING STUDY / ANALOG CONTROL PENDING" fontSize={0.95} />
-    <silkscreentext pcbX={-49} pcbY={10} text="J3 DNP" fontSize={0.8} />
-    <silkscreentext pcbX={51} pcbY={-10} text="J2 HV DNP" fontSize={0.8} />
+    <silkscreentext pcbX={0} pcbY={19} text="DANGER 400V - DISCHARGE BEFORE TOUCH" fontSize={0.95} />
+    <silkscreentext pcbX={-52} pcbY={7} text="PULSE LED" fontSize={0.65} />
+    <silkscreentext pcbX={-47} pcbY={18.5} text="CUT = LED OFF" fontSize={0.65} />
+    <silkscreentext pcbX={52} pcbY={6} text="HV ANODE" fontSize={0.8} />
     <silkscreenrect pcbX={-24} pcbY={0} width={20} height={24} stroke="dashed" strokeWidth={0.15} />
     <silkscreentext pcbX={-24} pcbY={4} text="U1/U2 RESERVE" fontSize={0.85} />
     <silkscreentext pcbX={-24} pcbY={0} text="ANALOG - NO MCU" fontSize={0.8} />
     <silkscreentext pcbX={-24} pcbY={-4} text="HEIGHT TBD" fontSize={0.8} />
     <silkscreentext pcbX={-43} pcbY={-18} text="3V3 GND PULSE EN" fontSize={0.7} />
-    <silkscreentext pcbX={15} pcbY={-17} text="TUBE HEIGHT / HV CLEARANCE UNVERIFIED" fontSize={0.8} />
+    <silkscreentext pcbX={15} pcbY={-19} text="HV MAY REMAIN AFTER POWER OFF" fontSize={0.8} />
   </board>
 }

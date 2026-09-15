@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { testpoints } from "./testpoints"
 import { parts } from "./parts"
 /** Review schematic of the simulated CW ladder. Not a fabrication board. */
 export const nodePorts: Record<string, string[]> = {
@@ -33,6 +34,15 @@ export const nodePorts: Record<string, string[]> = {
  DIV3:['.R3 > .pin2','.R4 > .pin1'],
  SENSE:['.R4 > .pin2','.R5 > .pin1','.C9 > .pin1','.U1 > .FB'],
 }
+
+for (const [ref,net] of testpoints) nodePorts[net].push(`.${ref} > .pin1`)
+nodePorts.V3V3.push('.SJ_LED > .pin1')
+nodePorts.DRIVE.push('.R_LB > .pin1')
+nodePorts.GND.push('.Q_LED > .E','.R_LPD > .pin2')
+nodePorts.LED_SUPPLY=['.SJ_LED > .pin2','.R_LED > .pin1']
+nodePorts.LED_A=['.R_LED > .pin2','.D_LED > .anode']
+nodePorts.LED_K=['.D_LED > .cathode','.Q_LED > .C']
+nodePorts.LED_BASE=['.R_LB > .pin2','.Q_LED > .B','.R_LPD > .pin1']
 
 /** All cross-panel connections use electrical net labels; local wires stay local. */
 const panelOf = (port: string) => {
@@ -82,6 +92,19 @@ const notes = [
 ] as const
 export default () => (
   <board routingDisabled schTraceAutoLabelEnabled={true} schMaxTraceDistance={8}>
+    <schematictext anchor="left" schX={70} schY={26} text="07  PULSE INDICATOR + PROBE ACCESS" fontSize={0.7} />
+    <schematictext anchor="left" schX={70} schY={24} text="SJ_LED: factory copper link; cut to disable, solder to restore." fontSize={0.45} />
+    <schematictext anchor="left" schX={70} schY={22} text="Q_LED isolates LED current from PULSE. No pulse stretching; brief flashes." fontSize={0.45} />
+    <solderjumper name="SJ_LED" pinCount={2} bridged schX={74} schY={18} footprint="solderjumper2_bridged12" />
+    <resistor {...parts.r1k} name="R_LED" resistance="1k" footprint="0603" schX={81} schY={18} />
+    <led {...parts.pulseLed} name="D_LED" color="green" footprint="0805" schX={88} schY={18} />
+    <chip {...parts.pulseTransistor} name="Q_LED" footprint="sot23" schX={95} schY={16} pinLabels={{pin1:'B',pin2:'E',pin3:'C'}} schPinArrangement={{leftSide:['B'],topSide:['C'],bottomSide:['E']}} />
+    <resistor {...parts.r47k} name="R_LB" resistance="47k" footprint="0603" schX={86} schY={12} />
+    <resistor {...parts.r100k} name="R_LPD" resistance="100k" footprint="0603" schX={95} schY={9} schRotation={270} />
+    {testpoints.map(([ref,net],i)=><chip key={ref} name={ref} displayName={`${ref} ${net}`} schX={73+(i%4)*8} schY={3-Math.floor(i/4)*5} pinLabels={{pin1:net}} schPinArrangement={{leftSide:[net]}} footprint={<footprint>
+      <platedhole portHints={['pin1']} pcbX={0} pcbY={0} shape="circle" holeDiameter={1} outerDiameter={2} />
+      <courtyardrect pcbX={0} pcbY={0} width={2.6} height={2.6} />
+    </footprint>} />)}
     {notes.map(([x,y,text,size],i)=><schematictext key={i} text={text} schX={x} schY={y} fontSize={size} anchor="left" color="#16324f" />)}
     <chip {...parts.connector} name="J1" schSectionName={panelOf(".J1 > pin1")} schX={3} schY={18} pinLabels={{pin1:'V3V3',pin2:'GND',pin3:'TTL',pin4:'EN'}} schPinArrangement={{rightSide:['V3V3','GND','TTL','EN']}} />
     <chip name="U1" schSectionName={panelOf(".U1 > pin1")} schX={17} schY={18} pinLabels={{pin1:'SW',pin2:'GND',pin3:'V3V3',pin4:'EN',pin5:'FB',pin6:'OVP'}} schPinArrangement={{leftSide:['V3V3','EN','FB','OVP','GND'],rightSide:['SW']}} />

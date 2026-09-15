@@ -6,10 +6,11 @@ const byMpn = new Map(Object.values(parts).map(p => [p.manufacturerPartNumber, p
 const quote = (x: unknown) => '"' + String(x ?? '').replaceAll('"', '""') + '"'
 const out = [['Reference','MPN','LCSC','DNP','Status']]
 for (const c of rows.filter((r: any) => r.type === 'source_component')) {
+  const pcbOnly = c.name.startsWith('TP') || c.name === 'SJ_LED'
   const p = byMpn.get(c.manufacturer_part_number)
-  if (!['U1','U2','GM1'].includes(c.name) && !p) throw new Error(`${c.name}: no selected part`)
+  if (!['U1','U2','GM1'].includes(c.name) && !p && !pcbOnly) throw new Error(`${c.name}: no selected part`)
   const dnp = p && 'doNotPlace' in p && p.doNotPlace
-  const status = ['U1','U2'].includes(c.name) ? 'BEHAVIORAL; NOT ORDERABLE' : c.name === 'GM1' ? 'OWNED TUBE; SIMULATION REPRESENTATION' : dnp ? 'DNP AT JLC' : !c.supplier_part_numbers?.jlcpcb ? 'EXTERNAL SOURCING; QUOTE REQUIRED' : 'SELECTED; QUALIFICATION PENDING'
+  const status = pcbOnly ? 'PCB FEATURE; NO ASSEMBLY PART' : ['U1','U2'].includes(c.name) ? 'BEHAVIORAL; NOT ORDERABLE' : c.name === 'GM1' ? 'OWNED TUBE; SIMULATION REPRESENTATION' : dnp ? 'DNP AT JLC' : !c.supplier_part_numbers?.jlcpcb ? 'EXTERNAL SOURCING; QUOTE REQUIRED' : 'SELECTED; QUALIFICATION PENDING'
   out.push([c.name,c.manufacturer_part_number ?? '',c.supplier_part_numbers?.jlcpcb?.[0] ?? '',dnp ? 'Yes' : 'No',status])
 }
 for (const ref of ['J2','J3']) {
