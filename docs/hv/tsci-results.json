@@ -1,0 +1,22 @@
+{
+  "netlist_sha256": "15966293951542f1fab95d5cf3e8717e6feb6fd30cd6b260af751fc66b5e3bbd",
+  "engine": "tsci simulate analog / WebAssembly ngspice",
+  "tscircuit": "0.0.2562",
+  "eecircuit_engine": "CLI-selected (see pinned tscircuit dependency)",
+  "points": 682075,
+  "duration_s": 0.12,
+  "ttl_max_V": 3.501223,
+  "measurement_window_s": [
+    0.08,
+    0.12
+  ],
+  "startup_396_ms": 28.82045,
+  "hv_mean": 399.2930473972935,
+  "hv_min": 396.5195,
+  "hv_max": 403.8189,
+  "peak_switch_v": 105.7299,
+  "input_mA": 2.5305409931122953,
+  "limitations": "Generic switch/diodes; behavioral controller; no controller or drive supply current. See README.",
+  "native_startup_396_ms": 33.7206028,
+  "startup_difference_ms": 0.09984719999999925
+}

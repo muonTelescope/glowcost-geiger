@@ -1,0 +1,463 @@
+{
+  "date": "2026-09-15",
+  "source": "pcbparts JLC catalog, not reserved inventory",
+  "queries": [
+    {
+      "results": [
+        {
+          "lcsc": "C81464",
+          "model": "MMBT3904LT1G",
+          "manufacturer": "onsemi",
+          "package": "SOT-23",
+          "stock": 1823881,
+          "price": 0.0168,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Transistors/Thyristors",
+          "subcategory": "Bipolar (BJT)",
+          "subcategory_id": 2934,
+          "mounting_type": "smd",
+          "description": "-55℃~+150℃ 1 NPN 200mA 200mV 225mW 300MHz 40 40V 50nA 6V NPN SOT-23 Bipolar (BJT) ROHS",
+          "specs": {
+            "Operating Temperature": "-55℃~+150℃",
+            "Transition frequency(fT)": "300MHz",
+            "Collector - Emitter Voltage VCEO": "40V",
+            "Number": "1 NPN",
+            "DC Current Gain": "40",
+            "Current - Collector(Ic)": "200mA",
+            "Vce Saturation(VCE(sat))": "200mV",
+            "Emitter-Base Voltage(Vebo)": "6V",
+            "Pd - Power Dissipation": "225mW",
+            "type": "NPN",
+            "Current - Collector Cutoff": "50nA"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "MMBT3904LT1G",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": "onsemi",
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "MMBT3904LT1G",
+        "detected": {},
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "MMBT3904LT1G"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C7835",
+          "model": "SN74LVC1G14DBVR",
+          "manufacturer": "Texas Instruments",
+          "package": "SOT-23-5",
+          "stock": 345113,
+          "price": 0.0651,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Logic",
+          "subcategory": "Inverters",
+          "subcategory_id": 2567,
+          "mounting_type": "smd",
+          "description": "-40℃~+85℃ 1 1 1.16V~3.33V 1.65V~5.5V 10uA 2.3V 32mA 32mA 390mV~1.87V 550mV 6.5ns@2.5V,50pF 74LVC Schmitt trigger 电源关断保护、噪声抑制功能 SOT-23-5 Inverters ROHS",
+          "specs": {
+            "Output Logic Level - Low": "550mV",
+            "Operating Temperature": "-40℃~+85℃",
+            "Propagation Delay": "6.5ns@2.5V,50pF",
+            "Input Type": "Schmitt trigger",
+            "Output Logic Level - High": "2.3V",
+            "Current - Output High(IOH)": "32mA",
+            "Quiescent Current(Iq)": "10uA",
+            "Series": "74LVC",
+            "Input Logic Level - High": "1.16V~3.33V",
+            "Voltage - Supply": "1.65V~5.5V",
+            "Input Logic Level -Low": "390mV~1.87V",
+            "Features": "Power shutdown protection、Noise suppression function",
+            "Number of Circuits": "1",
+            "Current - Output Low(IOL)": "32mA"
+          }
+        },
+        {
+          "lcsc": "C434069",
+          "model": "SN74LVC1G14DBVR",
+          "manufacturer": "UMW(Youtai Semiconductor Co., Ltd.)",
+          "package": "SOT-23-5",
+          "stock": 60627,
+          "price": 0.045,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Logic",
+          "subcategory": "Inverters",
+          "subcategory_id": 2567,
+          "mounting_type": "smd",
+          "description": "-40℃~+105℃ 1 1 1.65V~5.5V 10uA 1V~3V 20ns@5V,15pF 32mA 32mA 500mV~1.9V 74LVC Schmitt trigger SOT-23-5 Inverters ROHS",
+          "specs": {
+            "Output Logic Level - Low": "-",
+            "Operating Temperature": "-40℃~+105℃",
+            "Series": "74LVC",
+            "Input Type": "Schmitt trigger",
+            "Propagation Delay": "20ns@5V,15pF",
+            "Input Logic Level - High": "1V~3V",
+            "Output Logic Level - High": "-",
+            "Voltage - Supply": "1.65V~5.5V",
+            "Input Logic Level -Low": "500mV~1.9V",
+            "Current - Output High(IOH)": "32mA",
+            "Number of Circuits": "1",
+            "Quiescent Current(Iq)": "10uA",
+            "Current - Output Low(IOL)": "32mA"
+          }
+        },
+        {
+          "lcsc": "C55343406",
+          "model": "SN74LVC1G14DBVR-TUDI",
+          "manufacturer": "Tudi",
+          "package": "SOT-23-5",
+          "stock": 3000,
+          "price": 0.0477,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Logic",
+          "subcategory": "Inverters",
+          "subcategory_id": 2567,
+          "mounting_type": "smd",
+          "description": "SOT-23-5 Inverters ROHS",
+          "specs": {}
+        }
+      ],
+      "total": 8,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 3
+      },
+      "filters_applied": {
+        "query": "SN74LVC1G14DBVR",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 8
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "SN74LVC1G14DBVR",
+        "detected": {},
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "SN74LVC1G14DBVR"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C155214",
+          "model": "BAV21W-7-F",
+          "manufacturer": "Diodes Incorporated",
+          "package": "SOD-123",
+          "stock": 39726,
+          "price": 0.0464,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Diodes",
+          "subcategory": "Switching Diodes",
+          "subcategory_id": 2952,
+          "mounting_type": "smd",
+          "description": "-65℃~+150℃@(Tj) 1.25V@200mA 100nA 200V 200mA 250mW 50ns Standalone SOD-123 Switching Diodes ROHS",
+          "specs": {
+            "Voltage - Forward(Vf@If)": "1.25V@200mA",
+            "Non-Repetitive Peak Forward Surge Current": "-",
+            "Voltage - DC Reverse(Vr)": "200V",
+            "Operating Junction Temperature Range": "-65℃~+150℃",
+            "Reverse Recovery Time (trr)": "50ns",
+            "Diode Configuration": "Standalone",
+            "Current - Rectified": "200mA",
+            "Pd - Power Dissipation": "250mW",
+            "Reverse Leakage Current (Ir)": "100nA"
+          }
+        },
+        {
+          "lcsc": "C151350",
+          "model": "BAV21WS-7-F",
+          "manufacturer": "Diodes Incorporated",
+          "package": "SOD-323",
+          "stock": 15634,
+          "price": 0.0793,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Diodes",
+          "subcategory": "Switching Diodes",
+          "subcategory_id": 2952,
+          "mounting_type": "smd",
+          "description": "-65℃~+150℃@(Tj) 1.25V@200mA 100nA@200V 200V 200mA 200mW 50ns Independent SOD-323 Switching Diodes ROHS",
+          "specs": {
+            "Voltage - Forward(Vf@If)": "1.25V@200mA",
+            "Non-Repetitive Peak Forward Surge Current": "-",
+            "Voltage - DC Reverse(Vr)": "200V",
+            "Operating Junction Temperature Range": "-65℃~+150℃",
+            "Reverse Recovery Time (trr)": "50ns",
+            "Diode Configuration": "Standalone",
+            "Current - Rectified": "200mA",
+            "Pd - Power Dissipation": "200mW",
+            "Reverse Leakage Current (Ir)": "100nA@200V"
+          }
+        },
+        {
+          "lcsc": "C17673947",
+          "model": "BAV21WQ-7-F",
+          "manufacturer": "Diodes Incorporated",
+          "package": "SOD-123",
+          "stock": 4182,
+          "price": 0.0939,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Diodes",
+          "subcategory": "Switching Diodes",
+          "subcategory_id": 2952,
+          "mounting_type": "smd",
+          "description": "-55℃~+150℃ 1 Independent 1.25V@200mA 100nA 200V 250mW 50ns SOD-123 Switching Diodes ROHS",
+          "specs": {
+            "Voltage - Forward(Vf@If)": "1.25V@200mA",
+            "Non-Repetitive Peak Forward Surge Current": "-",
+            "Voltage - DC Reverse(Vr)": "200V",
+            "Operating Junction Temperature Range": "-55℃~+150℃",
+            "Reverse Recovery Time (trr)": "50ns",
+            "Diode Configuration": "1 Independent",
+            "Current - Rectified": "-",
+            "Pd - Power Dissipation": "250mW",
+            "Reverse Leakage Current (Ir)": "100nA"
+          }
+        }
+      ],
+      "total": 4,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 3
+      },
+      "filters_applied": {
+        "query": "BAV21W",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": "Diodes",
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 4
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "BAV21W",
+        "detected": {
+          "model_number": "BAV21W"
+        },
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "BAV21W"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C473031",
+          "model": "1206W3F100MT5E",
+          "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+          "package": "1206",
+          "stock": 56663,
+          "price": 0.0241,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Resistors",
+          "subcategory": "Chip Resistor - Surface Mount",
+          "subcategory_id": 2980,
+          "mounting_type": "smd",
+          "description": "-55℃~+155℃ 10mΩ 200V 333mW Thick Film Resistor ±1% ±1500ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+          "specs": {
+            "Resistance": "10mΩ",
+            "Operating Temperature": "-55℃~+155℃",
+            "Power(Watts)": "333mW",
+            "Type": "Thick Film Resistor",
+            "Voltage-Supply(Max)": "200V",
+            "Tolerance": "±1%",
+            "Temperature Coefficient": "±1500ppm/℃"
+          }
+        },
+        {
+          "lcsc": "C409086",
+          "model": "ERJ8CWFR010V",
+          "manufacturer": "PANASONIC",
+          "package": "1206",
+          "stock": 15621,
+          "price": 0.1527,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Resistors",
+          "subcategory": "Chip Resistor - Surface Mount",
+          "subcategory_id": 2980,
+          "mounting_type": "smd",
+          "description": "-55℃~+125℃ 10mΩ 1W Thick Film Resistor ±1% ±75ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+          "specs": {
+            "Resistance": "10mΩ",
+            "Operating Temperature": "-55℃~+125℃",
+            "Power(Watts)": "1W",
+            "Type": "Thick Film Resistor",
+            "Tolerance": "±1%",
+            "Temperature Coefficient": "±75ppm/℃"
+          }
+        },
+        {
+          "lcsc": "C247541",
+          "model": "1206W3J010LT5E",
+          "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+          "package": "1206",
+          "stock": 12870,
+          "price": 0.0104,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Resistors",
+          "subcategory": "Chip Resistor - Surface Mount",
+          "subcategory_id": 2980,
+          "mounting_type": "smd",
+          "description": "-55℃~+155℃ 10mΩ 200V 333mW Thick Film Resistor ±1500ppm/℃ ±5% 1206 Chip Resistor - Surface Mount ROHS",
+          "specs": {
+            "Resistance": "10mΩ",
+            "Operating Temperature": "-55℃~+155℃",
+            "Power(Watts)": "333mW",
+            "Type": "Thick Film Resistor",
+            "Voltage-Supply(Max)": "200V",
+            "Tolerance": "±5%",
+            "Temperature Coefficient": "±1500ppm/℃"
+          }
+        }
+      ],
+      "total": 29,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 3
+      },
+      "filters_applied": {
+        "query": null,
+        "subcategory_id": 2980,
+        "subcategory_name": "chip resistor - surface mount",
+        "subcategory_resolved": "Chip Resistor - Surface Mount",
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [
+          {
+            "name": "Resistance",
+            "op": "=",
+            "value": "10MOhm"
+          }
+        ],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": "1206",
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 29
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "10M resistor 1206",
+        "detected": {
+          "package": "1206",
+          "component_type": "resistor",
+          "subcategory": "chip resistor - surface mount",
+          "values": [
+            {
+              "raw": "10M",
+              "type": "resistance",
+              "normalized": "10MOhm"
+            }
+          ]
+        },
+        "subcategory": "chip resistor - surface mount",
+        "package": "1206",
+        "mounting_type": null,
+        "spec_filters": [
+          {
+            "name": "Resistance",
+            "op": "=",
+            "value": "10MOhm"
+          }
+        ],
+        "remaining_text": ""
+      }
+    }
+  ]
+}

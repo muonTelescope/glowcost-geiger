@@ -1,0 +1,221 @@
+$ bun --preload ./scripts/compact-tsci-output.ts ./node_modules/tscircuit/cli.mjs simulate analog sim/hv/hv.circuit.tsx --disable-parts-engine
+Warning: Could not find the instance line for vevent,
+   .probe i(vevent) will be ignored
+Warning: Could not find the instance line for vclock,
+   .probe i(vclock) will be ignored
+Warning: Could not find the instance line for vlogic,
+   .probe i(vlogic) will be ignored
+Warning : IC on non-existent node - vin, ignored
+   Please check line .ic v(vin)=0
+
+Warning : IC on non-existent node - sw, ignored
+   Please check line .ic v(sw)=0
+
+Warning : IC on non-existent node - p1, ignored
+   Please check line .ic v(p1)=0
+
+Warning : IC on non-existent node - s1, ignored
+   Please check line .ic v(s1)=0
+
+Warning : IC on non-existent node - p2, ignored
+   Please check line .ic v(p2)=0
+
+Warning : IC on non-existent node - s2, ignored
+   Please check line .ic v(s2)=0
+
+Warning : IC on non-existent node - p3, ignored
+   Please check line .ic v(p3)=0
+
+Warning : IC on non-existent node - s3, ignored
+   Please check line .ic v(s3)=0
+
+Warning : IC on non-existent node - p4, ignored
+   Please check line .ic v(p4)=0
+
+Warning : IC on non-existent node - hv, ignored
+   Please check line .ic v(hv)=0
+
+Warning : IC on non-existent node - sense, ignored
+   Please check line .ic v(sense)=0
+
+Warning : IC on non-existent node - delayed, ignored
+   Please check line .ic v(delayed)=0
+
+Warning : IC on non-existent node - anode, ignored
+   Please check line .ic v(anode)=0
+
+Warning : IC on non-existent node - cathode, ignored
+   Please check line .ic v(cathode)=0
+
+Warning : IC on non-existent node - ovp, ignored
+   Please check line .ic v(ovp)=0
+
+Warning: Could not find the instance line for vevent,
+   .probe i(vevent) will be ignored
+Warning: Could not find the instance line for vclock,
+   .probe i(vclock) will be ignored
+Warning: Could not find the instance line for vlogic,
+   .probe i(vlogic) will be ignored
+Warning : IC on non-existent node - vin, ignored
+   Please check line .ic v(vin)=0
+
+Warning : IC on non-existent node - sw, ignored
+   Please check line .ic v(sw)=0
+
+Warning : IC on non-existent node - p1, ignored
+   Please check line .ic v(p1)=0
+
+Warning : IC on non-existent node - s1, ignored
+   Please check line .ic v(s1)=0
+
+Warning : IC on non-existent node - p2, ignored
+   Please check line .ic v(p2)=0
+
+Warning : IC on non-existent node - s2, ignored
+   Please check line .ic v(s2)=0
+
+Warning : IC on non-existent node - p3, ignored
+   Please check line .ic v(p3)=0
+
+Warning : IC on non-existent node - s3, ignored
+   Please check line .ic v(s3)=0
+
+Warning : IC on non-existent node - p4, ignored
+   Please check line .ic v(p4)=0
+
+Warning : IC on non-existent node - hv, ignored
+   Please check line .ic v(hv)=0
+
+Warning : IC on non-existent node - sense, ignored
+   Please check line .ic v(sense)=0
+
+Warning : IC on non-existent node - delayed, ignored
+   Please check line .ic v(delayed)=0
+
+Warning : IC on non-existent node - anode, ignored
+   Please check line .ic v(anode)=0
+
+Warning : IC on non-existent node - cathode, ignored
+   Please check line .ic v(cathode)=0
+
+Warning : IC on non-existent node - ovp, ignored
+   Please check line .ic v(ovp)=0
+
+ngspice 1 -> ngspice 1 ->
+Note: No compatibility mode selected!
+
+Warning: Could not find the instance line for vevent,
+
+   .probe i(vevent) will be ignored
+
+Warning: Could not find the instance line for vclock,
+
+   .probe i(vclock) will be ignored
+
+Warning: Could not find the instance line for vlogic,
+
+   .probe i(vlogic) will be ignored
+
+
+Circuit: * circuit json to spice netlist
+
+Warning : IC on non-existent node - vin, ignored
+
+   Please check line .ic v(vin)=0
+
+
+
+Warning : IC on non-existent node - sw, ignored
+
+   Please check line .ic v(sw)=0
+
+
+
+Warning : IC on non-existent node - p1, ignored
+
+   Please check line .ic v(p1)=0
+
+
+
+Warning : IC on non-existent node - s1, ignored
+
+   Please check line .ic v(s1)=0
+
+
+
+Warning : IC on non-existent node - p2, ignored
+
+   Please check line .ic v(p2)=0
+
+
+
+Warning : IC on non-existent node - s2, ignored
+
+   Please check line .ic v(s2)=0
+
+
+
+Warning : IC on non-existent node - p3, ignored
+
+   Please check line .ic v(p3)=0
+
+
+
+Warning : IC on non-existent node - s3, ignored
+
+   Please check line .ic v(s3)=0
+
+
+
+Warning : IC on non-existent node - p4, ignored
+
+   Please check line .ic v(p4)=0
+
+
+
+Warning : IC on non-existent node - hv, ignored
+
+   Please check line .ic v(hv)=0
+
+
+
+Warning : IC on non-existent node - sense, ignored
+
+   Please check line .ic v(sense)=0
+
+
+
+Warning : IC on non-existent node - delayed, ignored
+
+   Please check line .ic v(delayed)=0
+
+
+
+Warning : IC on non-existent node - anode, ignored
+
+   Please check line .ic v(anode)=0
+
+
+
+Warning : IC on non-existent node - cathode, ignored
+
+   Please check line .ic v(cathode)=0
+
+
+
+Warning : IC on non-existent node - ovp, ignored
+
+   Please check line .ic v(ovp)=0
+
+
+
+ngspice 2 -> ngspice 3 -> Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+
+No. of Data Rows : 682075
+ngspice 4 -> binary raw file "out.raw"
+
+Saved complete tsci analog result table: build/tsci/hv-table.txt.gz

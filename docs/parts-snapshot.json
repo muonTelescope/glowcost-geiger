@@ -1,0 +1,654 @@
+[
+  {
+    "query": "TLV3012BIDBVR",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C20345924\",\"model\":\"TLV3012BIDBVR\",\"manufacturer\":\"Texas Instruments\",\"package\":\"SOT-23-6\",\"stock\":3096,\"price\":2.8186,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Amplifiers/Comparators\",\"subcategory\":\"Comparators\",\"subcategory_id\":3030,\"mounting_type\":\"smd\",\"description\":\"-40℃~+125℃ 1 1.65V~5.5V 10ns 12uV/℃ 1pA 2.4uA 300uV 4.5pA 4us 74dB 8mV CMOS Push-pull Rail-to-rail input SOT-23-6 Comparators ROHS\",\"specs\":{\"Operating Temperature\":\"-40℃~+125℃\",\"Vos - Input Offset Voltage\":\"300uV\",\"Output Type\":\"Push-pull\",\"Input Offset Current(Ios)\":\"1pA\",\"Input Offset Voltage Drift(Vos TC)\":\"12uV/℃\",\"Single Supply\":\"1.65V~5.5V\",\"Input Hysteresis Voltage (Vhys)\":\"8mV\",\"Response Time (tr)\":\"10ns\",\"Common Mode Rejection Ratio(CMRR)\":\"74dB\",\"Rail to Rail\":\"Rail-to-rail input\",\"Number of Channels\":\"1\",\"Quiescent Current\":\"2.4uA\",\"Ib - Input Bias Current\":\"4.5pA\",\"Propagation Delay Time\":\"4us\",\"Output Mode\":\"CMOS\"}}],\"total\":1,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":1},\"filters_applied\":{\"query\":\"TLV3012BIDBVR\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":1},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"TLV3012BIDBVR\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"TLV3012BIDBVR\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C20345924",
+              "model": "TLV3012BIDBVR",
+              "manufacturer": "Texas Instruments",
+              "package": "SOT-23-6",
+              "stock": 3096,
+              "price": 2.8186,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Amplifiers/Comparators",
+              "subcategory": "Comparators",
+              "subcategory_id": 3030,
+              "mounting_type": "smd",
+              "description": "-40℃~+125℃ 1 1.65V~5.5V 10ns 12uV/℃ 1pA 2.4uA 300uV 4.5pA 4us 74dB 8mV CMOS Push-pull Rail-to-rail input SOT-23-6 Comparators ROHS",
+              "specs": {
+                "Operating Temperature": "-40℃~+125℃",
+                "Vos - Input Offset Voltage": "300uV",
+                "Output Type": "Push-pull",
+                "Input Offset Current(Ios)": "1pA",
+                "Input Offset Voltage Drift(Vos TC)": "12uV/℃",
+                "Single Supply": "1.65V~5.5V",
+                "Input Hysteresis Voltage (Vhys)": "8mV",
+                "Response Time (tr)": "10ns",
+                "Common Mode Rejection Ratio(CMRR)": "74dB",
+                "Rail to Rail": "Rail-to-rail input",
+                "Number of Channels": "1",
+                "Quiescent Current": "2.4uA",
+                "Ib - Input Bias Current": "4.5pA",
+                "Propagation Delay Time": "4us",
+                "Output Mode": "CMOS"
+              }
+            }
+          ],
+          "total": 1,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 1
+          },
+          "filters_applied": {
+            "query": "TLV3012BIDBVR",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 1
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "TLV3012BIDBVR",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "TLV3012BIDBVR"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "C3216C0G2J103JT000N",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C342714\",\"model\":\"C3216C0G2J103JT000N\",\"manufacturer\":\"TDK\",\"package\":\"1206\",\"stock\":2413,\"price\":0.3883,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Capacitors\",\"subcategory\":\"Multilayer Ceramic Capacitors MLCC - SMD/SMT\",\"subcategory_id\":2929,\"mounting_type\":\"smd\",\"description\":\"10nF 630V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS\",\"specs\":{\"Voltage Rating\":\"630V\",\"Tolerance\":\"±5%\",\"Capacitance\":\"10nF\",\"Temperature Coefficient\":\"C0G\"}}],\"total\":1,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":1},\"filters_applied\":{\"query\":\"C3216C0G2J103JT000N\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":1},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"C3216C0G2J103JT000N\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"C3216C0G2J103JT000N\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C342714",
+              "model": "C3216C0G2J103JT000N",
+              "manufacturer": "TDK",
+              "package": "1206",
+              "stock": 2413,
+              "price": 0.3883,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Capacitors",
+              "subcategory": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+              "subcategory_id": 2929,
+              "mounting_type": "smd",
+              "description": "10nF 630V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+              "specs": {
+                "Voltage Rating": "630V",
+                "Tolerance": "±5%",
+                "Capacitance": "10nF",
+                "Temperature Coefficient": "C0G"
+              }
+            }
+          ],
+          "total": 1,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 1
+          },
+          "filters_applied": {
+            "query": "C3216C0G2J103JT000N",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 1
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "C3216C0G2J103JT000N",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "C3216C0G2J103JT000N"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "BAV21W-7-F",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C7420334\",\"model\":\"BAV21WS\",\"manufacturer\":\"hongjiacheng\",\"package\":\"SOD-323\",\"stock\":710624,\"price\":0.0132,\"price_10\":null,\"library_type\":\"preferred\",\"preferred\":true,\"category\":\"Diodes\",\"subcategory\":\"Switching Diodes\",\"subcategory_id\":2952,\"mounting_type\":\"smd\",\"description\":\"-55℃~+150℃ 1.25V@200mA 100nA@200V 2.5A 200mA 250V 250mW 50ns Standalone SOD-323 Switching Diodes ROHS\",\"specs\":{\"Voltage - Forward(Vf@If)\":\"1.25V@200mA\",\"Non-Repetitive Peak Forward Surge Current\":\"2.5A\",\"Voltage - DC Reverse(Vr)\":\"250V\",\"Operating Junction Temperature Range\":\"-55℃~+150℃\",\"Reverse Recovery Time (trr)\":\"50ns\",\"Diode Configuration\":\"Standalone\",\"Current - Rectified\":\"200mA\",\"Pd - Power Dissipation\":\"250mW\",\"Reverse Leakage Current (Ir)\":\"100nA@200V\"}},{\"lcsc\":\"C113947\",\"model\":\"BAV21W\",\"manufacturer\":\"MDD(Microdiode Semiconductor)\",\"package\":\"SOD-123\",\"stock\":891142,\"price\":0.0137,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Diodes\",\"subcategory\":\"Switching Diodes\",\"subcategory_id\":2952,\"mounting_type\":\"smd\",\"description\":\"1.25V@200mA 100nA@250V 200mA 250V 3A 500mW 50ns Independent SOD-123 Switching Diodes ROHS\",\"specs\":{\"Voltage - Forward(Vf@If)\":\"1.25V@200mA\",\"Non-Repetitive Peak Forward Surge Current\":\"3A\",\"Voltage - DC Reverse(Vr)\":\"250V\",\"Operating Junction Temperature Range\":\"-55℃~+150℃\",\"Reverse Recovery Time (trr)\":\"50ns\",\"Diode Configuration\":\"Standalone\",\"Current - Rectified\":\"200mA\",\"Pd - Power Dissipation\":\"500mW\",\"Reverse Leakage Current (Ir)\":\"100nA@250V\"}}],\"total\":102,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":2},\"filters_applied\":{\"query\":\"BAV21W\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":1,\"extended\":101},\"no_fee_available\":true,\"parsed\":{\"original_query\":\"BAV21W-7-F\",\"detected\":{\"model_number\":\"BAV21W\"},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"BAV21W\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C7420334",
+              "model": "BAV21WS",
+              "manufacturer": "hongjiacheng",
+              "package": "SOD-323",
+              "stock": 710624,
+              "price": 0.0132,
+              "price_10": null,
+              "library_type": "preferred",
+              "preferred": true,
+              "category": "Diodes",
+              "subcategory": "Switching Diodes",
+              "subcategory_id": 2952,
+              "mounting_type": "smd",
+              "description": "-55℃~+150℃ 1.25V@200mA 100nA@200V 2.5A 200mA 250V 250mW 50ns Standalone SOD-323 Switching Diodes ROHS",
+              "specs": {
+                "Voltage - Forward(Vf@If)": "1.25V@200mA",
+                "Non-Repetitive Peak Forward Surge Current": "2.5A",
+                "Voltage - DC Reverse(Vr)": "250V",
+                "Operating Junction Temperature Range": "-55℃~+150℃",
+                "Reverse Recovery Time (trr)": "50ns",
+                "Diode Configuration": "Standalone",
+                "Current - Rectified": "200mA",
+                "Pd - Power Dissipation": "250mW",
+                "Reverse Leakage Current (Ir)": "100nA@200V"
+              }
+            },
+            {
+              "lcsc": "C113947",
+              "model": "BAV21W",
+              "manufacturer": "MDD(Microdiode Semiconductor)",
+              "package": "SOD-123",
+              "stock": 891142,
+              "price": 0.0137,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Diodes",
+              "subcategory": "Switching Diodes",
+              "subcategory_id": 2952,
+              "mounting_type": "smd",
+              "description": "1.25V@200mA 100nA@250V 200mA 250V 3A 500mW 50ns Independent SOD-123 Switching Diodes ROHS",
+              "specs": {
+                "Voltage - Forward(Vf@If)": "1.25V@200mA",
+                "Non-Repetitive Peak Forward Surge Current": "3A",
+                "Voltage - DC Reverse(Vr)": "250V",
+                "Operating Junction Temperature Range": "-55℃~+150℃",
+                "Reverse Recovery Time (trr)": "50ns",
+                "Diode Configuration": "Standalone",
+                "Current - Rectified": "200mA",
+                "Pd - Power Dissipation": "500mW",
+                "Reverse Leakage Current (Ir)": "100nA@250V"
+              }
+            }
+          ],
+          "total": 102,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 2
+          },
+          "filters_applied": {
+            "query": "BAV21W",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 1,
+            "extended": 101
+          },
+          "no_fee_available": true,
+          "parsed": {
+            "original_query": "BAV21W-7-F",
+            "detected": {
+              "model_number": "BAV21W"
+            },
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "BAV21W"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "B82442T1105K050",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C2041861\",\"model\":\"B82442T1105K050\",\"manufacturer\":\"TDK\",\"package\":\"SMD,5.6x5mm\",\"stock\":1973,\"price\":0.6445,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Inductors, Coils, Chokes\",\"subcategory\":\"Inductors (SMD)\",\"subcategory_id\":2936,\"mounting_type\":\"smd\",\"description\":\"1.8MHz 150mA 1mH 30@252kHz 310mA 9.5Ω ±10% SMD,5.6x5mm Inductors (SMD) ROHS\",\"specs\":{\"Inductance\":\"1mH\",\"Current - Saturation (Isat)\":\"310mA\",\"Q @ Frequency\":\"30@252kHz\",\"Frequency - Self Resonant\":\"1.8MHz\",\"Tolerance\":\"±10%\",\"Current Rating\":\"150mA\",\"DC Resistance(DCR)\":\"9.5Ω\"}}],\"total\":1,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":1},\"filters_applied\":{\"query\":\"B82442T1105K050\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":1},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"B82442T1105K050\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"B82442T1105K050\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C2041861",
+              "model": "B82442T1105K050",
+              "manufacturer": "TDK",
+              "package": "SMD,5.6x5mm",
+              "stock": 1973,
+              "price": 0.6445,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Inductors, Coils, Chokes",
+              "subcategory": "Inductors (SMD)",
+              "subcategory_id": 2936,
+              "mounting_type": "smd",
+              "description": "1.8MHz 150mA 1mH 30@252kHz 310mA 9.5Ω ±10% SMD,5.6x5mm Inductors (SMD) ROHS",
+              "specs": {
+                "Inductance": "1mH",
+                "Current - Saturation (Isat)": "310mA",
+                "Q @ Frequency": "30@252kHz",
+                "Frequency - Self Resonant": "1.8MHz",
+                "Tolerance": "±10%",
+                "Current Rating": "150mA",
+                "DC Resistance(DCR)": "9.5Ω"
+              }
+            }
+          ],
+          "total": 1,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 1
+          },
+          "filters_applied": {
+            "query": "B82442T1105K050",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 1
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "B82442T1105K050",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "B82442T1105K050"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "LMC555CMX",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C90760\",\"model\":\"LMC555CMX/NOPB\",\"manufacturer\":\"Texas Instruments\",\"package\":\"SOIC-8\",\"stock\":14058,\"price\":0.3049,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Clock/Timing\",\"subcategory\":\"555 Timers / Counters\",\"subcategory_id\":2101,\"mounting_type\":\"smd\",\"description\":\"-40℃~+85℃ 1.5V~15V 150uA 3MHz SOIC-8 555 Timers / Counters ROHS\",\"specs\":{\"Operating Temperature\":\"-40℃~+85℃\",\"Timer Number\":\"1\",\"Voltage - Supply\":\"1.5V~15V\",\"Supply Current\":\"50uA\",\"Output Current\":\"100mA\",\"Features\":\"Adjustable duty cycle oscillation、Reset function\"}}],\"total\":1,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":1},\"filters_applied\":{\"query\":\"LMC555CMX\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":1},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"LMC555CMX\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"LMC555CMX\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C90760",
+              "model": "LMC555CMX/NOPB",
+              "manufacturer": "Texas Instruments",
+              "package": "SOIC-8",
+              "stock": 14058,
+              "price": 0.3049,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Clock/Timing",
+              "subcategory": "555 Timers / Counters",
+              "subcategory_id": 2101,
+              "mounting_type": "smd",
+              "description": "-40℃~+85℃ 1.5V~15V 150uA 3MHz SOIC-8 555 Timers / Counters ROHS",
+              "specs": {
+                "Operating Temperature": "-40℃~+85℃",
+                "Timer Number": "1",
+                "Voltage - Supply": "1.5V~15V",
+                "Supply Current": "50uA",
+                "Output Current": "100mA",
+                "Features": "Adjustable duty cycle oscillation、Reset function"
+              }
+            }
+          ],
+          "total": 1,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 1
+          },
+          "filters_applied": {
+            "query": "LMC555CMX",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 1
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "LMC555CMX",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "LMC555CMX"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "MMBTA42LT1G",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C94389\",\"model\":\"MMBTA42LT1G\",\"manufacturer\":\"onsemi\",\"package\":\"SOT-23\",\"stock\":198731,\"price\":0.0404,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Transistors/Thyristors\",\"subcategory\":\"Bipolar (BJT)\",\"subcategory_id\":2934,\"mounting_type\":\"smd\",\"description\":\"-55℃~+150℃ 1 NPN 100nA 225mW 25 300V 500mA 500mV 50MHz 6V NPN SOT-23 Bipolar (BJT) ROHS\",\"specs\":{\"Operating Temperature\":\"-55℃~+150℃\",\"Transition frequency(fT)\":\"50MHz\",\"Collector - Emitter Voltage VCEO\":\"300V\",\"Number\":\"1 NPN\",\"DC Current Gain\":\"25\",\"Current - Collector(Ic)\":\"500mA\",\"Vce Saturation(VCE(sat))\":\"500mV\",\"Emitter-Base Voltage(Vebo)\":\"6V\",\"Pd - Power Dissipation\":\"225mW\",\"type\":\"NPN\",\"Current - Collector Cutoff\":\"100nA\"}}],\"total\":1,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":1},\"filters_applied\":{\"query\":\"MMBTA42LT1G\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":1},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"MMBTA42LT1G\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"MMBTA42LT1G\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C94389",
+              "model": "MMBTA42LT1G",
+              "manufacturer": "onsemi",
+              "package": "SOT-23",
+              "stock": 198731,
+              "price": 0.0404,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Transistors/Thyristors",
+              "subcategory": "Bipolar (BJT)",
+              "subcategory_id": 2934,
+              "mounting_type": "smd",
+              "description": "-55℃~+150℃ 1 NPN 100nA 225mW 25 300V 500mA 500mV 50MHz 6V NPN SOT-23 Bipolar (BJT) ROHS",
+              "specs": {
+                "Operating Temperature": "-55℃~+150℃",
+                "Transition frequency(fT)": "50MHz",
+                "Collector - Emitter Voltage VCEO": "300V",
+                "Number": "1 NPN",
+                "DC Current Gain": "25",
+                "Current - Collector(Ic)": "500mA",
+                "Vce Saturation(VCE(sat))": "500mV",
+                "Emitter-Base Voltage(Vebo)": "6V",
+                "Pd - Power Dissipation": "225mW",
+                "type": "NPN",
+                "Current - Collector Cutoff": "100nA"
+              }
+            }
+          ],
+          "total": 1,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 1
+          },
+          "filters_applied": {
+            "query": "MMBTA42LT1G",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 1
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "MMBTA42LT1G",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "MMBTA42LT1G"
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "query": "SN74HCT14",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\":[{\"lcsc\":\"C6769\",\"model\":\"SN74HCT14DR\",\"manufacturer\":\"Texas Instruments\",\"package\":\"SOIC-14\",\"stock\":15281,\"price\":0.6071,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Logic\",\"subcategory\":\"Inverters\",\"subcategory_id\":2567,\"mounting_type\":\"smd\",\"description\":\"-40℃~+85℃ 1.9V~2.1V 2uA 3.7V 30ns@5.5V,50pF 4.5V~5.5V 400mV 4mA 4mA 500mV~600mV 6 74HCT Noise suppression function Schmitt trigger SOIC-14 Inverters ROHS\",\"specs\":{\"Output Logic Level - Low\":\"400mV\",\"Operating Temperature\":\"-40℃~+85℃\",\"Input Type\":\"Schmitt trigger\",\"Propagation Delay\":\"30ns@5.5V,50pF\",\"Output Logic Level - High\":\"3.7V\",\"Current - Output High(IOH)\":\"4mA\",\"Quiescent Current(Iq)\":\"2uA\",\"Series\":\"74HCT\",\"Input Logic Level - High\":\"1.9V~2.1V\",\"Voltage - Supply\":\"4.5V~5.5V\",\"Input Logic Level -Low\":\"500mV~600mV\",\"Features\":\"Noise suppression function\",\"Number of Circuits\":\"6\",\"Current - Output Low(IOL)\":\"4mA\"}},{\"lcsc\":\"C133639\",\"model\":\"SN74HCT14PWR\",\"manufacturer\":\"Texas Instruments\",\"package\":\"TSSOP-14\",\"stock\":2945,\"price\":0.5034,\"price_10\":null,\"library_type\":\"extended\",\"preferred\":false,\"category\":\"Logic\",\"subcategory\":\"Inverters\",\"subcategory_id\":2567,\"mounting_type\":\"smd\",\"description\":\"-40℃~+85℃ 1 1.9V~2.1V 170mV~330mV 2uA 3.98V~4.3V 30ns@5.5V,50pF 4.5V~5.5V 4mA 4mA 500mV~600mV 6 74HCT Schmitt trigger 噪声抑制功能 TSSOP-14 Inverters ROHS\",\"specs\":{\"Output Logic Level - Low\":\"170mV~330mV\",\"Operating Temperature\":\"-40℃~+85℃\",\"Input Type\":\"Schmitt trigger\",\"Propagation Delay\":\"30ns@5.5V,50pF\",\"Output Logic Level - High\":\"3.98V~4.3V\",\"Current - Output High(IOH)\":\"4mA\",\"Quiescent Current(Iq)\":\"2uA\",\"Series\":\"74HCT\",\"Input Logic Level - High\":\"1.9V~2.1V\",\"Voltage - Supply\":\"4.5V~5.5V\",\"Input Logic Level -Low\":\"500mV~600mV\",\"Features\":\"Noise suppression function\",\"Number of Circuits\":\"6\",\"Current - Output Low(IOL)\":\"4mA\"}}],\"total\":6,\"page_info\":{\"limit\":2,\"offset\":0,\"returned\":2},\"filters_applied\":{\"query\":\"SN74HCT14\",\"subcategory_id\":null,\"subcategory_name\":null,\"subcategory_resolved\":null,\"category_id\":null,\"category_name\":null,\"category_resolved\":null,\"spec_filters\":[],\"library_type\":null,\"prefer_no_fee\":true,\"min_stock\":10,\"package\":null,\"packages\":null,\"manufacturer\":null,\"match_all_terms\":true},\"library_type_counts\":{\"basic\":0,\"preferred\":0,\"extended\":6},\"no_fee_available\":false,\"parsed\":{\"original_query\":\"SN74HCT14\",\"detected\":{},\"subcategory\":null,\"package\":null,\"mounting_type\":null,\"spec_filters\":[],\"remaining_text\":\"SN74HCT14\"}}"
+          }
+        ],
+        "structuredContent": {
+          "results": [
+            {
+              "lcsc": "C6769",
+              "model": "SN74HCT14DR",
+              "manufacturer": "Texas Instruments",
+              "package": "SOIC-14",
+              "stock": 15281,
+              "price": 0.6071,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Logic",
+              "subcategory": "Inverters",
+              "subcategory_id": 2567,
+              "mounting_type": "smd",
+              "description": "-40℃~+85℃ 1.9V~2.1V 2uA 3.7V 30ns@5.5V,50pF 4.5V~5.5V 400mV 4mA 4mA 500mV~600mV 6 74HCT Noise suppression function Schmitt trigger SOIC-14 Inverters ROHS",
+              "specs": {
+                "Output Logic Level - Low": "400mV",
+                "Operating Temperature": "-40℃~+85℃",
+                "Input Type": "Schmitt trigger",
+                "Propagation Delay": "30ns@5.5V,50pF",
+                "Output Logic Level - High": "3.7V",
+                "Current - Output High(IOH)": "4mA",
+                "Quiescent Current(Iq)": "2uA",
+                "Series": "74HCT",
+                "Input Logic Level - High": "1.9V~2.1V",
+                "Voltage - Supply": "4.5V~5.5V",
+                "Input Logic Level -Low": "500mV~600mV",
+                "Features": "Noise suppression function",
+                "Number of Circuits": "6",
+                "Current - Output Low(IOL)": "4mA"
+              }
+            },
+            {
+              "lcsc": "C133639",
+              "model": "SN74HCT14PWR",
+              "manufacturer": "Texas Instruments",
+              "package": "TSSOP-14",
+              "stock": 2945,
+              "price": 0.5034,
+              "price_10": null,
+              "library_type": "extended",
+              "preferred": false,
+              "category": "Logic",
+              "subcategory": "Inverters",
+              "subcategory_id": 2567,
+              "mounting_type": "smd",
+              "description": "-40℃~+85℃ 1 1.9V~2.1V 170mV~330mV 2uA 3.98V~4.3V 30ns@5.5V,50pF 4.5V~5.5V 4mA 4mA 500mV~600mV 6 74HCT Schmitt trigger 噪声抑制功能 TSSOP-14 Inverters ROHS",
+              "specs": {
+                "Output Logic Level - Low": "170mV~330mV",
+                "Operating Temperature": "-40℃~+85℃",
+                "Input Type": "Schmitt trigger",
+                "Propagation Delay": "30ns@5.5V,50pF",
+                "Output Logic Level - High": "3.98V~4.3V",
+                "Current - Output High(IOH)": "4mA",
+                "Quiescent Current(Iq)": "2uA",
+                "Series": "74HCT",
+                "Input Logic Level - High": "1.9V~2.1V",
+                "Voltage - Supply": "4.5V~5.5V",
+                "Input Logic Level -Low": "500mV~600mV",
+                "Features": "Noise suppression function",
+                "Number of Circuits": "6",
+                "Current - Output Low(IOL)": "4mA"
+              }
+            }
+          ],
+          "total": 6,
+          "page_info": {
+            "limit": 2,
+            "offset": 0,
+            "returned": 2
+          },
+          "filters_applied": {
+            "query": "SN74HCT14",
+            "subcategory_id": null,
+            "subcategory_name": null,
+            "subcategory_resolved": null,
+            "category_id": null,
+            "category_name": null,
+            "category_resolved": null,
+            "spec_filters": [],
+            "library_type": null,
+            "prefer_no_fee": true,
+            "min_stock": 10,
+            "package": null,
+            "packages": null,
+            "manufacturer": null,
+            "match_all_terms": true
+          },
+          "library_type_counts": {
+            "basic": 0,
+            "preferred": 0,
+            "extended": 6
+          },
+          "no_fee_available": false,
+          "parsed": {
+            "original_query": "SN74HCT14",
+            "detected": {},
+            "subcategory": null,
+            "package": null,
+            "mounting_type": null,
+            "spec_filters": [],
+            "remaining_text": "SN74HCT14"
+          }
+        },
+        "isError": false
+      }
+    }
+  }
+]
