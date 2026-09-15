@@ -1,0 +1,8 @@
+{
+  "tube": "recovered mesh, user-confirmed match",
+  "clips": "datasheet-derived approximation",
+  "tube_axis_height_mm": 7.2,
+  "tube_nominal_underside_mm": 1.7,
+  "other_bodies": "illustrative generic boxes; heights not validated",
+  "clearance_status": "NOT verified; spring-loaded seating, exact bodies and HV spacing pending"
+}

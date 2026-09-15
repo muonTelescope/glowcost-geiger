@@ -4,9 +4,9 @@
 3.3 V pulse output and power enable. Uses the same **CTC-5 / STS-5 (СТС-5)**
 Geiger–Müller tube as geiger2, biased near 400 V.
 
-**Status: functional tscircuit schematic, reproducible SPICE study and basic unrouted placement.** The HV
+**Status: functional tscircuit schematic, reproducible SPICE study and compact routing study.** The HV
 oscillator/switch, comparator timing and output blanking contain behavioral
-models. JLC component candidates are documented; this is not a routed PCB,
+models. JLC component candidates are documented; this is not a fabrication-qualified PCB,
 complete pin-level production schematic or fabrication release. HV protection
 is modeled, not bench-qualified.
 
@@ -94,17 +94,25 @@ and 30 exposed nets against SPICE, including diode polarity and passive values.
 
 ## PCB renders and layer views
 
-The **120 × 40 mm, two-layer placement study** holds 44 footprints, with all SMT
+The **120 × 40 mm, two-layer routing study** holds 44 footprints, with all SMT
 parts on top. J2/J3 retain their holes and pads while remaining **C142864 DNP**.
 The reserved area is for analog HV control (timer, comparators and logic), with
 no microcontroller or board firmware. Circuitry now occupies the space beneath
 the tube; 120 × 40 mm is 43% less board area than the previous 140 × 60 mm study.
-There are **no routed traces, vias or copper planes** yet.
+There are **61 routed trace objects and 16 vias**, with no copper planes.
+Two open ports remain at the missing analog drive circuits; this is not a
+complete working board.
 
-![Native tscircuit 3D placement preview](docs/layout/3d.png)
+![Assembled tube and clip routing study](docs/layout/assembled.png)
 
-This preview uses generic package models; the tube and accurate connector/clip
-bodies are absent. The tube outline is a plan-view envelope; its installed height is unverified.
+This assembly preview includes the recovered tube and datasheet-derived clips.
+Other component bodies are illustrative, including J1. Tube-axis height is
+provisionally 7.2 mm above the PCB, leaving approximately 1.7 mm below the widest
+body section; actual loaded seating and HV clearance to the tube are unverified.
+
+![Side view of nominal tube seating](docs/layout/tube-side.png)
+
+![Board with tube hidden](docs/layout/board-top.png)
 
 ![Annotated top placement](docs/layout/placement.png)
 
@@ -114,8 +122,7 @@ bodies are absent. The tube outline is a plan-view envelope; its installed heigh
 | Top silkscreen | Drill locations |
 | ![Silkscreen](docs/layout/silkscreen.png) | ![Drill locations](docs/layout/drill.png) |
 
-These are design-layer views, not manufacturing Gerbers. Bottom copper currently
-contains only the clip-hole annuli. The drill view includes annuli for context.
+These are design-layer views, not manufacturing Gerbers. Bottom copper now includes routed traces and vias. The drill view includes annuli for context.
 
 ![Courtyards and compact placement](docs/layout/courtyards.png)
 
@@ -125,7 +132,7 @@ contains only the clip-hole annuli. The drill view includes annuli for context.
 [Published circuit JSON](docs/layout/circuit.json) ·
 [Layout source](board/layout.circuit.tsx)
 
-Courtyard and mechanical-reserve checks pass. HV creepage/clearance, routing,
+Courtyard and mechanical-reserve checks pass. HV creepage/clearance, route review,
 actual tube fit and enclosure interference still require review. The revised board
 supersedes the earlier 125 × 35 mm cost assumption; obtain a fresh PCB quote.
 
@@ -956,7 +963,7 @@ entire assembly cost by board area. See [placement documentation](#layout-detail
 
 ## Basic PCB placement and render review
 
-**Unrouted placement study, not a fabrication release.** This tscircuit layout
+**Routing study, not a fabrication release.** This tscircuit layout
 reuses the functional schematic's part identities and nets. U1/U2 remain
 behavioral blocks; their physical oscillator, comparators, logic and input
 soft-start parts still need a complete pin-level schematic and placement.
@@ -991,9 +998,9 @@ Clip ratings and source references are in [part selection](#part-details).
 ### Render gallery
 
 
-The native tscircuit 3D preview uses generic passive/semiconductor packages.
-It does not include the tube or accurate JST/clip bodies, so it cannot establish
-mechanical interference clearance. The tube outline does not establish vertical clearance.
+The assembly renders use the actual recovered tube mesh and reconstructed clip
+mesh. Remaining bodies are illustrative boxes. The native tscircuit preview is
+also retained as `docs/layout/3d.png`; it does not include the assembly meshes.
 
 
 Vector images: [placement](docs/layout/placement.svg), [top copper](docs/layout/top-copper.svg),
@@ -1001,7 +1008,7 @@ Vector images: [placement](docs/layout/placement.svg), [top copper](docs/layout/
 [drill](docs/layout/drill.svg), [courtyards](docs/layout/courtyards.svg).
 PNG versions are embedded in the [main README](#pcb-renders-and-layer-views).
 These views filter actual tscircuit PCB artwork; they are not Gerber exports.
-Bottom copper contains only plated clip-hole annuli. Drill artwork retains those
+Bottom copper includes routed traces, vias and clip-hole annuli. Drill artwork retains those
 annuli for reference. Cyan courtyard boxes bound component assembly space.
 
 ### 3D model audit
@@ -1028,7 +1035,7 @@ transition heights and tail landings are approximated; embossing, edge rounds
 and spring deflection are omitted. The sidewall offset approximates sheet
 thickness. The solid and exported STEP both pass FreeCAD validity checks.
 Actual loaded tube seating and HV clearance still need verification. The model
-is available separately; the board preview has not yet been regenerated with it.
+is available separately; the separate assembly renders now use it.
 J2/J3 remain DNP for JLC assembly.
 
 Regenerate using FreeCAD's Python runtime with `scripts/generate_clip_model.py`;
@@ -1074,8 +1081,8 @@ now available above; loaded seating and installed tube height remain unverified;
 |---|---|
 | 41 passive/semiconductor bodies | Generic package models, not exact manufacturer height verification |
 | J1 JST GH | Placeholder only; connector body and mating cable absent |
-| J2/J3 C142864 | Placeholder only; spring geometry and seating height absent |
-| Owned tube | No 3D model; only an assumed 110 × 12 mm plan-view envelope |
+| J2/J3 C142864 | Datasheet-derived mesh in assembly renders; unloaded approximate spring shape |
+| Owned tube | Recovered mesh, user-confirmed match; approximately 108 × 11 mm |
 | Analog HV control | Reserved area; physical parts not yet instantiated |
 
 The current 3D preview is useful for placement orientation, but **cannot verify
@@ -1091,8 +1098,10 @@ beside the tube. No MCU or programming is required on this board.
 
 [Automated checks](docs/layout/checks.json) verify 44 part identities against the
 schematic, courtyard presence/non-overlap, board bounds, clip-access/controller reserves,
-mounting hardware reserves and DNP clip-hole retention. There are zero traces,
-vias and planes. These checks do not verify electrical connections or HV spacing.
+mounting hardware reserves and DNP clip-hole retention. There are 61 trace objects and 16 vias, with no planes. The CAD build reports
+two unconnected ports: C1.pin1 (SW) and R_OUT.pin1 (DRIVE), both awaiting analog
+control circuitry. The export check accepts exactly these known errors and fails
+on any other error. This is not a clean electrical DRC result.
 
 [Review coordinates](docs/layout/placement.csv) are for inspection, not production
 pick-and-place. [Published circuit JSON](docs/layout/circuit.json) retains the clip
@@ -1106,6 +1115,22 @@ report. Vertical connector access and actual tube insertion need mechanical
 review. No KiCad DRC or complete 3D interference check has been performed.
 
 <a id="layout-details-remaining-work-before-fabrication"></a>
+
+### Routing limits and reproduction
+
+The local tscircuit router uses 0.25 mm traces, a 0.25 mm routing-clearance
+setting and 0.6/0.3 mm via pad/drill sizes. **These are general routing settings,
+not 400 V insulation rules.** The routing needs a voltage-aware clearance review,
+especially between the multiplier, tube metal body and low-voltage circuitry.
+The 20 × 24 mm analog-control reserve excludes copper on both layers.
+Clip footprints are now aligned along the tube axis, matching the generated model.
+
+`bun run build:layout` exports the board despite reporting the two known open
+ports and returning a nonzero exit status. Then run `bun run render:layout` and
+`Blender --background --python scripts/render_assembly.py` for layer and assembly
+renders. [Assembly assumptions](docs/layout/assembly-models.json) record model
+coverage and provisional seating. The generated Blender scene is
+[available here](docs/layout/assembly.blend).
 
 ### Remaining work before fabrication
 
@@ -1148,7 +1173,7 @@ bun run build
 bun run check
 bun run bom:review                   # review inventory with DNP, not production BOM
 bun run render:schematic             # full sheet and readable detail views
-bun run build:layout                 # unrouted PCB SVG and native 3D preview
+bun run build:layout                 # writes routing study; exits nonzero for two known open ports
 bun run render:layout                # placement checks and published layer images
 bun run sim                         # native supply/load/fault sweep and plots
 bun run sim:sync                    # regenerate tscircuit SPICE subcircuit

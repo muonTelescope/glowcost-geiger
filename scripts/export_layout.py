@@ -12,8 +12,11 @@ name=lambda r:source[r['source_component_id']]['name']
 expected={r['name']:r.get('manufacturer_part_number') for r in schematic if r['type']=='source_component' and r['name'] not in ('U1','U2','GM1')}
 assert {name(r):source[r['source_component_id']].get('manufacturer_part_number') for r in pcb}==expected
 assert len(pcb)==44
-assert not [r for r in rows if r['type'].endswith('_error')]
-assert not [r for r in rows if r['type'] in ('pcb_trace','pcb_via','pcb_copper_pour')]
+errors=[r for r in rows if r['type'].endswith('_error')]
+# Preserve the known missing analog-control connections; fail on new error types.
+assert len(errors)==2 and all(r['type']=='pcb_port_not_connected_error' for r in errors)
+assert all(any(token in r.get('message','') for token in ['C1.pin1','R_OUT.pin1']) for r in errors)
+assert any(r['type']=='pcb_trace' for r in rows)
 
 def bounds(r):
     if 'outline' in r:
@@ -57,9 +60,9 @@ for h in mounts:
         assert math.hypot(dx,dy)>3.2, f'{name(c)} overlaps mounting hardware reserve'
 
 warnings=[{'type':r['type'],'message':r.get('message','')} for r in rows if r['type'].endswith('_warning')]
-report={'status':'placement checks pass; NOT routing/clearance or electrical signoff','board_mm':[120,40,1.6],
+report={'status':'routing study; two expected unconnected analog-control ports; NOT fabrication signoff','board_mm':[120,40,1.6],
         'placed_footprints':44,'dnp_retained_footprints':['J2','J3'],'mounting_holes':4,'clip_plated_holes':4,
-        'copper_traces':0,'vias':0,'planes':0,'checks':['schematic part identity','all courtyards present','courtyard AABB overlap','board bounds','local clip access and controller reserves','mounting hardware reserves','DNP clips and 7.6mm drill spacing'],
+        'copper_traces':sum(r['type']=='pcb_trace' for r in rows),'vias':sum(r['type']=='pcb_via' for r in rows),'planes':0,'errors':errors,'checks':['schematic part identity','all courtyards present','courtyard AABB overlap','board bounds','local clip access and controller reserves','mounting hardware reserves','DNP clips and 7.6mm drill spacing'],
         'tube_vertical_clearance':'UNVERIFIED; component height and electrical spacing to tube require measurement',
         'warnings':warnings}
 (OUT/'checks.json').write_text(json.dumps(report,indent=2)+'\n')
@@ -75,16 +78,18 @@ x,y,w,h=(float(boundary.get(k)) for k in ('x','y','width','height'))
 scale=w/120
 views={
  'placement':None,
- 'top-copper':{'pcb_smtpad','pcb_plated_hole'},
- 'bottom-copper':{'pcb_plated_hole'},
+ 'top-copper':{'pcb_smtpad','pcb_plated_hole','pcb_trace','pcb_via'},
+ 'bottom-copper':{'pcb_plated_hole','pcb_trace','pcb_via'},
  'silkscreen':{'pcb_silkscreen_text','pcb_silkscreen_path','pcb_silkscreen_rect'},
- 'drill':{'pcb_plated_hole','pcb_hole'},
+ 'drill':{'pcb_plated_hole','pcb_hole','pcb_via'},
  'courtyards':{'pcb_smtpad','pcb_plated_hole','pcb_hole','pcb_keepout'},
 }
 for view,types in views.items():
     root=ET.fromstring(ET.tostring(svg))
     for e in list(root):
         typ=e.get('data-type')
+        if typ in ('pcb_trace','pcb_smtpad','pcb_via') and view in ('top-copper','bottom-copper') and e.get('data-pcb-layer') not in (None,'through',view.split('-')[0]):
+            root.remove(e);continue
         if typ in ('pcb_fabrication_note_text','pcb_fabrication_note_path') or (types is not None and typ and typ not in types|{'pcb_background','pcb_boundary','pcb_board'}):root.remove(e)
     root.set('viewBox',f'{x-8} {y-8} {w+16} {h+16}')
     root.set('width','2000');root.set('height',str(round(2000*(h+16)/(w+16))))
@@ -102,9 +107,10 @@ shutil.copyfile(ROOT/'dist/board/layout/3d.png', OUT/'3d.png')
 # Audit model coverage separately from 2D placement: generic packages do not
 # establish manufacturer body heights or assembled tube clearance.
 cad=[r for r in rows if r['type']=='cad_component']
-audit={'status':'INCOMPLETE: assembled tube interference cannot be checked',
+audit={'status':'assembly renders include recovered tube and reconstructed clips; exact interference unverified',
        'generic_package_models':[source[r['source_component_id']]['name'] for r in cad if r.get('footprinter_string')],
        'placeholder_only':[source[r['source_component_id']]['name'] for r in cad if r.get('show_as_bounding_box')],
-       'missing_assemblies':['CTC-5 / STS-5 tube','physical analog HV control circuitry'],
+       'assembly_renderer_models':{'tube':'cad/models/tube.stl','clips':'cad/models/C142864/C142864.stl'},
+       'missing_assemblies':['physical analog HV control circuitry','exact J1 body'],
        'required_checks':['manufacturer-specific body heights','tube underside height in C142864 clips','electrical clearance from HV parts to tube body','clip insertion and connector mating access']}
 (OUT/'model-audit.json').write_text(json.dumps(audit,indent=2)+'\n')

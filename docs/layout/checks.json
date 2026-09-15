@@ -1,5 +1,5 @@
 {
-  "status": "placement checks pass; NOT routing/clearance or electrical signoff",
+  "status": "routing study; two expected unconnected analog-control ports; NOT fabrication signoff",
   "board_mm": [
     120,
     40,
@@ -12,9 +12,35 @@
   ],
   "mounting_holes": 4,
   "clip_plated_holes": 4,
-  "copper_traces": 0,
-  "vias": 0,
+  "copper_traces": 61,
+  "vias": 16,
   "planes": 0,
+  "errors": [
+    {
+      "type": "pcb_port_not_connected_error",
+      "message": "Port [C1.pin1] is not connected to net [SW] by a PCB trace.",
+      "error_type": "pcb_port_not_connected_error",
+      "pcb_port_ids": [
+        "pcb_port_6"
+      ],
+      "pcb_component_ids": [
+        "pcb_component_2"
+      ],
+      "pcb_port_not_connected_error_id": "pcb_port_not_connected_error_0"
+    },
+    {
+      "type": "pcb_port_not_connected_error",
+      "message": "Port [R_OUT.pin1] is not connected to net [DRIVE] by a PCB trace.",
+      "error_type": "pcb_port_not_connected_error",
+      "pcb_port_ids": [
+        "pcb_port_89"
+      ],
+      "pcb_component_ids": [
+        "pcb_component_43"
+      ],
+      "pcb_port_not_connected_error_id": "pcb_port_not_connected_error_1"
+    }
+  ],
   "checks": [
     "schematic part identity",
     "all courtyards present",

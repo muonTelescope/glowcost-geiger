@@ -1,12 +1,12 @@
 import { Children, Fragment, cloneElement, isValidElement } from 'react'
 import Module, { nodePorts } from './module.circuit'
 
-/** Placement study only. Values, MPNs and exposed nets come from the schematic.
+/** Routing study only; analog control remains incomplete. Values, MPNs and exposed nets come from the schematic.
  * U1/U2 are reserved areas until a physical controller exists; GM1 is a body envelope.
  * DNP clips retain PCB holes here. Assembly population comes from parts.ts/review BOM.
  */
 export const placement: Record<string, [number, number, number?]> = {
-  J1: [-43,-13], J2: [52.5,0,90], J3: [-52.5,0,90],
+  J1: [-43,-13], J2: [52.5,0,0], J3: [-52.5,0,0],
   R_EN: [-36,-13], R_A1: [45,10], R_A2: [51,10],
   R5: [-8,-15,90], C9: [-12,-15,90], R_OVBOT: [-8,15,90], C_OV: [-12,15,90],
   R_K: [-44,0,90], R_PROTECT: [-43,6], Q1: [-38,6],
@@ -37,7 +37,7 @@ function flatten(children: any): any[] {
 }
 export default () => {
   const components=flatten(Module().props.children).filter((e:any)=>isValidElement(e) && placement[e.props.name])
-  return <board width={120} height={40} thickness={1.6} routingDisabled pcbStyle={{silkscreenFontSize:0.9}}
+  return <board width={120} height={40} thickness={1.6} autorouter={{local:true, traceClearance:0.25}} minTraceWidth={0.25} minViaHoleDiameter={0.3} minViaPadDiameter={0.6} pcbStyle={{silkscreenFontSize:0.9}}
     outline={[{x:-58,y:-20},{x:58,y:-20},{x:60,y:-18},{x:60,y:18},{x:58,y:20},{x:-58,y:20},{x:-60,y:18},{x:-60,y:-18}]}>
     {components.map((e:any)=>{
       const [pcbX,pcbY,pcbRotation=0]=placement[e.props.name]
@@ -50,14 +50,15 @@ export default () => {
       .filter(port=>placement[port.split(' > ')[0].slice(1)])
       .map(port=><trace key={`${net}-${port}`} from={port} to={`net.${net}`} />))}
     {[-56,56].flatMap(x=>[-16,16].map(y=><hole key={`${x}:${y}`} name={`M_${x}_${y}`} pcbX={x} pcbY={y} diameter={3.2} />))}
+    <keepout shape="rect" pcbX={-24} pcbY={0} width={20} height={24} layers={["top","bottom"]} />
     {/* Local clip access only; no blanket copper/component keepout under tube. */}
     <silkscreenrect pcbX={0} pcbY={0} width={110} height={12} stroke="dashed" strokeWidth={0.15} />
-    <silkscreentext pcbX={0} pcbY={18} text="120 x 40 / UNDER-TUBE PLACEMENT / UNROUTED" fontSize={0.95} />
+    <silkscreentext pcbX={0} pcbY={18} text="120 x 40 / ROUTING STUDY / ANALOG CONTROL PENDING" fontSize={0.95} />
     <silkscreentext pcbX={-49} pcbY={10} text="J3 DNP" fontSize={0.8} />
     <silkscreentext pcbX={51} pcbY={-10} text="J2 HV DNP" fontSize={0.8} />
     <silkscreenrect pcbX={-24} pcbY={0} width={20} height={24} stroke="dashed" strokeWidth={0.15} />
     <silkscreentext pcbX={-24} pcbY={4} text="U1/U2 RESERVE" fontSize={0.85} />
-    <silkscreentext pcbX={-24} pcbY={0} text="CONTROLLER" fontSize={0.8} />
+    <silkscreentext pcbX={-24} pcbY={0} text="ANALOG - NO MCU" fontSize={0.8} />
     <silkscreentext pcbX={-24} pcbY={-4} text="HEIGHT TBD" fontSize={0.8} />
     <silkscreentext pcbX={-43} pcbY={-18} text="3V3 GND PULSE EN" fontSize={0.7} />
     <silkscreentext pcbX={15} pcbY={-17} text="TUBE HEIGHT / HV CLEARANCE UNVERIFIED" fontSize={0.8} />

@@ -1,5 +1,5 @@
 {
-  "status": "INCOMPLETE: assembled tube interference cannot be checked",
+  "status": "assembly renders include recovered tube and reconstructed clips; exact interference unverified",
   "generic_package_models": [
     "R_EN",
     "C1",
@@ -48,9 +48,13 @@
     "J2",
     "J3"
   ],
+  "assembly_renderer_models": {
+    "tube": "cad/models/tube.stl",
+    "clips": "cad/models/C142864/C142864.stl"
+  },
   "missing_assemblies": [
-    "CTC-5 / STS-5 tube",
-    "physical analog HV control circuitry"
+    "physical analog HV control circuitry",
+    "exact J1 body"
   ],
   "required_checks": [
     "manufacturer-specific body heights",
