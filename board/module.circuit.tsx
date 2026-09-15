@@ -78,7 +78,7 @@ const notes = [
   [43, -24.5, "EN LOW IS NOT PROOF OF DISCHARGE.", 0.48],
   [0, -32, "DESIGN NOTES: shared ground, no galvanic isolation. Keep HV physically separated from Pi wiring.", 0.48],
   [0, -33.5, "Plan 10 mA continuous / 20 mA average startup. INPUT INRUSH NOT LIMITED: add soft-start before Pi use.", 0.45],
-  [0, -35, "See docs/performance.md for dead-time, conditional dose-rate conversion, power budget and calibration limits.", 0.45],
+  [0, -35, "See README.md for dead-time, conditional dose-rate conversion, power budget and calibration limits.", 0.45],
 ] as const
 export default () => (
   <board routingDisabled schTraceAutoLabelEnabled={true} schMaxTraceDistance={8}>
