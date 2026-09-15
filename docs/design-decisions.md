@@ -13,7 +13,7 @@ qualified protection components, PCB routing, ERC/DRC and bench verification rem
 - Same CTC-5 / STS-5 (СТС-5) tube as geiger2; ~400 V bias.
 - No MCU, firmware, radio, battery, display or external HV/sense connector.
 - Connector: locking 4-pin SMT from JLC; JST GH BM04B-GHS-TBT(LF)(SN) candidate.
-- Tube: mounted on-board with clips; clip MPN and mounting geometry remain open.
+- Tube: user already owns the tubes; mounted on-board with clips; clip MPN and mounting geometry remain open.
 - Use: indoor background monitoring, beta retained; raw counts primary, µSv approximate.
 - Assembly: 25–50 boards, optimize JLC cost; future coating/potting requires requalification.
 - Accepted passives: 0603 low voltage; choose larger HV packages for ratings and stock.

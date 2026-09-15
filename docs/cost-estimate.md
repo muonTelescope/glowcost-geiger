@@ -65,9 +65,8 @@ assumed. The excess allowance is a budget reserve, not JLC's attrition formula.
 
 ## Costs outside the electronics board
 
-- **Tube:** excluded; use actual landed cost of the intended NOS lot. No
-  qualified tube supplier/lot price has been established. Existing tubes have
-  zero new purchase cost but still need inspection and testing.
+- **Tube:** user already owns the tubes: **$0 new purchase cost**. They still
+  need inspection, dimensional checks and electrical testing.
 - **Clips and mating Pi cable:** carry a separate provisional **$2–5 per unit**
   materials reserve until exact clips, cable length and terminations are chosen.
   This is not a vendor quote and excludes fitting/crimping labor.
@@ -79,6 +78,56 @@ assumed. The excess allowance is a budget reserve, not JLC's attrition formula.
 For example, a 50-board electronics order plus the clips/cable reserve and one
 shipping reserve would be **$725–1,110**, before tubes, enclosure, labor and tax.
 Two separately shipped prototype/production orders incur separate setup and freight.
+
+## Five-board prototype batch — tubes already owned
+
+Use **$130–190 for five assembled electronics boards ($26–38 each)**.
+Adding provisional clips/cables and one shipping allowance gives **$165–275**
+before tax, enclosure, coating and test/assembly labor. Tube purchase cost is $0.
+This assumes Economic one-sided SMT is available for the final design.
+
+| Cost for the entire five-board batch | USD |
+|---|---:|
+| Catalog-priced candidate parts, exact 5-board tier calculation | $49.34 |
+| Remaining physical circuitry and HV parts allowance | $8–18 |
+| Purchased excess, attrition minima and pricing reserve | $10–25 |
+| Bare PCB allowance, assumed approximately 125 × 35 mm | $10–25 |
+| Setup, stencil, 12–18 extended types and SMT placement | $48–67 |
+| Calculated electronics total | $125–185 |
+| **Rounded electronics budget** | **$130–190** |
+| Clips and mating cables, provisional materials reserve | $10–25 |
+| Shipping, provisional reserve | $25–60 |
+| **Budget including clips/cables and shipping** | **$165–275** |
+
+The candidate subtotal is $9.8686 per board: capacitors $3.1064, diodes $0.3712,
+inductor $0.6445, two comparator/references $4.8562, timer $0.3049, switch $0.0404,
+pulse transistor $0.0168, Schmitt gate $0.0651, bleeder $0.0704 and connector
+$0.3927. Rates come from the stored catalog snapshot; actual component purchase
+quantities can be larger than five boards consume. At this batch size, setup and
+feeder charges contribute roughly $10–13 per board, so dividing the 50-board
+price by ten would significantly underbudget the prototype order.
+
+### Parts and implementation still to resolve
+
+| Item | What remains |
+|---|---|
+| Two 2.49 MΩ anode resistors | Exact stocked MPN/footprint; each needs at least 500 V working rating and suitable pulse rating. |
+| Eight 33 MΩ divider resistors; 412 kΩ and 402 kΩ bottom legs | Exact MPNs; working voltage, tolerance, temperature/voltage coefficient and leakage must support regulation and OVP accuracy. |
+| Reverse base-emitter clamp and remaining passives | Choose exact protection diode and rated capacitors/resistors, including real input bypass and oscillator timing network. |
+| Physical U1 HV controller | Complete LMC555 timing, transistor drive and independent regulation/OVP wiring; confirm actual comparator delay and startup behavior. U1 is currently a behavioral block. |
+| Physical U2 pulse conditioning | Complete Schmitt/blanking logic, HV-ready detection, enable behavior and unpowered-host protection. U2 is currently behavioral. |
+| Input soft-start/current limiting | Select and implement an actual circuit; the existing input capacitor model does not limit power-on inrush. |
+| Candidate multiplier diodes and HV switch | Verify reverse stress, leakage, switching loss, drive and safe operating area with the actual circuit. |
+| Candidate inductor and HV capacitors | Verify footprint, inductor saturation/DCR and capacitor electrical stress against the final implementation. |
+| Tube clips | Measure the owned tube contacts; select clips, retention, spacing and attachment process. A generic fuse clip is not yet qualified. |
+| Pi cable and connector footprint | Set cable length/host termination; confirm mating GH contacts/housing, pin order and SMT retention tabs. |
+
+These can be resolved through engineering and part selection; the user-specific
+inputs still needed are tube contact dimensions and preferred cable length/host
+termination. After this, PCB HV spacing, routing and manufacturing checks remain.
+First prototypes must verify current/inrush, HV regulation and discharge, OVP,
+pulse voltage, recovery and the owned tube lot's plateau. Those checks establish
+whether the design is ready for the later 25–50-board run.
 
 ## Where cost reduction matters
 

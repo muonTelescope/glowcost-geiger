@@ -124,6 +124,11 @@ spike, so physical soft-start and Pi rail-droop tests remain necessary.
 
 ## Expected cost
 
+**Five-board prototype batch, tubes already owned:** allow **$130–190** for
+assembled electronics, or **$165–275** including provisional clips/cables and
+shipping. Taxes, enclosure and test labor are extra. See the
+[five-board breakdown and unresolved parts](docs/cost-estimate.md#five-board-prototype-batch--tubes-already-owned).
+
 Budget **$14–19 per assembled electronics board at 25 units** ($350–475 total),
 or **$12–16 at 50 units** ($600–800 total), in USD. These estimates include PCB,
 SMT assembly and allowances for the unfinished physical circuitry. They exclude
