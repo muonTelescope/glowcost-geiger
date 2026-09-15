@@ -1,8 +1,8 @@
 {
   "status": "placement checks pass; NOT routing/clearance or electrical signoff",
   "board_mm": [
-    140,
-    60,
+    120,
+    40,
     1.6
   ],
   "placed_footprints": 44,
@@ -20,10 +20,11 @@
     "all courtyards present",
     "courtyard AABB overlap",
     "board bounds",
-    "tube and controller reserves",
+    "local clip access and controller reserves",
     "mounting hardware reserves",
     "DNP clips and 7.6mm drill spacing"
   ],
+  "tube_vertical_clearance": "UNVERIFIED; component height and electrical spacing to tube require measurement",
   "warnings": [
     {
       "type": "source_refdes_convention_warning",
@@ -47,11 +48,11 @@
     },
     {
       "type": "pcb_connector_not_in_accessible_orientation_warning",
-      "message": "component is facing y+ but should face x- so the connector is accessible from the board edge"
+      "message": "component is facing y+ but should face y- so the connector is accessible from the board edge"
     },
     {
       "type": "pcb_connector_not_in_accessible_orientation_warning",
-      "message": "component is facing x- but should face y+ so the connector is accessible from the board edge"
+      "message": "component is facing x- but should face x+ so the connector is accessible from the board edge"
     },
     {
       "type": "source_component_pins_underspecified_warning",

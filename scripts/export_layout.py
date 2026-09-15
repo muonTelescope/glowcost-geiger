@@ -29,9 +29,11 @@ assert len(courtyards)==len(pcb)
 def overlap(a,b):return min(a[2],b[2])-max(a[0],b[0])>1e-6 and min(a[3],b[3])-max(a[1],b[1])>1e-6
 for i,a in enumerate(pcb):
     ba=courtyards[a['pcb_component_id']]
-    assert ba[0]>-69 and ba[1]>-29 and ba[2]<69 and ba[3]<29, name(a)
-    assert not overlap(ba,(-37,-24,-7,2)), f'{name(a)} overlaps controller reserve'
-    if name(a) not in ('J2','J3'):assert not overlap(ba,(-48,10,48,26)), f'{name(a)} overlaps tube keepout'
+    assert ba[0]>-59 and ba[1]>-19 and ba[2]<59 and ba[3]<19, name(a)
+    assert not overlap(ba,(-34,-12,-14,12)), f'{name(a)} overlaps controller reserve'
+    if name(a) not in ('J2','J3'):
+        for reserve in [(-58,-7,-48,7),(48,-7,58,7)]:
+            assert not overlap(ba,reserve), f'{name(a)} overlaps clip access reserve'
     for b in pcb[i+1:]:assert not overlap(ba,courtyards[b['pcb_component_id']]), f'Courtyard overlap: {name(a)}, {name(b)}'
 
 holes=[r for r in rows if r['type']=='pcb_plated_hole']
@@ -55,21 +57,22 @@ for h in mounts:
         assert math.hypot(dx,dy)>3.2, f'{name(c)} overlaps mounting hardware reserve'
 
 warnings=[{'type':r['type'],'message':r.get('message','')} for r in rows if r['type'].endswith('_warning')]
-report={'status':'placement checks pass; NOT routing/clearance or electrical signoff','board_mm':[140,60,1.6],
+report={'status':'placement checks pass; NOT routing/clearance or electrical signoff','board_mm':[120,40,1.6],
         'placed_footprints':44,'dnp_retained_footprints':['J2','J3'],'mounting_holes':4,'clip_plated_holes':4,
-        'copper_traces':0,'vias':0,'planes':0,'checks':['schematic part identity','all courtyards present','courtyard AABB overlap','board bounds','tube and controller reserves','mounting hardware reserves','DNP clips and 7.6mm drill spacing'],
+        'copper_traces':0,'vias':0,'planes':0,'checks':['schematic part identity','all courtyards present','courtyard AABB overlap','board bounds','local clip access and controller reserves','mounting hardware reserves','DNP clips and 7.6mm drill spacing'],
+        'tube_vertical_clearance':'UNVERIFIED; component height and electrical spacing to tube require measurement',
         'warnings':warnings}
 (OUT/'checks.json').write_text(json.dumps(report,indent=2)+'\n')
 (OUT/'circuit.json').write_text(json.dumps(rows,indent=2)+'\n')
 with (OUT/'placement.csv').open('w') as f:
-    w=csv.writer(f);w.writerow(['Reference','X_mm','Y_mm','Rotation_deg','Layer','DNP','MPN'])
+    w=csv.writer(f,lineterminator="\n");w.writerow(['Reference','X_mm','Y_mm','Rotation_deg','Layer','DNP','MPN'])
     for c in pcb:w.writerow([name(c),c['center']['x'],c['center']['y'],c.get('rotation',0),c['layer'],'Yes' if population[name(c)] else 'No',source[c['source_component_id']].get('manufacturer_part_number','')])
 
 ET.register_namespace('','http://www.w3.org/2000/svg')
 svg=ET.parse(ROOT/'dist/board/layout/pcb.svg').getroot()
 boundary=next(e for e in svg if e.get('data-type')=='pcb_boundary')
 x,y,w,h=(float(boundary.get(k)) for k in ('x','y','width','height'))
-scale=w/140
+scale=w/120
 views={
  'placement':None,
  'top-copper':{'pcb_smtpad','pcb_plated_hole'},
@@ -88,10 +91,20 @@ for view,types in views.items():
     if view=='courtyards':
         for c in pcb:
             a,b,d,e=courtyards[c['pcb_component_id']]
-            ET.SubElement(root,'{http://www.w3.org/2000/svg}rect',{'x':str(x+(a+70)*scale),'y':str(y+(30-e)*scale),'width':str((d-a)*scale),'height':str((e-b)*scale),'fill':'none','stroke':'#66ffff','stroke-width':'0.6'})
+            ET.SubElement(root,'{http://www.w3.org/2000/svg}rect',{'x':str(x+(a+60)*scale),'y':str(y+(20-e)*scale),'width':str((d-a)*scale),'height':str((e-b)*scale),'fill':'none','stroke':'#66ffff','stroke-width':'0.6'})
     path=OUT/f'{view}.svg'
     path.write_text('\n'.join(l.rstrip() for l in ET.tostring(root,encoding='unicode').splitlines())+'\n')
     subprocess.run(['rsvg-convert','-w','2400',str(path),'-o',str(OUT/f'{view}.png')],check=True)
 print(f'PASS: {len(pcb)} footprints, no courtyard overlaps, four DNP clip holes retained; six layer views exported')
 
 shutil.copyfile(ROOT/'dist/board/layout/3d.png', OUT/'3d.png')
+
+# Audit model coverage separately from 2D placement: generic packages do not
+# establish manufacturer body heights or assembled tube clearance.
+cad=[r for r in rows if r['type']=='cad_component']
+audit={'status':'INCOMPLETE: assembled tube interference cannot be checked',
+       'generic_package_models':[source[r['source_component_id']]['name'] for r in cad if r.get('footprinter_string')],
+       'placeholder_only':[source[r['source_component_id']]['name'] for r in cad if r.get('show_as_bounding_box')],
+       'missing_assemblies':['CTC-5 / STS-5 tube','physical analog HV control circuitry'],
+       'required_checks':['manufacturer-specific body heights','tube underside height in C142864 clips','electrical clearance from HV parts to tube body','clip insertion and connector mating access']}
+(OUT/'model-audit.json').write_text(json.dumps(audit,indent=2)+'\n')

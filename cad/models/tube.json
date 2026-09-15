@@ -1,0 +1,13 @@
+{
+  "source_object": "SBM-20",
+  "source_file": "cad/reference/wirelessGeigerCounter/cad/blender/transmitter.blend",
+  "user_confirmed_tube_match": true,
+  "legacy_units_to_mm": 10,
+  "dimensions_mm": [
+    107.98988342285156,
+    11.00002110004425,
+    11.000021696090698
+  ],
+  "origin": "body bounding-box center; long axis X",
+  "installed_height": "not established; requires clip seating geometry"
+}

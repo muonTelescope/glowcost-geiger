@@ -94,15 +94,17 @@ and 30 exposed nets against SPICE, including diode polarity and passive values.
 
 ## PCB renders and layer views
 
-The **140 × 60 mm, two-layer placement study** holds 44 footprints, with all SMT
+The **120 × 40 mm, two-layer placement study** holds 44 footprints, with all SMT
 parts on top. J2/J3 retain their holes and pads while remaining **C142864 DNP**.
-The controller area is reserved for the physical implementation of U1/U2.
+The reserved area is for analog HV control (timer, comparators and logic), with
+no microcontroller or board firmware. Circuitry now occupies the space beneath
+the tube; 120 × 40 mm is 43% less board area than the previous 140 × 60 mm study.
 There are **no routed traces, vias or copper planes** yet.
 
 ![Native tscircuit 3D placement preview](docs/layout/3d.png)
 
 This preview uses generic package models; the tube and accurate connector/clip
-bodies are absent. Red hatching marks the tube keepout, not copper.
+bodies are absent. The tube outline is a plan-view envelope; its installed height is unverified.
 
 ![Annotated top placement](docs/layout/placement.png)
 
@@ -115,7 +117,7 @@ bodies are absent. Red hatching marks the tube keepout, not copper.
 These are design-layer views, not manufacturing Gerbers. Bottom copper currently
 contains only the clip-hole annuli. The drill view includes annuli for context.
 
-![Courtyards and reserved tube space](docs/layout/courtyards.png)
+![Courtyards and compact placement](docs/layout/courtyards.png)
 
 [Layout dimensions, assembly notes and remaining checks](#layout-details) ·
 [Placement checks](docs/layout/checks.json) ·
@@ -124,7 +126,7 @@ contains only the clip-hole annuli. The drill view includes annuli for context.
 [Layout source](board/layout.circuit.tsx)
 
 Courtyard and mechanical-reserve checks pass. HV creepage/clearance, routing,
-actual tube fit and enclosure interference still require review. The larger board
+actual tube fit and enclosure interference still require review. The revised board
 supersedes the earlier 125 × 35 mm cost assumption; obtain a fresh PCB quote.
 
 ## Tube and HV protection
@@ -944,7 +946,7 @@ authorize purchasing or establish that the hardware is ready for manufacture.
 
 ### Placement-size update
 
-The basic layout now measures **140 × 60 mm**, superseding the 125 × 35 mm
+The basic layout now measures **120 × 40 mm**, superseding the 125 × 35 mm
 assumption used in the PCB allowances above. The component estimates are
 unchanged; the bare-board and shipping allowances require a new supplier quote.
 Do not treat the earlier totals as a quote for this larger board or scale the
@@ -965,13 +967,13 @@ soft-start parts still need a complete pin-level schematic and placement.
 
 | Item | Current placement |
 |---|---|
-| Board | 140 × 60 × 1.6 mm, two copper layers, 2 mm corner chamfers |
+| Board | 120 × 40 × 1.6 mm, two copper layers, 2 mm corner chamfers |
 | Assembly | All SMT on top; 44 physical footprints |
-| Mounting | Four 3.2 mm nonplated holes at (±64, ±24) mm |
-| Tube envelope | Assumed 110 × 12 mm, centered at (0, 18) mm |
+| Mounting | Four 3.2 mm nonplated holes at (±56, ±16) mm |
+| Tube envelope | Assumed 110 × 12 mm, centered at (0, 0) mm |
 | Clip centers | 105 mm apart; actual NOS tube contact fit must be measured |
-| Tube reserve | 96 × 16 mm central keepout on both sides |
-| Controller reserve | 30 × 26 mm centered at (−22, −11) mm |
+| Tube reserve | No blanket keepout; circuitry permitted under tube, height pending |
+| Controller reserve | 20 × 24 mm centered at (−24, 0) mm |
 | J1 | Vertical locking four-pin JST GH SMT connector |
 | J2/J3 | C142864, DNP; two plated holes per clip, 7.6 mm pitch |
 
@@ -991,7 +993,7 @@ Clip ratings and source references are in [part selection](#part-details).
 
 The native tscircuit 3D preview uses generic passive/semiconductor packages.
 It does not include the tube or accurate JST/clip bodies, so it cannot establish
-mechanical interference clearance. Red hatching is the tube keepout.
+mechanical interference clearance. The tube outline does not establish vertical clearance.
 
 
 Vector images: [placement](docs/layout/placement.svg), [top copper](docs/layout/top-copper.svg),
@@ -1002,12 +1004,93 @@ These views filter actual tscircuit PCB artwork; they are not Gerber exports.
 Bottom copper contains only plated clip-hole annuli. Drill artwork retains those
 annuli for reference. Cyan courtyard boxes bound component assembly space.
 
+### 3D model audit
+
+#### Generated C142864 clip model
+
+A datasheet-derived **Littelfuse 10207101009 / C142864** model is available:
+[STEP solid](cad/models/C142864/C142864.step) ·
+[STL mesh](cad/models/C142864/C142864.stl) ·
+[FreeCAD source](cad/models/C142864/C142864.FCStd) ·
+[dimensions and validation](cad/models/C142864/model.json) ·
+[source datasheet](cad/models/C142864/datasheet.pdf).
+
+![Datasheet-derived C142864 clip; undimensioned bends approximate](cad/models/C142864/preview.png)
+
+The model uses millimetres, with the origin on the PCB top at the midpoint
+between the tails. X follows the 7.6 mm tail pitch and tube axis; Z points up.
+The clip extends 10.9 mm above the board and the tails extend 3.6 mm below it.
+Tail cross-section is 0.5 × 1.5 mm. The 7 mm axial body, 7.9 mm transverse base,
+R3.2 contact profile and 7.2 mm radius-center height follow the drawing.
+
+This is reconstructed CAD, not a manufacturer model. Undimensioned bends,
+transition heights and tail landings are approximated; embossing, edge rounds
+and spring deflection are omitted. The sidewall offset approximates sheet
+thickness. The solid and exported STEP both pass FreeCAD validity checks.
+Actual loaded tube seating and HV clearance still need verification. The model
+is available separately; the board preview has not yet been regenerated with it.
+J2/J3 remain DNP for JLC assembly.
+
+Regenerate using FreeCAD's Python runtime with `scripts/generate_clip_model.py`;
+render using Blender with `scripts/render_clip_model.py`. Neither requires
+changes to the electrical circuit or firmware.
+
+
+The requested [wirelessGeigerCounter source repository](https://github.com/sawaiz/wirelessGeigerCounter/tree/9fde1175eae3e9a3cc510e67e4d2def6b82e2f02)
+was retrieved at revision `9fde1175eae3e9a3cc510e67e4d2def6b82e2f02`.
+Its original Inventor housing parts/assembly and project file are preserved in
+[cad/reference/wirelessGeigerCounter](cad/reference/wirelessGeigerCounter), with
+[file hashes and provenance](cad/reference/wirelessGeigerCounter/source.json).
+The latest commit deleted the imported models. Recovered from history:
+
+- [SBM-20 Inventor part](cad/reference/wirelessGeigerCounter/cad/Electronics/SBM-20.ipt)
+- [Blender transmitter assembly](cad/reference/wirelessGeigerCounter/cad/blender/transmitter.blend)
+- [Tube-label texture](cad/reference/wirelessGeigerCounter/cad/blender/assets/STM-20%20Label.png) and its companion grunge texture
+
+Each recovered file's exact source revision and SHA-256 are recorded in the
+provenance manifest. The Blender file is the original complete assembly, not an
+isolated tube export. The user confirmed that the recovered tube geometry matches the owned tube.
+C142864 clip seating remains unverified. An isolated mesh is now exported; its installed height is not yet assigned to the tscircuit preview. “Acrylic Tube Housing” is
+the enclosure, not the detector tube.
+
+
+The user confirmed the recovered tube matches the owned tube. An isolated
+[STL mesh](cad/models/tube.stl) and [Blender model](cad/models/tube.blend) are
+available, with [dimensions and conversion assumptions](cad/models/tube.json).
+The legacy mesh was converted at 10 mm per source unit, giving approximately
+108 × 11 × 11 mm; this scale inference must be checked against the physical tube.
+Its origin is centered and its long axis is X. Run
+`Blender --background --python scripts/export_tube_model.py` to regenerate it.
+
+Exact clip-model search: the [DigiKey/Ultra Librarian page](https://www.digikey.com/en/models/468061?tab=ultralibrarian)
+reports “This model is currently not available” for 3D. ComponentSearchEngine
+returned no exact match, and JLC's C142864 record has no EasyEDA footprint.
+No manufacturer 10207101009 STEP/STL was obtained. A reconstructed model is
+now available above; loaded seating and installed tube height remain unverified; the clips remain DNP for JLC assembly.
+
+[Machine-readable model audit](docs/layout/model-audit.json).
+
+| Coverage | Finding |
+|---|---|
+| 41 passive/semiconductor bodies | Generic package models, not exact manufacturer height verification |
+| J1 JST GH | Placeholder only; connector body and mating cable absent |
+| J2/J3 C142864 | Placeholder only; spring geometry and seating height absent |
+| Owned tube | No 3D model; only an assumed 110 × 12 mm plan-view envelope |
+| Analog HV control | Reserved area; physical parts not yet instantiated |
+
+The current 3D preview is useful for placement orientation, but **cannot verify
+under-tube fit or HV clearance to the tube body**. Measure the tube's underside
+height in the selected clips, obtain exact component height limits and model the
+assembled tube/clip geometry before checking interference. DNP at JLC does not
+remove the clips from the final mechanical assembly. Keep the tall connector
+beside the tube. No MCU or programming is required on this board.
+
 <a id="layout-details-verification-and-assembly-data"></a>
 
 ### Verification and assembly data
 
 [Automated checks](docs/layout/checks.json) verify 44 part identities against the
-schematic, courtyard presence/non-overlap, board bounds, tube/controller reserves,
+schematic, courtyard presence/non-overlap, board bounds, clip-access/controller reserves,
 mounting hardware reserves and DNP clip-hole retention. There are zero traces,
 vias and planes. These checks do not verify electrical connections or HV spacing.
 
@@ -1031,11 +1114,11 @@ review. No KiCad DRC or complete 3D interference check has been performed.
 - Route the converter with short switching loops and local bypassing; keep the
   HV ladder and high-impedance sensing away from Pi signals.
 - Establish HV creepage/clearance rules for the actual materials and environment;
-  inspect pads, holes, board edges and both copper layers. The current keepout
+  inspect pads, holes, board edges and both copper layers. The local clip-access reserves
   and default CAD spacing rules do not establish a safe HV insulation rating.
 - Add final silkscreen polarity, pin-one and assembly markings, then review
   fabrication outputs and production BOM/placement rotations.
-- Re-quote the larger PCB and qualify protection and Pi rail behavior on hardware.
+- Re-quote the revised PCB and qualify protection and Pi rail behavior on hardware.
 
 <a id="layout-details-reproduce"></a>
 

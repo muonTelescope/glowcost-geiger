@@ -1,0 +1,63 @@
+{
+  "repository": "https://github.com/sawaiz/wirelessGeigerCounter",
+  "revision": "9fde1175eae3e9a3cc510e67e4d2def6b82e2f02",
+  "purpose": "Recovered SBM-20 Inventor model and historical Blender assembly/assets, plus housing references; not verified CTC-5 geometry",
+  "files": [
+    {
+      "path": "cad/Housing/Back Cap.ipt",
+      "sha256": "28c743543382a61e6b2f610d7f8ea877fe1a1a5a853da8d2833909f71427d288"
+    },
+    {
+      "path": "cad/Housing/.75in PVC.ipt",
+      "sha256": "bcdef9bbc9386cb7cfc822f9a8a651de94ac69ca4acd519395da6f083c9eadd8"
+    },
+    {
+      "path": "cad/Housing/Switch Cap.ipt",
+      "sha256": "52fec53195e4873674c0aaa49de49a17ff7412ff0b54edae87eb79e76bef12fc"
+    },
+    {
+      "path": "cad/Housing/Acrylic Housing.iam",
+      "sha256": "c38d0e046a645afb5da4d3045f1ce86cc31f3693f150c72a41e0bc59dde98882"
+    },
+    {
+      "path": "cad/Housing/Acrylic Tube Housing.dwg",
+      "sha256": "abdd4acb25016ec4525aef2fc369c336092b6590cd91cca428c1099e20ded1bf"
+    },
+    {
+      "path": "cad/Housing/8907K48 045 Phosphate Rod.ipt",
+      "sha256": "3f7ba32957d8a240480d090b00e74d43a85e73c7392e25d2d1a50737b5809548"
+    },
+    {
+      "path": "cad/Housing/Acrylic Tube Housing.ipt",
+      "sha256": "f87f6afaf973b1b54a2c359456a7031fd106edd1fa37ee3bb50a1d56354bcab3"
+    },
+    {
+      "path": "cad/Housing/Power Switch.ipt",
+      "sha256": "5f3fd8ae210f071bc1f39a312af87dd9f4044689df6aba95a3539eb100b2b6f1"
+    },
+    {
+      "path": "cad/wirelessGeigerCounter.ipj",
+      "sha256": "7450d25c70ab0adb2df524115aba3c551c7edfe772296a2008fada90a5cc66ee"
+    },
+    {
+      "path": "cad/Electronics/SBM-20.ipt",
+      "revision": "8f712a9ca11d42672114b1b7a6bd497661d1cc08",
+      "sha256": "fb902a3fba706cc4f58ccab7033463e8b932ab34edb643835c72860b302e36bc"
+    },
+    {
+      "path": "cad/blender/transmitter.blend",
+      "revision": "2b14dfbd3969d9a4ab60d794b3106dbf7970f395",
+      "sha256": "31de825efd742613c964c4927904839de3a18b7baa61559850c63ab6a7a95bce"
+    },
+    {
+      "path": "cad/blender/assets/STM-20 Label.png",
+      "revision": "2b14dfbd3969d9a4ab60d794b3106dbf7970f395",
+      "sha256": "d7ebbb3bb97888f10a52d07fcb3083989364c6db55d2749b687e99424c91f581"
+    },
+    {
+      "path": "cad/blender/assets/Grungemaps0017_S.jpg",
+      "revision": "2b14dfbd3969d9a4ab60d794b3106dbf7970f395",
+      "sha256": "093fdbedcc4c0b05ff42ae912ba6d02014eaf33c5c9591a20306d4ed724d1ee3"
+    }
+  ]
+}

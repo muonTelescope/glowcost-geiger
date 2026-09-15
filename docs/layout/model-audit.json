@@ -1,0 +1,61 @@
+{
+  "status": "INCOMPLETE: assembled tube interference cannot be checked",
+  "generic_package_models": [
+    "R_EN",
+    "C1",
+    "D1",
+    "D2",
+    "C2",
+    "C3",
+    "D3",
+    "D4",
+    "C4",
+    "C5",
+    "D5",
+    "D6",
+    "C6",
+    "C7",
+    "D7",
+    "D8",
+    "C8",
+    "R1",
+    "R_OV1",
+    "R_BL1",
+    "R2",
+    "R_OV2",
+    "R_BL2",
+    "R3",
+    "R_OV3",
+    "R_BL3",
+    "R4",
+    "R_OV4",
+    "R_BL4",
+    "R5",
+    "C9",
+    "R_OVBOT",
+    "C_OV",
+    "R_A1",
+    "R_A2",
+    "R_K",
+    "R_PROTECT",
+    "Q1",
+    "D_NEG",
+    "R_COL",
+    "R_OUT"
+  ],
+  "placeholder_only": [
+    "J1",
+    "J2",
+    "J3"
+  ],
+  "missing_assemblies": [
+    "CTC-5 / STS-5 tube",
+    "physical analog HV control circuitry"
+  ],
+  "required_checks": [
+    "manufacturer-specific body heights",
+    "tube underside height in C142864 clips",
+    "electrical clearance from HV parts to tube body",
+    "clip insertion and connector mating access"
+  ]
+}
