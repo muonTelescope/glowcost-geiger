@@ -122,6 +122,17 @@ spike, so physical soft-start and Pi rail-droop tests remain necessary.
 [Detailed calculations, source references, pulse-pair charts and current budget](docs/performance.md)
 · [Machine-readable results](docs/performance/results.json)
 
+## Expected cost
+
+Budget **$14–19 per assembled electronics board at 25 units** ($350–475 total),
+or **$12–16 at 50 units** ($600–800 total), in USD. These estimates include PCB,
+SMT assembly and allowances for the unfinished physical circuitry. They exclude
+the tube, clips/cable, enclosure, shipping, tax and functional testing.
+
+The catalog-priced candidate parts alone total $8.41 / $7.74 per board; the two
+comparator/reference ICs and eight HV capacitors dominate.
+[Detailed cost breakdown, sources and assumptions](docs/cost-estimate.md).
+
 ## Assembly plan
 
 - **25–50 boards:** optimize JLC SMT assembly cost; use 0603 low-voltage passives

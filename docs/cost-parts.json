@@ -1,0 +1,1067 @@
+{
+  "date": "2026-09-15",
+  "currency": "USD",
+  "source": "pcbparts JLC database; catalog price tiers, not a live PCBA quote",
+  "parts": [
+    {
+      "lcsc": "C342714",
+      "model": "C3216C0G2J103JT000N",
+      "manufacturer": "TDK",
+      "package": "1206",
+      "stock": 2413,
+      "price": 0.3883,
+      "price_10": 0.3198,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Capacitors",
+      "subcategory": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+      "subcategory_id": 2929,
+      "mounting_type": "smd",
+      "specs": {
+        "Voltage Rating": "630V",
+        "Tolerance": "±5%",
+        "Capacitance": "10nF",
+        "Temperature Coefficient": "C0G"
+      },
+      "description": "10nF 630V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "min_order": 1,
+      "reel_qty": 2000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_TDK-C3216C0G2J103JT000N_C342714.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c3216c0g2j103jt000n_C342714.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3883
+        },
+        {
+          "qty": "50+",
+          "price": 0.3198
+        },
+        {
+          "qty": "150+",
+          "price": 0.2904
+        },
+        {
+          "qty": "500+",
+          "price": 0.2536
+        },
+        {
+          "qty": "2000+",
+          "price": 0.2289
+        },
+        {
+          "qty": "4000+",
+          "price": 0.2191
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Voltage Rating",
+          "value": "630V"
+        },
+        {
+          "name": "Tolerance",
+          "value": "±5%"
+        },
+        {
+          "name": "Capacitance",
+          "value": "10nF"
+        },
+        {
+          "name": "Temperature Coefficient",
+          "value": "C0G"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "cb4f9f280c4d484b89312dffe89a9a44",
+      "easyeda_footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "per_board": 8
+    },
+    {
+      "lcsc": "C155214",
+      "model": "BAV21W-7-F",
+      "manufacturer": "Diodes Incorporated",
+      "package": "SOD-123",
+      "stock": 39726,
+      "price": 0.0464,
+      "price_10": 0.038,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Diodes",
+      "subcategory": "Switching Diodes",
+      "subcategory_id": 2952,
+      "mounting_type": "smd",
+      "specs": {
+        "Voltage - Forward(Vf@If)": "1.25V@200mA",
+        "Non-Repetitive Peak Forward Surge Current": "-",
+        "Voltage - DC Reverse(Vr)": "200V",
+        "Operating Junction Temperature Range": "-65℃~+150℃",
+        "Reverse Recovery Time (trr)": "50ns",
+        "Diode Configuration": "Standalone",
+        "Current - Rectified": "200mA",
+        "Pd - Power Dissipation": "250mW",
+        "Reverse Leakage Current (Ir)": "100nA"
+      },
+      "description": "-65℃~+150℃@(Tj) 1.25V@200mA 100nA 200V 200mA 250mW 50ns Standalone SOD-123 Switching Diodes ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1807271839_Diodes-Incorporated-BAV21W-7-F_C155214.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/switching-diodes_diodes-incorporated-bav21w-7-f_C155214.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0464
+        },
+        {
+          "qty": "200+",
+          "price": 0.038
+        },
+        {
+          "qty": "600+",
+          "price": 0.0332
+        },
+        {
+          "qty": "3000+",
+          "price": 0.0264
+        },
+        {
+          "qty": "9000+",
+          "price": 0.024
+        },
+        {
+          "qty": "21000+",
+          "price": 0.0227
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Voltage - Forward(Vf@If)",
+          "value": "1.25V@200mA"
+        },
+        {
+          "name": "Non-Repetitive Peak Forward Surge Current",
+          "value": "-"
+        },
+        {
+          "name": "Voltage - DC Reverse(Vr)",
+          "value": "200V"
+        },
+        {
+          "name": "Operating Junction Temperature Range",
+          "value": "-65℃~+150℃"
+        },
+        {
+          "name": "Reverse Recovery Time (trr)",
+          "value": "50ns"
+        },
+        {
+          "name": "Diode Configuration",
+          "value": "Standalone"
+        },
+        {
+          "name": "Current - Rectified",
+          "value": "200mA"
+        },
+        {
+          "name": "Pd - Power Dissipation",
+          "value": "250mW"
+        },
+        {
+          "name": "Reverse Leakage Current (Ir)",
+          "value": "100nA"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "eaedf46b818443cca178dbe963900498",
+      "easyeda_footprint_uuid": "60a676d313ae48718a81c380b73dfe4f",
+      "per_board": 8
+    },
+    {
+      "lcsc": "C81464",
+      "model": "MMBT3904LT1G",
+      "manufacturer": "onsemi",
+      "package": "SOT-23",
+      "stock": 1823766,
+      "price": 0.0168,
+      "price_10": 0.0135,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Transistors/Thyristors",
+      "subcategory": "Bipolar (BJT)",
+      "subcategory_id": 2934,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-55℃~+150℃",
+        "Transition frequency(fT)": "300MHz",
+        "Collector - Emitter Voltage VCEO": "40V",
+        "Number": "1 NPN",
+        "DC Current Gain": "40",
+        "Current - Collector(Ic)": "200mA",
+        "Vce Saturation(VCE(sat))": "200mV",
+        "Emitter-Base Voltage(Vebo)": "6V",
+        "Pd - Power Dissipation": "225mW",
+        "type": "NPN",
+        "Current - Collector Cutoff": "50nA"
+      },
+      "description": "-55℃~+150℃ 1 NPN 200mA 200mV 225mW 300MHz 40 40V 50nA 6V NPN SOT-23 Bipolar (BJT) ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_onsemi-MMBT3904LT1G_C81464.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/bipolar-bjt_onsemi-mmbt3904lt1g_C81464.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0168
+        },
+        {
+          "qty": "500+",
+          "price": 0.0135
+        },
+        {
+          "qty": "3000+",
+          "price": 0.0096
+        },
+        {
+          "qty": "6000+",
+          "price": 0.0085
+        },
+        {
+          "qty": "24000+",
+          "price": 0.008
+        },
+        {
+          "qty": "51000+",
+          "price": 0.0077
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-55℃~+150℃"
+        },
+        {
+          "name": "Transition frequency(fT)",
+          "value": "300MHz"
+        },
+        {
+          "name": "Collector - Emitter Voltage VCEO",
+          "value": "40V"
+        },
+        {
+          "name": "Number",
+          "value": "1 NPN"
+        },
+        {
+          "name": "DC Current Gain",
+          "value": "40"
+        },
+        {
+          "name": "Current - Collector(Ic)",
+          "value": "200mA"
+        },
+        {
+          "name": "Vce Saturation(VCE(sat))",
+          "value": "200mV"
+        },
+        {
+          "name": "Emitter-Base Voltage(Vebo)",
+          "value": "6V"
+        },
+        {
+          "name": "Pd - Power Dissipation",
+          "value": "225mW"
+        },
+        {
+          "name": "type",
+          "value": "NPN"
+        },
+        {
+          "name": "Current - Collector Cutoff",
+          "value": "50nA"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "7780af0ee6094f7d9d143d2f2c6ec7a6",
+      "easyeda_footprint_uuid": "b3b82869fa924bae820e3a6cfb44d689",
+      "per_board": 1
+    },
+    {
+      "lcsc": "C161692",
+      "model": "BM04B-GHS-TBT(LF)(SN)",
+      "manufacturer": "JST",
+      "package": "SMD,P=1.25mm",
+      "stock": 36163,
+      "price": 0.3927,
+      "price_10": 0.3404,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Connectors",
+      "subcategory": "Wire To Board Connector",
+      "subcategory_id": 2132,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-25℃~+85℃",
+        "Number of Rows": "1",
+        "Voltage Rating": "50V",
+        "Color": "White",
+        "Current Rating": "1A",
+        "Pins Structure": "1x4P",
+        "Row Spacing": "-",
+        "Mounting Type": "Surface Mount,Vertical",
+        "Flame Retardant Rating": "UL94V-0",
+        "Y-Width of Bottom Edge on Board": "4.32mm",
+        "X-Length of Bottom Edge on Board (Spacing Line)": "8.25mm",
+        "Reference Series": "GH",
+        "Contact Plating": "Tin",
+        "Number of Pins": "4P",
+        "Contact Material": "Phosphor bronze",
+        "Pitch": "1.25mm",
+        "Supplementary Features": "Auxiliary Solder Pin",
+        "Z-Height of the Board": "4.05mm",
+        "Plastic Material": "PA9T",
+        "Number of PINs Per Row": "4"
+      },
+      "description": "-25℃~+85℃ 1 1.25mm 1A 1x4P 4 4.05mm 4.32mm 4P 50V 8.25mm Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount,Vertical Tin UL94V-0 White SMD,P=1.25mm Wire To Board Connector ROHS",
+      "min_order": 1,
+      "reel_qty": 2500,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010302_JST-BM04B-GHS-TBT-LF-SN_C161692.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/wire-to-board-connector_jst-bm04b-ghs-tbt-lf-sn_C161692.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3927
+        },
+        {
+          "qty": "50+",
+          "price": 0.3404
+        },
+        {
+          "qty": "150+",
+          "price": 0.3148
+        },
+        {
+          "qty": "500+",
+          "price": 0.292
+        },
+        {
+          "qty": "2500+",
+          "price": 0.2858
+        },
+        {
+          "qty": "5000+",
+          "price": 0.2819
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-25℃~+85℃"
+        },
+        {
+          "name": "Number of Rows",
+          "value": "1"
+        },
+        {
+          "name": "Voltage Rating",
+          "value": "50V"
+        },
+        {
+          "name": "Color",
+          "value": "White"
+        },
+        {
+          "name": "Current Rating",
+          "value": "1A"
+        },
+        {
+          "name": "Pins Structure",
+          "value": "1x4P"
+        },
+        {
+          "name": "Row Spacing",
+          "value": "-"
+        },
+        {
+          "name": "Mounting Type",
+          "value": "Surface Mount,Vertical"
+        },
+        {
+          "name": "Flame Retardant Rating",
+          "value": "UL94V-0"
+        },
+        {
+          "name": "Y-Width of Bottom Edge on Board",
+          "value": "4.32mm"
+        },
+        {
+          "name": "X-Length of Bottom Edge on Board (Spacing Line)",
+          "value": "8.25mm"
+        },
+        {
+          "name": "Reference Series",
+          "value": "GH"
+        },
+        {
+          "name": "Contact Plating",
+          "value": "Tin"
+        },
+        {
+          "name": "Number of Pins",
+          "value": "4P"
+        },
+        {
+          "name": "Contact Material",
+          "value": "Phosphor bronze"
+        },
+        {
+          "name": "Pitch",
+          "value": "1.25mm"
+        },
+        {
+          "name": "Supplementary Features",
+          "value": "Auxiliary Solder Pin"
+        },
+        {
+          "name": "Z-Height of the Board",
+          "value": "4.05mm"
+        },
+        {
+          "name": "Plastic Material",
+          "value": "PA9T"
+        },
+        {
+          "name": "Number of PINs Per Row",
+          "value": "4"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "b970ddcfabf1410591dc576fc46cd571",
+      "easyeda_footprint_uuid": "54cfc3a29dde46f89545ffc3d16949b9",
+      "per_board": 1
+    },
+    {
+      "lcsc": "C26119",
+      "model": "1206W4F1005T5E",
+      "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+      "package": "1206",
+      "stock": 23028,
+      "price": 0.0176,
+      "price_10": 0.0153,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Resistors",
+      "subcategory": "Chip Resistor - Surface Mount",
+      "subcategory_id": 2980,
+      "mounting_type": "smd",
+      "specs": {
+        "Resistance": "10MΩ",
+        "Operating Temperature": "-55℃~+155℃",
+        "Power(Watts)": "250mW",
+        "Type": "Thick Film Resistor",
+        "Voltage-Supply(Max)": "200V",
+        "Tolerance": "±1%",
+        "Temperature Coefficient": "±100ppm/℃"
+      },
+      "description": "-55℃~+155℃ 10MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+      "min_order": 1,
+      "reel_qty": 5000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010030_UNI-ROYAL-Uniroyal-Elec-1206W4F1005T5E_C26119.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-1206w4f1005t5e_C26119.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0176
+        },
+        {
+          "qty": "500+",
+          "price": 0.0153
+        },
+        {
+          "qty": "1500+",
+          "price": 0.0139
+        },
+        {
+          "qty": "5000+",
+          "price": 0.0131
+        },
+        {
+          "qty": "25000+",
+          "price": 0.0124
+        },
+        {
+          "qty": "50000+",
+          "price": 0.012
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Resistance",
+          "value": "10MΩ"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-55℃~+155℃"
+        },
+        {
+          "name": "Power(Watts)",
+          "value": "250mW"
+        },
+        {
+          "name": "Type",
+          "value": "Thick Film Resistor"
+        },
+        {
+          "name": "Voltage-Supply(Max)",
+          "value": "200V"
+        },
+        {
+          "name": "Tolerance",
+          "value": "±1%"
+        },
+        {
+          "name": "Temperature Coefficient",
+          "value": "±100ppm/℃"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "a3f402eeaf6e70f77a8e643a9a1cf151",
+      "easyeda_footprint_uuid": "8e9b1be4bcb6420dbd1d09bf04b02792",
+      "per_board": 4
+    },
+    {
+      "lcsc": "C2041861",
+      "model": "B82442T1105K050",
+      "manufacturer": "TDK",
+      "package": "SMD,5.6x5mm",
+      "stock": 1973,
+      "price": 0.6445,
+      "price_10": 0.5224,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Inductors, Coils, Chokes",
+      "subcategory": "Inductors (SMD)",
+      "subcategory_id": 2936,
+      "mounting_type": "smd",
+      "specs": {
+        "Inductance": "1mH",
+        "Current - Saturation (Isat)": "310mA",
+        "Q @ Frequency": "30@252kHz",
+        "Frequency - Self Resonant": "1.8MHz",
+        "Tolerance": "±10%",
+        "Current Rating": "150mA",
+        "DC Resistance(DCR)": "9.5Ω"
+      },
+      "description": "1.8MHz 150mA 1mH 30@252kHz 310mA 9.5Ω ±10% SMD,5.6x5mm Inductors (SMD) ROHS",
+      "min_order": 1,
+      "reel_qty": 1500,
+      "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2108040730_TDK-B82442T1105K050_C2041861.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/inductors-smd_tdk-b82442t1105k050_C2041861.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.6445
+        },
+        {
+          "qty": "10+",
+          "price": 0.5224
+        },
+        {
+          "qty": "30+",
+          "price": 0.4606
+        },
+        {
+          "qty": "100+",
+          "price": 0.4004
+        },
+        {
+          "qty": "500+",
+          "price": 0.3646
+        },
+        {
+          "qty": "1500+",
+          "price": 0.345
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Inductance",
+          "value": "1mH"
+        },
+        {
+          "name": "Current - Saturation (Isat)",
+          "value": "310mA"
+        },
+        {
+          "name": "Q @ Frequency",
+          "value": "30@252kHz"
+        },
+        {
+          "name": "Frequency - Self Resonant",
+          "value": "1.8MHz"
+        },
+        {
+          "name": "Tolerance",
+          "value": "±10%"
+        },
+        {
+          "name": "Current Rating",
+          "value": "150mA"
+        },
+        {
+          "name": "DC Resistance(DCR)",
+          "value": "9.5Ω"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "d71ad8062ef94953bc5e6b4c98f865c3",
+      "easyeda_footprint_uuid": "37c3059ad358469393f6acee942ddb61",
+      "per_board": 1
+    },
+    {
+      "lcsc": "C20345924",
+      "model": "TLV3012BIDBVR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOT-23-6",
+      "stock": 3096,
+      "price": 2.8186,
+      "price_10": 2.4281,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Amplifiers/Comparators",
+      "subcategory": "Comparators",
+      "subcategory_id": 3030,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-40℃~+125℃",
+        "Vos - Input Offset Voltage": "300uV",
+        "Output Type": "Push-pull",
+        "Input Offset Current(Ios)": "1pA",
+        "Input Offset Voltage Drift(Vos TC)": "12uV/℃",
+        "Single Supply": "1.65V~5.5V",
+        "Input Hysteresis Voltage (Vhys)": "8mV",
+        "Response Time (tr)": "10ns",
+        "Common Mode Rejection Ratio(CMRR)": "74dB",
+        "Rail to Rail": "Rail-to-rail input",
+        "Number of Channels": "1",
+        "Quiescent Current": "2.4uA",
+        "Ib - Input Bias Current": "4.5pA",
+        "Propagation Delay Time": "4us",
+        "Output Mode": "CMOS"
+      },
+      "description": "-40℃~+125℃ 1 1.65V~5.5V 10ns 12uV/℃ 1pA 2.4uA 300uV 4.5pA 4us 74dB 8mV CMOS Push-pull Rail-to-rail input SOT-23-6 Comparators ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2403281333_Texas-Instruments-TLV3012BIDBVR_C20345924.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/comparators_texas-instruments-tlv3012bidbvr_C20345924.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 2.8186
+        },
+        {
+          "qty": "10+",
+          "price": 2.4281
+        },
+        {
+          "qty": "30+",
+          "price": 2.184
+        },
+        {
+          "qty": "100+",
+          "price": 1.935
+        },
+        {
+          "qty": "500+",
+          "price": 1.8211
+        },
+        {
+          "qty": "1000+",
+          "price": 1.7722
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+125℃"
+        },
+        {
+          "name": "Vos - Input Offset Voltage",
+          "value": "300uV"
+        },
+        {
+          "name": "Output Type",
+          "value": "Push-pull"
+        },
+        {
+          "name": "Input Offset Current(Ios)",
+          "value": "1pA"
+        },
+        {
+          "name": "Input Offset Voltage Drift(Vos TC)",
+          "value": "12uV/℃"
+        },
+        {
+          "name": "Single Supply",
+          "value": "1.65V~5.5V"
+        },
+        {
+          "name": "Input Hysteresis Voltage (Vhys)",
+          "value": "8mV"
+        },
+        {
+          "name": "Response Time (tr)",
+          "value": "10ns"
+        },
+        {
+          "name": "Common Mode Rejection Ratio(CMRR)",
+          "value": "74dB"
+        },
+        {
+          "name": "Rail to Rail",
+          "value": "Rail-to-rail input"
+        },
+        {
+          "name": "Number of Channels",
+          "value": "1"
+        },
+        {
+          "name": "Quiescent Current",
+          "value": "2.4uA"
+        },
+        {
+          "name": "Ib - Input Bias Current",
+          "value": "4.5pA"
+        },
+        {
+          "name": "Propagation Delay Time",
+          "value": "4us"
+        },
+        {
+          "name": "Output Mode",
+          "value": "CMOS"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "ad53b42e0c314f489db6c4e6a0d419e9",
+      "easyeda_footprint_uuid": "b02d449aa017424fa28776946fd51d36",
+      "per_board": 2
+    },
+    {
+      "lcsc": "C90760",
+      "model": "LMC555CMX/NOPB",
+      "manufacturer": "Texas Instruments",
+      "package": "SOIC-8",
+      "stock": 14058,
+      "price": 0.3049,
+      "price_10": 0.2455,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Clock/Timing",
+      "subcategory": "555 Timers / Counters",
+      "subcategory_id": 2101,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-40℃~+85℃",
+        "Timer Number": "1",
+        "Voltage - Supply": "1.5V~15V",
+        "Supply Current": "50uA",
+        "Output Current": "100mA",
+        "Features": "Adjustable duty cycle oscillation、Reset function"
+      },
+      "description": "-40℃~+85℃ 1.5V~15V 150uA 3MHz SOIC-8 555 Timers / Counters ROHS",
+      "min_order": 1,
+      "reel_qty": 2500,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810181624_Texas-Instruments-LMC555CMX-NOPB_C90760.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/timers-counters_texas-instruments-lmc555cmx-nopb_C90760.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3049
+        },
+        {
+          "qty": "50+",
+          "price": 0.2455
+        },
+        {
+          "qty": "150+",
+          "price": 0.2201
+        },
+        {
+          "qty": "500+",
+          "price": 0.1817
+        },
+        {
+          "qty": "2500+",
+          "price": 0.1675
+        },
+        {
+          "qty": "5000+",
+          "price": 0.159
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "Timer Number",
+          "value": "1"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "1.5V~15V"
+        },
+        {
+          "name": "Supply Current",
+          "value": "50uA"
+        },
+        {
+          "name": "Output Current",
+          "value": "100mA"
+        },
+        {
+          "name": "Features",
+          "value": "Adjustable duty cycle oscillation、Reset function"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "61d77d77571e4e6fa513544fba282939",
+      "easyeda_footprint_uuid": "806a55eb4d3c40ab838f70f86785d85e",
+      "per_board": 1
+    },
+    {
+      "lcsc": "C94389",
+      "model": "MMBTA42LT1G",
+      "manufacturer": "onsemi",
+      "package": "SOT-23",
+      "stock": 198731,
+      "price": 0.0404,
+      "price_10": 0.0318,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Transistors/Thyristors",
+      "subcategory": "Bipolar (BJT)",
+      "subcategory_id": 2934,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-55℃~+150℃",
+        "Transition frequency(fT)": "50MHz",
+        "Collector - Emitter Voltage VCEO": "300V",
+        "Number": "1 NPN",
+        "DC Current Gain": "25",
+        "Current - Collector(Ic)": "500mA",
+        "Vce Saturation(VCE(sat))": "500mV",
+        "Emitter-Base Voltage(Vebo)": "6V",
+        "Pd - Power Dissipation": "225mW",
+        "type": "NPN",
+        "Current - Collector Cutoff": "100nA"
+      },
+      "description": "-55℃~+150℃ 1 NPN 100nA 225mW 25 300V 500mA 500mV 50MHz 6V NPN SOT-23 Bipolar (BJT) ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_onsemi-MMBTA42LT1G_C94389.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/bipolar-bjt_onsemi-mmbta42lt1g_C94389.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0404
+        },
+        {
+          "qty": "100+",
+          "price": 0.0318
+        },
+        {
+          "qty": "300+",
+          "price": 0.0276
+        },
+        {
+          "qty": "3000+",
+          "price": 0.0227
+        },
+        {
+          "qty": "6000+",
+          "price": 0.0201
+        },
+        {
+          "qty": "9000+",
+          "price": 0.0188
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-55℃~+150℃"
+        },
+        {
+          "name": "Transition frequency(fT)",
+          "value": "50MHz"
+        },
+        {
+          "name": "Collector - Emitter Voltage VCEO",
+          "value": "300V"
+        },
+        {
+          "name": "Number",
+          "value": "1 NPN"
+        },
+        {
+          "name": "DC Current Gain",
+          "value": "25"
+        },
+        {
+          "name": "Current - Collector(Ic)",
+          "value": "500mA"
+        },
+        {
+          "name": "Vce Saturation(VCE(sat))",
+          "value": "500mV"
+        },
+        {
+          "name": "Emitter-Base Voltage(Vebo)",
+          "value": "6V"
+        },
+        {
+          "name": "Pd - Power Dissipation",
+          "value": "225mW"
+        },
+        {
+          "name": "type",
+          "value": "NPN"
+        },
+        {
+          "name": "Current - Collector Cutoff",
+          "value": "100nA"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "584379317ca5430da5b49072b0a88718",
+      "easyeda_footprint_uuid": "b3b82869fa924bae820e3a6cfb44d689",
+      "per_board": 1
+    },
+    {
+      "lcsc": "C7835",
+      "model": "SN74LVC1G14DBVR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOT-23-5",
+      "stock": 345037,
+      "price": 0.0651,
+      "price_10": 0.0526,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Logic",
+      "subcategory": "Inverters",
+      "subcategory_id": 2567,
+      "mounting_type": "smd",
+      "specs": {
+        "Output Logic Level - Low": "550mV",
+        "Operating Temperature": "-40℃~+85℃",
+        "Propagation Delay": "6.5ns@2.5V,50pF",
+        "Input Type": "Schmitt trigger",
+        "Output Logic Level - High": "2.3V",
+        "Current - Output High(IOH)": "32mA",
+        "Quiescent Current(Iq)": "10uA",
+        "Series": "74LVC",
+        "Input Logic Level - High": "1.16V~3.33V",
+        "Voltage - Supply": "1.65V~5.5V",
+        "Input Logic Level -Low": "390mV~1.87V",
+        "Features": "Power shutdown protection、Noise suppression function",
+        "Number of Circuits": "1",
+        "Current - Output Low(IOL)": "32mA"
+      },
+      "description": "-40℃~+85℃ 1 1 1.16V~3.33V 1.65V~5.5V 10uA 2.3V 32mA 32mA 390mV~1.87V 550mV 6.5ns@2.5V,50pF 74LVC Schmitt trigger 电源关断保护、噪声抑制功能 SOT-23-5 Inverters ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809251717_Texas-Instruments-SN74LVC1G14DBVR_C7835.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/inverters_texas-instruments-sn74lvc1g14dbvr_C7835.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0651
+        },
+        {
+          "qty": "100+",
+          "price": 0.0526
+        },
+        {
+          "qty": "300+",
+          "price": 0.0463
+        },
+        {
+          "qty": "3000+",
+          "price": 0.0409
+        },
+        {
+          "qty": "6000+",
+          "price": 0.0391
+        },
+        {
+          "qty": "9000+",
+          "price": 0.0378
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Output Logic Level - Low",
+          "value": "550mV"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "Propagation Delay",
+          "value": "6.5ns@2.5V,50pF"
+        },
+        {
+          "name": "Input Type",
+          "value": "Schmitt trigger"
+        },
+        {
+          "name": "Output Logic Level - High",
+          "value": "2.3V"
+        },
+        {
+          "name": "Current - Output High(IOH)",
+          "value": "32mA"
+        },
+        {
+          "name": "Quiescent Current(Iq)",
+          "value": "10uA"
+        },
+        {
+          "name": "Series",
+          "value": "74LVC"
+        },
+        {
+          "name": "Input Logic Level - High",
+          "value": "1.16V~3.33V"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "1.65V~5.5V"
+        },
+        {
+          "name": "Input Logic Level -Low",
+          "value": "390mV~1.87V"
+        },
+        {
+          "name": "Features",
+          "value": "Power shutdown protection、Noise suppression function"
+        },
+        {
+          "name": "Number of Circuits",
+          "value": "1"
+        },
+        {
+          "name": "Current - Output Low(IOL)",
+          "value": "32mA"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "1c778a45f99d4a8bbd74330641d2d6f7",
+      "easyeda_footprint_uuid": "e7f085e4f71344109c090040716070ab",
+      "per_board": 1
+    }
+  ]
+}
