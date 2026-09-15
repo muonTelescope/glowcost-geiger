@@ -6,13 +6,14 @@ rows=json.loads((root/'dist/board/module/circuit.json').read_text())
 assert not [r for r in rows if 'error' in r['type']]
 comps={r['source_component_id']:r for r in rows if r['type']=='source_component'}
 ports={r['source_port_id']:r for r in rows if r['type']=='source_port'}
-parent={p:p for p in ports}
+net_ids={r['source_net_id'] for r in rows if r['type']=='source_net'}
+parent={p:p for p in set(ports)|net_ids}
 def find(p):
     if parent[p]!=p:parent[p]=find(parent[p])
     return parent[p]
 for r in rows:
     if r['type']=='source_trace':
-        ps=r['connected_source_port_ids']
+        ps=r['connected_source_port_ids']+r.get('connected_source_net_ids',[])
         for p in ps[1:]:parent[find(p)]=find(ps[0])
 actual={}
 for p,r in ports.items():actual.setdefault(find(p),set()).add((comps[r['source_component_id']]['name'],r['pin_number']))

@@ -1,0 +1,361 @@
+{
+  "date": "2026-09-15",
+  "source": "pcbparts JLC database snapshot, not live reservation",
+  "results": [
+    {
+      "results": [
+        {
+          "lcsc": "C161692",
+          "model": "BM04B-GHS-TBT(LF)(SN)",
+          "manufacturer": "JST",
+          "package": "SMD,P=1.25mm",
+          "stock": 36168,
+          "price": 0.3927,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Connectors",
+          "subcategory": "Wire To Board Connector",
+          "subcategory_id": 2132,
+          "mounting_type": "smd",
+          "description": "-25℃~+85℃ 1 1.25mm 1A 1x4P 4 4.05mm 4.32mm 4P 50V 8.25mm Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount,Vertical Tin UL94V-0 White SMD,P=1.25mm Wire To Board Connector ROHS",
+          "specs": {
+            "Operating Temperature": "-25℃~+85℃",
+            "Number of Rows": "1",
+            "Voltage Rating": "50V",
+            "Color": "White",
+            "Current Rating": "1A",
+            "Pins Structure": "1x4P",
+            "Row Spacing": "-",
+            "Mounting Type": "Surface Mount,Vertical",
+            "Flame Retardant Rating": "UL94V-0",
+            "Y-Width of Bottom Edge on Board": "4.32mm",
+            "X-Length of Bottom Edge on Board (Spacing Line)": "8.25mm",
+            "Reference Series": "GH",
+            "Contact Plating": "Tin",
+            "Number of Pins": "4P",
+            "Contact Material": "Phosphor bronze",
+            "Pitch": "1.25mm",
+            "Supplementary Features": "Auxiliary Solder Pin",
+            "Z-Height of the Board": "4.05mm",
+            "Plastic Material": "PA9T",
+            "Number of PINs Per Row": "4"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 4,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "BM04B-GHS",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "BM04B-GHS-TBT",
+        "detected": {
+          "model_number": "BM04B-GHS"
+        },
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "BM04B-GHS"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C51940118",
+          "model": "XY-SM04B-GHS-TB",
+          "manufacturer": "XYECONN",
+          "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
+          "stock": 83504,
+          "price": 0.0585,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Connectors",
+          "subcategory": "Wire To Board Connector",
+          "subcategory_id": 2132,
+          "mounting_type": "smd",
+          "description": "-25℃~+85℃ 1 1.25mm 1A 1x4P 250V 4 4P Brass LCP Surface Mount, Right Angle Tin UL94V-0 SMD,P=1.25mm,卧贴 Wire To Board Connector ROHS",
+          "specs": {
+            "Operating Temperature": "-25℃~+85℃",
+            "Number of Rows": "1",
+            "Flame Retardant Rating": "UL94V-0",
+            "Voltage Rating": "250V",
+            "Contact Plating": "Tin",
+            "Number of Pins": "4P",
+            "Pitch": "1.25mm",
+            "Current Rating": "1A",
+            "Contact Material": "Brass",
+            "Pins Structure": "1x4P",
+            "Mounting Type": "Surface Mount, Right Angle",
+            "Plastic Material": "LCP",
+            "Number of PINs Per Row": "4"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 4,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "SM04B-GHS",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "SM04B-GHS-TB",
+        "detected": {
+          "model_number": "SM04B-GHS"
+        },
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "SM04B-GHS"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C342714",
+          "model": "C3216C0G2J103JT000N",
+          "manufacturer": "TDK",
+          "package": "1206",
+          "stock": 2413,
+          "price": 0.3883,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Capacitors",
+          "subcategory": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+          "subcategory_id": 2929,
+          "mounting_type": "smd",
+          "description": "10nF 630V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+          "specs": {
+            "Voltage Rating": "630V",
+            "Tolerance": "±5%",
+            "Capacitance": "10nF",
+            "Temperature Coefficient": "C0G"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 4,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "C3216C0G2J103JT000N",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "C3216C0G2J103JT000N",
+        "detected": {},
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "C3216C0G2J103JT000N"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C26119",
+          "model": "1206W4F1005T5E",
+          "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+          "package": "1206",
+          "stock": 23028,
+          "price": 0.0176,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Resistors",
+          "subcategory": "Chip Resistor - Surface Mount",
+          "subcategory_id": 2980,
+          "mounting_type": "smd",
+          "description": "-55℃~+155℃ 10MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+          "specs": {
+            "Resistance": "10MΩ",
+            "Operating Temperature": "-55℃~+155℃",
+            "Power(Watts)": "250mW",
+            "Type": "Thick Film Resistor",
+            "Voltage-Supply(Max)": "200V",
+            "Tolerance": "±1%",
+            "Temperature Coefficient": "±100ppm/℃"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "1206W4F1005T5E",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "1206W4F1005T5E",
+        "detected": {},
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "1206W4F1005T5E"
+      }
+    },
+    {
+      "results": [
+        {
+          "lcsc": "C275643",
+          "model": "RC1206FR-0710ML",
+          "manufacturer": "YAGEO",
+          "package": "1206",
+          "stock": 27,
+          "price": 0.0058,
+          "price_10": null,
+          "library_type": "extended",
+          "preferred": false,
+          "category": "Resistors",
+          "subcategory": "Chip Resistor - Surface Mount",
+          "subcategory_id": 2980,
+          "mounting_type": "smd",
+          "description": "-55℃~+155℃ 10MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+          "specs": {
+            "Resistance": "10MΩ",
+            "Operating Temperature": "-55℃~+155℃",
+            "Power(Watts)": "250mW",
+            "Type": "Thick Film Resistor",
+            "Voltage-Supply(Max)": "200V",
+            "Tolerance": "±1%",
+            "Temperature Coefficient": "±100ppm/℃"
+          }
+        }
+      ],
+      "total": 1,
+      "page_info": {
+        "limit": 3,
+        "offset": 0,
+        "returned": 1
+      },
+      "filters_applied": {
+        "query": "RC1206FR 0710ML",
+        "subcategory_id": null,
+        "subcategory_name": null,
+        "subcategory_resolved": null,
+        "category_id": null,
+        "category_name": null,
+        "category_resolved": null,
+        "spec_filters": [],
+        "library_type": null,
+        "prefer_no_fee": true,
+        "min_stock": 10,
+        "package": null,
+        "packages": null,
+        "manufacturer": null,
+        "match_all_terms": true
+      },
+      "library_type_counts": {
+        "basic": 0,
+        "preferred": 0,
+        "extended": 1
+      },
+      "no_fee_available": false,
+      "parsed": {
+        "original_query": "RC1206FR-0710ML",
+        "detected": {},
+        "subcategory": null,
+        "package": null,
+        "mounting_type": null,
+        "spec_filters": [],
+        "remaining_text": "RC1206FR 0710ML"
+      }
+    }
+  ]
+}

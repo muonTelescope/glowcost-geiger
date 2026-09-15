@@ -8,7 +8,9 @@
     "sim:sync": "python3 scripts/sync_spice_model.py",
     "sim:tsci": "bun --preload ./scripts/compact-tsci-output.ts ./node_modules/tscircuit/cli.mjs simulate analog sim/hv/hv.circuit.tsx --disable-parts-engine",
     "check": "python3 scripts/check_schematic.py",
-    "sim:plots": "python3 scripts/analyze_tsci.py"
+    "sim:plots": "python3 scripts/analyze_tsci.py",
+    "render:schematic": "python3 scripts/render_schematic.py",
+    "analyze:performance": "python3 scripts/analyze_performance.py"
   },
   "dependencies": {
     "circuit-json": "0.0.491",

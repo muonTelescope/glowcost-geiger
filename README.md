@@ -32,7 +32,9 @@ Use edge counting; Linux polling can miss short pulses. The simulated pulse
 width is stimulus-dependent and is not a measured tube specification.
 
 No MCU, radio, firmware, battery or display. Tube contacts are internal to the
-module. Header pitch and tube mounting are provisional pending mechanical choices.
+module. The tube will mount on-board with clips. J1 is a locking SMT JST GH candidate
+from JLC; 0603 low-voltage passives are accepted. Target batch: 25–50 boards,
+indoor use, beta sensitivity retained. Tube clip MPN and cable length remain open.
 
 ## Circuit
 
@@ -52,13 +54,24 @@ flowchart LR
   CW --> BLEED["40 MΩ passive discharge to GND"]
 ```
 
-![tscircuit functional schematic](docs/schematic.png)
+### Annotated schematic
 
-[Zoomable schematic](docs/schematic.svg) · [tscircuit source](board/module.circuit.tsx)
+[Full annotated sheet](docs/schematic.svg) · [tscircuit source](board/module.circuit.tsx)
 · [SPICE source](sim/hv/converter.cir) · [JLC candidates and design decisions](docs/design-decisions.md)
 
-The drawing shows all eight multiplier diodes/capacitors, feedback and protection
-dividers, bleeder and tube interface. U1/U2 are explicitly labeled behavioral
+![Power and multiplier](docs/schematic-power.png)
+
+![Feedback and independent cutoff](docs/schematic-feedback.png)
+
+![Tube and pulse input](docs/schematic-pulse.png)
+
+[Passive discharge detail](docs/schematic-discharge.svg)
+
+The sheet is organized into six annotated sections: power/enable, multiplier,
+main feedback, independent overvoltage cutoff, tube/pulse input and discharge.
+Named nets connect the sections without wires crossing the notes. Open the SVG
+to zoom into component values and pin labels. The drawing shows all eight
+multiplier diodes/capacitors, feedback and protection dividers, bleeder and tube interface. U1/U2 are explicitly labeled behavioral
 blocks. Their symbols are not real IC pinouts. The checker compares 45 components
 and 30 exposed nets against SPICE, including diode polarity and passive values.
 
@@ -84,6 +97,45 @@ The board must enclose exposed HV and maintain HV-to-logic creepage/clearance;
 those protections require an actual PCB/enclosure review. This common-ground
 architecture is not galvanic isolation. See [fault coverage and unresolved
 protection checks](docs/design-decisions.md#hv-protection-and-limits).
+
+## Expected dead time, rate and current
+
+| Quantity | Planning estimate |
+|---|---|
+| Effective dead time | **~190–250 µs**; use **250 µs** until measured |
+| 5% uncorrected dead-time-loss boundary | **200 observed cps**; ~**1.21 µSv/min** conditional gamma estimate |
+| 10% uncorrected loss boundary | **400 observed cps**; ~**2.55 µSv/min** conditional gamma estimate |
+| Existing 3.3 V power-path simulation | **2.515 mA** at 1 µA added HV load |
+| Illustrative whole-module operating budget | **~5.1 mA**; reserve **10 mA continuous** |
+| Startup after enable | **5.77 mA modeled average**; reserve **20 mA average**, separate from inrush |
+
+**Counts are primary; µSv is approximate.** The rate conversions assume a
+reference gamma response of 2.9 cps per µSv/h, not calibration of this tube.
+They are not valid for arbitrary beta/gamma mixtures. The mathematical 4000 cps
+ceiling (~23 µSv/min naive display) is **not a usable measurement range**.
+
+The 33 new paired-pulse SPICE cases resolve synthetic pulses at 150–175 µs
+spacing, but do not model intrinsic tube dead time. Power-on inrush is still
+uncontrolled: the ideal 22 µF / 0.5 Ω input model produces a 6.6 A mathematical
+spike, so physical soft-start and Pi rail-droop tests remain necessary.
+
+[Detailed calculations, source references, pulse-pair charts and current budget](docs/performance.md)
+· [Machine-readable results](docs/performance/results.json)
+
+## Assembly plan
+
+- **25–50 boards:** optimize JLC SMT assembly cost; use 0603 low-voltage passives
+  and larger parts where HV ratings require them.
+- **Pi connector:** locking SMT JST GH, BM04B-GHS-TBT(LF)(SN), JLC C161692.
+  The mating cable is separate; its length remains to be specified.
+- **Tube:** on-board clips; install the NOS tube after reflow and cleaning.
+  Clip selection and mechanical retention remain to be finalized.
+- **Environment:** dry indoor enclosure initially. Future conformal coating or
+  potting requires rechecking HV leakage, pulse recovery and beta response.
+  Keep coating out of connector and tube-clip contact surfaces.
+
+[Candidate stock snapshot](docs/assembly-stock.json) and
+[assembly decisions](docs/design-decisions.md) record the selections and open checks.
 
 ## SPICE results
 
@@ -158,13 +210,13 @@ bun install --frozen-lockfile
 python3 -m pip install -r requirements-sim.txt
 bun run build
 bun run check
-cp dist/board/module/schematic.svg docs/schematic.svg
-rsvg-convert -w 2400 docs/schematic.svg -o docs/schematic.png
+bun run render:schematic             # full sheet and readable detail views
 bun run sim                         # native supply/load/fault sweep and plots
 bun run sim:sync                    # regenerate tscircuit SPICE subcircuit
 bun run sim:tsci > docs/hv/tsci-run.log 2>&1
 bun run sim:plots                   # validate WASM run and compare startup
 python3 scripts/update_readme.py    # refresh numerical summary
+bun run analyze:performance         # paired pulses, dead-time/rate/power calculations
 ```
 
 The tscircuit preload only compresses the CLI result table to

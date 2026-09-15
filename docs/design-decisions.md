@@ -12,8 +12,11 @@ qualified protection components, PCB routing, ERC/DRC and bench verification rem
 - Exactly four external connections: 3V3, GND, PULSE, EN.
 - Same CTC-5 / STS-5 (СТС-5) tube as geiger2; ~400 V bias.
 - No MCU, firmware, radio, battery, display or external HV/sense connector.
-- Provisional connector: 1×4 2.54 mm header, tube mounted beside the circuit.
-- Provisional passives: 0603 low voltage; 1206 or larger for HV ratings.
+- Connector: locking 4-pin SMT from JLC; JST GH BM04B-GHS-TBT(LF)(SN) candidate.
+- Tube: mounted on-board with clips; clip MPN and mounting geometry remain open.
+- Use: indoor background monitoring, beta retained; raw counts primary, µSv approximate.
+- Assembly: 25–50 boards, optimize JLC cost; future coating/potting requires requalification.
+- Accepted passives: 0603 low voltage; choose larger HV packages for ratings and stock.
 - EN has 100 kΩ pulldown. EN stops switching and blanks pulses; it is not
   galvanic isolation, instant HV discharge, or a zero-current power disconnect.
 
@@ -33,8 +36,9 @@ Parts are not locked until their datasheets and footprints are qualified.
 | HV switch | onsemi MMBTA42LT1G | C94389 | SOT-23 | Candidate; base drive, SOA and switching loss not implemented in ideal switch model |
 | Pulse transistor | onsemi MMBT3904LT1G | C81464 | SOT-23 | Generic NPN model presently; current-limited base and grounded emitter |
 | 3.3 V pulse conditioning | TI SN74LVC1G14DBVR | C7835 | SOT-23-5 | Candidate only; extra blanking logic required |
-| Passive bleeder, 4×10 MΩ | Yageo RC1206FR-0710ML | C275643 | 1206 | Catalog 200 V / 0.25 W / 1%; low catalog stock; qualify alternate |
-| Divider, anode resistors, protection diode, connector | TBD | — | — | Exact MPNs remain open |
+| Passive bleeder, 4×10 MΩ | UNI-ROYAL 1206W4F1005T5E | C26119 | 1206 | Catalog 200 V / 0.25 W / 1%; 23,028 stock; replaces 27-stock Yageo candidate |
+| Locking SMT connector | JST BM04B-GHS-TBT(LF)(SN) | C161692 | 1.25 mm pitch | 36,168 catalog stock; mating GHR-04V-S housing; verify pin-1 orientation in final footprint |
+| Divider, anode resistors, protection diode, tube clips | TBD | — | — | Exact MPNs remain open |
 
 The previously searched **SN74HCT14 is rejected for this 3.3 V design**: its
 recommended supply starts at 4.5 V. The JLC search also confused MΩ with mΩ;
@@ -87,3 +91,32 @@ This repository does **not** certify Pi protection or touch safety.
 Decision workflow: the user's `~/agent-skills/kicad-bom/SKILL.md` is used for
 JLC lookup, packages, rating/derating and exact-part review. Circuit authoring
 remains tscircuit as requested; no KiCad project or manufacturing BOM is implied.
+
+## Assembly and enclosure decisions
+
+[JLC stock snapshot](assembly-stock.json) records the latest exact-MPN searches.
+The TDK C0G capacitor stock of 2,413 supports 400 placements for 50 boards with
+margin. Keep its 630 V C0G rating; do not trade for high-stock X7R without a
+DC-bias/leakage analysis. PSA FP31N103J631EEG / C41370618 is a catalog alternative
+(4,977 stock, 10 nF / 630 V / C0G / 1206), pending manufacturer qualification.
+The high-stock milliohm search matches were rejected again.
+
+The genuine [JST GH family](https://www.jst-mfg.com/product/pdf/eng/eGH.pdf) has
+positive locking. J1 is for low-voltage Pi connections only. The 50 V connector
+rating is not an HV rating. Its SMT retention tabs must be part of the final
+footprint; four logical circuit pins do not describe those mechanical pads.
+The mating housing/cable is a separate assembly item, not installed by reflow.
+
+For 25–50 units: SMT assembly including J1 at JLC; install NOS tube after reflow,
+cleaning and electrical test. Clip attachment process remains open. Do not expose
+the tube to reflow or assume a generic fuse clip fits it. Optimize repeated parts
+and assembler feeder fees after the full pin-level circuit is complete; current
+candidate-only circuitry cannot produce an honest assembly quote.
+
+Indoor enclosure first. Mask tube, clips, connector contacts and required test
+points during any future coating. Clean flux/ionic residues before coating;
+33 MΩ dividers are sensitive to surface leakage. Potting can increase anode
+capacitance, change recovery and loading, trap moisture, and attenuate beta
+radiation. Select a material/process and rerun leakage, HV withstand, plateau
+and pulse measurements before approving it. Cable length and cost ceiling are
+still open; no long-cable compatibility is claimed.

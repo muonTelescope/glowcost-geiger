@@ -1,0 +1,311 @@
+{
+  "reference_deadtime_us": 190,
+  "planning_deadtime_us": 250,
+  "conditional_cps_per_uSv_h": 2.9,
+  "reference_condition": "RH Electronics MyGeiger 3 manual: STS-5/SBM-20 at 420 V; our tube at 400 V remains uncalibrated",
+  "front_end_pair_minimum_us": {
+    "5": 150,
+    "10": 175,
+    "20": 175
+  },
+  "pair_test_criteria": "Two rising edges separated by >=5 us low; only synthetic electrical events, no intrinsic tube model",
+  "rc_90pct_us": {
+    "5": 58.485661362048766,
+    "10": 116.97132272409753,
+    "20": 233.94264544819507
+  },
+  "loss_limits": [
+    {
+      "deadtime_us": 190.0,
+      "loss_fraction": 0.01,
+      "observed_cps": 52.63157894736842,
+      "true_cps": 53.1632110579479,
+      "conditional_uSv_min": 0.30553569573533274
+    },
+    {
+      "deadtime_us": 190.0,
+      "loss_fraction": 0.05,
+      "observed_cps": 263.1578947368421,
+      "true_cps": 277.00831024930744,
+      "conditional_uSv_min": 1.5920017830419968
+    },
+    {
+      "deadtime_us": 190.0,
+      "loss_fraction": 0.1,
+      "observed_cps": 526.3157894736842,
+      "true_cps": 584.7953216374268,
+      "conditional_uSv_min": 3.36089265308866
+    },
+    {
+      "deadtime_us": 250.0,
+      "loss_fraction": 0.01,
+      "observed_cps": 40.0,
+      "true_cps": 40.4040404040404,
+      "conditional_uSv_min": 0.23220712875885288
+    },
+    {
+      "deadtime_us": 250.0,
+      "loss_fraction": 0.05,
+      "observed_cps": 200.0,
+      "true_cps": 210.5263157894737,
+      "conditional_uSv_min": 1.209921355111918
+    },
+    {
+      "deadtime_us": 250.0,
+      "loss_fraction": 0.1,
+      "observed_cps": 400.0,
+      "true_cps": 444.44444444444446,
+      "conditional_uSv_min": 2.554278416347382
+    }
+  ],
+  "ideal_nonparalyzable_asymptote_cps": 4000,
+  "asymptotic_display_uSv_min_not_range": 22.988505747126435,
+  "synthetic_event_charge_nC": 2.02,
+  "nominal_converter_mA": 2.514779485480845,
+  "startup_average_mA": 5.7739958474803235,
+  "startup_source_data": "adaptive",
+  "source_peak_mA": 6599.7000100000005,
+  "current_budget": {
+    "timer_mA": 0.25,
+    "two_comparators_mA": 0.0062,
+    "logic_allowance_mA": 0.1,
+    "switch_drive_allowance_mA": 1.2,
+    "additional_losses_allowance_mA": 1.0,
+    "continuous_reservation_mA": 10,
+    "startup_reservation_mA": 20
+  },
+  "pair_tests": [
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 100,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 110,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 125,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 150,
+      "output_rising_edges": 2,
+      "low_gap_us": 30.544989999999917,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 175,
+      "output_rising_edges": 2,
+      "low_gap_us": 58.04683999999986,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 190,
+      "output_rising_edges": 2,
+      "low_gap_us": 73.67534999999995,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 200,
+      "output_rising_edges": 2,
+      "low_gap_us": 83.91261999999992,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 225,
+      "output_rising_edges": 2,
+      "low_gap_us": 109.23775999999988,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 250,
+      "output_rising_edges": 2,
+      "low_gap_us": 134.35543999999982,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 300,
+      "output_rising_edges": 2,
+      "low_gap_us": 184.41664,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 5,
+      "event_separation_us": 400,
+      "output_rising_edges": 2,
+      "low_gap_us": 284.4260199999999,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 100,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 110,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 125,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 150,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 175,
+      "output_rising_edges": 2,
+      "low_gap_us": 38.93203000000008,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 190,
+      "output_rising_edges": 2,
+      "low_gap_us": 57.08241000000006,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 200,
+      "output_rising_edges": 2,
+      "low_gap_us": 68.64575000000004,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 225,
+      "output_rising_edges": 2,
+      "low_gap_us": 96.31701999999999,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 250,
+      "output_rising_edges": 2,
+      "low_gap_us": 122.88464999999998,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 300,
+      "output_rising_edges": 2,
+      "low_gap_us": 174.38089000000016,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 10,
+      "event_separation_us": 400,
+      "output_rising_edges": 2,
+      "low_gap_us": 275.13915000000003,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 100,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 110,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 125,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 150,
+      "output_rising_edges": 1,
+      "low_gap_us": 0,
+      "resolved_with_5us_low": false
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 175,
+      "output_rising_edges": 2,
+      "low_gap_us": 17.691729999999918,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 190,
+      "output_rising_edges": 2,
+      "low_gap_us": 41.1750399999999,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 200,
+      "output_rising_edges": 2,
+      "low_gap_us": 54.67939999999989,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 225,
+      "output_rising_edges": 2,
+      "low_gap_us": 86.34707999999998,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 250,
+      "output_rising_edges": 2,
+      "low_gap_us": 116.26577999999986,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 300,
+      "output_rising_edges": 2,
+      "low_gap_us": 172.74206,
+      "resolved_with_5us_low": true
+    },
+    {
+      "capacitance_pF": 20,
+      "event_separation_us": 400,
+      "output_rising_edges": 2,
+      "low_gap_us": 278.74895,
+      "resolved_with_5us_low": true
+    }
+  ],
+  "illustrative_total_mA": 5.070979485480845
+}
