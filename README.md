@@ -31,7 +31,7 @@ rendered images, simulation results and machine-readable review data.
 
 ## Selected implementation parts
 
-The former behavioral boundaries now have JLC candidates: [parts-selection](kicad/parts-selection.md). U1 is TLC555IDR (C6987), U2 is MCP6562T-E/MS (C625560), the boost inductor is TDK B82442T1105K050 (C2041861), and the HV switch is HL2310A (C7420347). Their footprints and STEP models are included in `kicad/`; the selected models still need pin-by-pin datasheet review before fabrication.
+The former behavioral boundaries now have JLC candidates: [parts-selection](kicad/parts-selection.md). U1 is TLC555IDR (C6987), U2 is MCP6562T-E/MS (C625560), the boost inductor is TDK B82442T1105K050 (C2041861), and the HV switch is HL2310A (C7420347). Their footprints and STEP models are included in `kicad/`; the selected models still need pin-by-pin datasheet review before fabrication. U1 and U2 are placed in the reserved analog area with no new routing; lock their positions before the next routing pass.
 
 Net classes are documented in [net-classes.md](kicad/net-classes.md) and stored in the KiCad project.
 
