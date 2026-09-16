@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 board=pcbnew.LoadBoard(str(ROOT/'kicad/glowcost-geiger.kicad_pcb'))
 j1=board.FindFootprintByReference('J1')
 if j1:
- j1.SetPosition(pcbnew.VECTOR2I(int(4.5*1e6),int(100*1e6)))
+ j1.SetPosition(pcbnew.VECTOR2I(int(44.5*1e6),int(100*1e6)))
  j1.SetOrientationDegrees(90)
  j1.SetLocked(False)
 lib=ROOT/'kicad/glowcost.pretty'

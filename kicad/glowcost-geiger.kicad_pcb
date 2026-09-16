@@ -802,7 +802,7 @@
 	(footprint "glowcost:J1"
 		(layer "F.Cu")
 		(uuid "06d7c200-5398-7be1-51f7-463e0878f7a3")
-		(at 4.5 100 90)
+		(at 44.5 100 90)
 		(property "Reference" "J1"
 			(at 0 -3 90)
 			(layer "F.SilkS")
