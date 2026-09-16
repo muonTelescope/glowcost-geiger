@@ -22,6 +22,8 @@ erc=json.loads((ROOT/'docs/kicad/erc.json').read_text())
 if any(v['severity']=='error' for s in erc['sheets'] for v in s['violations']):raise SystemExit('FAILURE: ERC errors; schematic export stopped.')
 run(CLI,'sch','export','netlist','--format','kicadxml','--output','docs/kicad/netlist.xml',sch)
 run(CLI,'sch','export','svg','--output','docs/kicad',sch)
+svg=ROOT/'docs/kicad/glowcost-geiger.svg'
+svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
 run(CLI,'sch','export','pdf','--output','docs/kicad/schematic.pdf',sch)
 run('rsvg-convert','-w','3000','docs/kicad/glowcost-geiger.svg','-o','docs/kicad/schematic.png')
 run(CLI,'pcb','drc','--schematic-parity','--format','json','--output','docs/kicad/drc.json',board)

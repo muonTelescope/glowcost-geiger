@@ -235,5 +235,5 @@ print('Generated',len(byref),'components /',len(explicit),'nets')
 
 import csv
 with (ROOT/'docs/kicad/reference-map.csv').open('w') as f:
- w=csv.writer(f);w.writerow(['tscircuit reference','KiCad reference','footprint'])
+ w=csv.writer(f,lineterminator="\n");w.writerow(['tscircuit reference','KiCad reference','footprint'])
  for r,k in refmap.items():w.writerow([r,k,'' if r in ['U1','U2','GM1'] else 'glowcost:'+r])

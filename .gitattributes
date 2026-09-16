@@ -1,0 +1,2 @@
+# Preserve redistributed STEP data byte-for-byte, including exporter whitespace.
+kicad/models/*.step -whitespace
