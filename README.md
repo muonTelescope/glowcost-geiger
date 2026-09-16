@@ -4,7 +4,7 @@
 3.3 V pulse output and power enable. Uses the same **CTC-5 / STS-5 (СТС-5)**
 Geiger–Müller tube as geiger2, biased near 400 V.
 
-**Status: tscircuit and native KiCad prototypes, reproducible SPICE study and compact routing study.** The HV
+**Status: native KiCad prototype, reproducible SPICE study and compact routing study.** The HV
 oscillator/switch, comparator timing and output blanking contain behavioral
 models. JLC component candidates are documented; this is not a fabrication-qualified PCB,
 complete pin-level production schematic or fabrication release. HV protection
@@ -29,11 +29,17 @@ All project documentation is consolidated here. The `docs/` directory holds
 rendered images, simulation results and machine-readable review data.
 
 
+## Selected implementation parts
+
+The former behavioral boundaries now have JLC candidates: [parts-selection](kicad/parts-selection.md). U1 is TLC555IDR (C6987), U2 is MCP6562T-E/MS (C625560), the boost inductor is TDK B82442T1105K050 (C2041861), and the HV switch is HL2310A (C7420347). Their footprints and STEP models are included in `kicad/`; the selected models still need pin-by-pin datasheet review before fabrication.
+
+Net classes are documented in [net-classes.md](kicad/net-classes.md) and stored in the KiCad project.
+
 ## Native KiCad project
 
 Open [glowcost-geiger.kicad_pro](kicad/glowcost-geiger.kicad_pro) in **KiCad 10**. The
 [editable schematic](kicad/glowcost-geiger.kicad_sch) and
-[PCB](kicad/glowcost-geiger.kicad_pcb) live alongside the tscircuit sources.
+[PCB](kicad/glowcost-geiger.kicad_pcb) live alongside the KiCad sources.
 The conversion preserves the **120 × 40 mm outline, all 72 component placements,
 all pads and drills, 41 vias and routed copper geometry**. Four board-only mounting
 holes and one model-only tube footprint are also included. This is the same
@@ -86,7 +92,7 @@ excluded from PCB placement; no MCU or new controller circuitry was introduced.
 
 The first KiCad check at its default 0.20 mm clearance found 44 spacing errors;
 applying the source design's intended 0.25 mm rule finds 50. Some existing gaps
-are approximately **0.115 mm**. The earlier tscircuit “no errors” result was only
+are approximately **0.115 mm**. The earlier KiCad prototype “no errors” result was only
 that tool's check, **not** a passing KiCad DRC or an HV insulation assessment.
 A 0.25 mm default rule is also **not sufficient evidence for 400 V insulation**.
 The HV spacing rules, physical analog implementation, silkscreen and tube
@@ -95,16 +101,16 @@ clearance must be resolved before fabrication. No errors are hidden or excluded.
 The exporter originally assigned the cuttable jumper's interchangeable pads to
 opposite logical nets and omitted the bridge's net. The KiCad conversion corrects
 those assignments and represents the **same 0.375 mm copper bridge** as a net tie.
-`JP1` is factory closed; cutting it isolates the LED supply, as in tscircuit.
+`JP1` is factory closed; cutting it isolates the LED supply, as in KiCad prototype.
 Standard diode/LED symbols were explicitly mapped to **pad 1 = anode, pad 2 =
 cathode**, preserving this board's numbering and polarity.
 
 KiCad requires numbered references. Underscore names therefore have native
 aliases—for example `SJ_LED → JP1`, `R_LED → R6`, `D_LED → D9` and `Q_LED → Q2`.
-The complete reference CSV maps every part back to the tscircuit name; local
+The complete reference CSV maps every part back to the KiCad prototype name; local
 footprint names retain those source names. Values and LCSC/MPN fields are included
 in the native schematic and PCB. The surrounding design calculations continue
-to use the original tscircuit reference names.
+to use the original KiCad prototype reference names.
 
 ### Rebuilding KiCad
 
@@ -119,7 +125,7 @@ The generator currently reads the standard symbol/model libraries from the
 macOS KiCad installation; project files themselves are portable.
 
 The schematic preview is generated from the ERC-clean native schematic. Existing
-board renders elsewhere in this README are the earlier tscircuit/Blender study,
+board renders elsewhere in this README are the earlier KiCad prototype/Blender study,
 not a DRC-approved KiCad fabrication release.
 
 
@@ -169,7 +175,7 @@ flowchart LR
 
 ### Annotated schematic
 
-[Full annotated sheet](docs/schematic.svg) · [tscircuit source](board/module.circuit.tsx)
+[Full annotated sheet](docs/schematic.svg) · [KiCad source](kicad/glowcost-geiger.kicad_sch)
 · [SPICE source](sim/hv/converter.cir) · [JLC candidates and design decisions](#design-details)
 
 ![Power and multiplier](docs/schematic-power.png)
@@ -226,7 +232,7 @@ These are design-layer views, not manufacturing Gerbers. Bottom copper now inclu
 [Placement checks](docs/layout/checks.json) ·
 [Review coordinates](docs/layout/placement.csv) ·
 [Published circuit JSON](docs/layout/circuit.json) ·
-[Layout source](board/layout.circuit.tsx)
+[Layout source](kicad/glowcost-geiger.kicad_pcb)
 
 Courtyard and mechanical-reserve checks pass. HV creepage/clearance, route review,
 actual tube fit and enclosure interference still require review. The revised board
@@ -404,9 +410,9 @@ WASM: 682,075 points over 120 ms; mean HV **399.29 V**.
 <!-- RESULTS END -->
 
 [Native metrics JSON](docs/hv/results.json) · [CSV](docs/hv/results.csv)
-· [tscircuit/WASM metrics](docs/hv/tsci-results.json)
+· [KiCad prototype/WASM metrics](docs/hv/tsci-results.json)
 
-![tscircuit simulation](docs/hv/tsci-comparison.png)
+![KiCad prototype simulation](docs/hv/tsci-comparison.png)
 
 ### Assumptions and practical limits
 
@@ -427,7 +433,7 @@ WASM: 682,075 points over 120 ms; mean HV **399.29 V**.
 - Reported input current includes the modeled converter and passive loads,
   but excludes real oscillator/comparator/logic/driver current. It is not a
   complete module current budget or a measured efficiency claim.
-- Native ngspice uses Gear integration. WASM uses the tscircuit engine defaults.
+- Native ngspice uses Gear integration. WASM uses the KiCad prototype engine defaults.
   Native EN rises at 5 ms; WASM EN is high at t=0. The comparison aligns this
   5 ms difference. Numerical switching ripple is not hardware verification.
 - The WASM model reports a **3.50 V numerical pulse-transition peak** at a
@@ -444,7 +450,7 @@ WASM: 682,075 points over 120 ms; mean HV **399.29 V**.
 
 ## Design decisions and part candidates
 
-This is a tscircuit **functional design and SPICE study**, not an assembly release.
+This is a KiCad prototype **functional design and SPICE study**, not an assembly release.
 JLC parts are preferred. Parts below are candidates, and U1/U2 in the schematic
 are behavioral blocks, not orderable ICs. Pin-level controller implementation,
 qualified protection components, PCB routing, ERC/DRC and bench verification remain.
@@ -552,7 +558,7 @@ This repository does **not** certify Pi protection or touch safety.
 
 Decision workflow: the user's `~/agent-skills/kicad-bom/SKILL.md` is used for
 JLC lookup, packages, rating/derating and exact-part review. Circuit authoring
-remains tscircuit as requested; no KiCad project or manufacturing BOM is implied.
+remains KiCad prototype as requested; no KiCad project or manufacturing BOM is implied.
 
 <a id="design-details-assembly-and-enclosure-decisions"></a>
 
@@ -611,7 +617,7 @@ mechanical review. DNP is encoded in `parts.tubeClip.doNotPlace` and the
 generated [review inventory](docs/review-bom.csv), not merely a printed note.
 The functional schematic build disables PCB output. The separate placement study
 retains clip holes/pads by generating their geometry before restoring DNP in the
-published circuit JSON. The tscircuit `doNotPlace` flag otherwise skips placement.
+published circuit JSON. The KiCad prototype `doNotPlace` flag otherwise skips placement.
 The review inventory remains authoritative for population; J2/J3 must be excluded
 from assembly procurement and placement. See [layout notes](#layout-details).
 
@@ -666,7 +672,7 @@ before purchasing; it is a selected electrical part, not procurement-ready.
 
 ### Parts selected for the physical controller implementation
 
-[implementation-parts.ts](board/implementation-parts.ts) records these choices.
+The implementation part decisions are now maintained in [parts-selection.md](kicad/parts-selection.md).
 They are **not yet wired into U1/U2**, and are excluded from the generated
 functional schematic inventory. The existing SPICE results still describe the
 original behavioral controller and 22 µF ideal input model.
@@ -1113,7 +1119,7 @@ entire assembly cost by board area. See [placement documentation](#layout-detail
 
 ## Basic PCB placement and render review
 
-**Routing study, not a fabrication release.** This tscircuit layout
+**Routing study, not a fabrication release.** This KiCad prototype layout
 reuses the functional schematic's part identities and nets. U1/U2 remain
 behavioral blocks; their physical oscillator, comparators, logic and input
 soft-start parts still need a complete pin-level schematic and placement.
@@ -1149,7 +1155,7 @@ Clip ratings and source references are in [part selection](#part-details).
 
 
 The assembly renders use the actual recovered tube mesh and reconstructed clip
-mesh. Remaining bodies are illustrative boxes. The native tscircuit preview is
+mesh. Remaining bodies are illustrative boxes. The native KiCad prototype preview is
 also retained as `docs/layout/3d.png`; it does not include the assembly meshes.
 
 
@@ -1157,7 +1163,7 @@ Vector images: [placement](docs/layout/placement.svg), [top copper](docs/layout/
 [bottom copper](docs/layout/bottom-copper.svg), [silkscreen](docs/layout/silkscreen.svg),
 [drill](docs/layout/drill.svg), [courtyards](docs/layout/courtyards.svg).
 PNG versions are embedded in the [main README](#pcb-renders-and-layer-views).
-These views filter actual tscircuit PCB artwork; they are not Gerber exports.
+These views filter actual KiCad prototype PCB artwork; they are not Gerber exports.
 Bottom copper includes routed traces, vias and clip-hole annuli. Drill artwork retains those
 annuli for reference. Cyan courtyard boxes bound component assembly space.
 
@@ -1207,7 +1213,7 @@ The latest commit deleted the imported models. Recovered from history:
 Each recovered file's exact source revision and SHA-256 are recorded in the
 provenance manifest. The Blender file is the original complete assembly, not an
 isolated tube export. The user confirmed that the recovered tube geometry matches the owned tube.
-C142864 clip seating remains unverified. An isolated mesh is now exported; its installed height is not yet assigned to the tscircuit preview. “Acrylic Tube Housing” is
+C142864 clip seating remains unverified. An isolated mesh is now exported; its installed height is not yet assigned to the KiCad prototype preview. “Acrylic Tube Housing” is
 the enclosure, not the detector tube.
 
 
@@ -1257,7 +1263,7 @@ This does not constitute complete circuit or HV insulation signoff.
 [Review coordinates](docs/layout/placement.csv) are for inspection, not production
 pick-and-place. [Published circuit JSON](docs/layout/circuit.json) retains the clip
 geometry with DNP restored. During geometry generation the DNP flag is temporarily
-cleared because this tscircuit version otherwise omits the holes. The
+cleared because this KiCad prototype version otherwise omits the holes. The
 [review BOM](docs/review-bom.csv) excludes both clips from population.
 
 The build retains connector-orientation heuristic warnings, missing schematic
@@ -1269,7 +1275,7 @@ review. No KiCad DRC or complete 3D interference check has been performed.
 
 ### Routing limits and reproduction
 
-The local tscircuit router uses 0.25 mm traces, a 0.25 mm routing-clearance
+The local KiCad prototype router uses 0.25 mm traces, a 0.25 mm routing-clearance
 setting and 0.6/0.3 mm via pad/drill sizes. **These are general routing settings,
 not 400 V insulation rules.** The routing needs a voltage-aware clearance review,
 especially between the multiplier, tube metal body and low-voltage circuitry.
@@ -1309,12 +1315,12 @@ bun run render:layout
 ```
 
 The export script checks placement, writes review data, renders six SVG/PNG
-views using `rsvg-convert`, and copies the native tscircuit 3D PNG into `docs/layout`.
+views using `rsvg-convert`, and copies the native KiCad prototype 3D PNG into `docs/layout`.
 
 ## Reproduce
 
 Dependencies: Bun, native ngspice, Python 3 with NumPy/Matplotlib; `rsvg-convert`
-for PNG rendering. tscircuit and its dependency versions are pinned in `bun.lock`.
+for PNG rendering. KiCad prototype and its dependency versions are pinned in `bun.lock`.
 
 ```sh
 bun install --frozen-lockfile
@@ -1327,14 +1333,14 @@ bun run render:schematic             # full sheet and readable detail views
 bun run build:layout                 # builds routing study, including probe holes and LED
 bun run render:layout                # placement checks and published layer images
 bun run sim                         # native supply/load/fault sweep and plots
-bun run sim:sync                    # regenerate tscircuit SPICE subcircuit
+bun run sim:sync                    # regenerate KiCad prototype SPICE subcircuit
 bun run sim:tsci > docs/hv/tsci-run.log 2>&1
 bun run sim:plots                   # validate WASM run and compare startup
 python3 scripts/update_readme.py    # refresh numerical summary
 bun run analyze:performance         # paired pulses, dead-time/rate/power calculations
 ```
 
-The tscircuit preload only compresses the CLI result table to
+The KiCad prototype preload only compresses the CLI result table to
 `build/tsci/hv-table.txt.gz`; it does not change the solver. Native decks/logs
 and large raw outputs live in ignored `build/`. Charts, compact traces, metrics
 and the actual WASM run log are versioned. The CLI may warn about ignored
@@ -1345,7 +1351,7 @@ its log. These warnings are not evidence of hardware validation.
 
 Adapted from local `geiger2`, revision
 `57b206a88d6513fb3bc38d2fa9b1ea6aec39ed02`: tube requirements, multiplier topology,
-SPICE model, tscircuit ladder drawing and simulation tooling. Added the four-wire
+SPICE model, KiCad prototype ladder drawing and simulation tooling. Added the four-wire
 Pi interface, 3.3 V sweep, transistor pulse stage, enable, OVP and passive bleeder.
 The geiger2 source project was left unchanged.
 

@@ -52,9 +52,6 @@ for idx,fp in enumerate(children(x,'footprint')):
   sch=parse((OUT/'glowcost-geiger.kicad_sch').read_text())
   sym=next(s for s in children(sch,'symbol') if child(s,'uuid')[1]==m['symbols'][old])
   prop['Value'][2]=next(p[2] for p in children(sym,'property') if p[1]=='Value')
-  for p in children(sym,'property'):
-   if p[1] in ['MPN','LCSC']:
-    f=copy.deepcopy(prop['Datasheet']);f[1]=p[1];f[2]=p[2];fp.append(f)
  for p in children(fp,'fp_text'):
   if p[1]=='reference':p[2]=new
   elif p[1]=='value':p[2]=prop['Value'][2]

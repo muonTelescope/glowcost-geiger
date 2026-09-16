@@ -3,23 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsci build board/module.circuit.tsx --disable-pcb --disable-parts-engine --schematic-svgs",
     "sim": "python3 scripts/simulate.py",
     "sim:sync": "python3 scripts/sync_spice_model.py",
-    "sim:tsci": "bun --preload ./scripts/compact-tsci-output.ts ./node_modules/tscircuit/cli.mjs simulate analog sim/hv/hv.circuit.tsx --disable-parts-engine",
     "check": "python3 scripts/check_schematic.py",
     "sim:plots": "python3 scripts/analyze_tsci.py",
     "render:schematic": "python3 scripts/render_schematic.py",
     "analyze:performance": "python3 scripts/analyze_performance.py",
     "bom:review": "bun scripts/export-review-bom.ts",
-    "build:layout": "tsci build board/layout.circuit.tsx --disable-parts-engine --pcb-svgs --3d-png",
-    "render:layout": "python3 scripts/export_layout.py",
     "build:kicad": "python3 scripts/build_kicad.py"
   },
   "dependencies": {
-    "circuit-json": "0.0.491",
-    "circuit-json-to-pnp-csv": "0.0.16",
-    "format-si-unit": "0.0.14",
-    "tscircuit": "0.0.2562"
+    "format-si-unit": "0.0.14"
   }
 }
