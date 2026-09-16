@@ -1164,6 +1164,30 @@ The assembly renders use the actual recovered tube mesh and reconstructed clip
 mesh. Remaining bodies are illustrative boxes. The native KiCad prototype preview is
 also retained as `docs/layout/3d.png`; it does not include the assembly meshes.
 
+#### Updated review renders
+
+The latest render set is grouped under [`docs/renders/board`](docs/renders/board/):
+[top](docs/renders/board/top.png), [bottom](docs/renders/board/bottom.png),
+[front](docs/renders/board/front.png), [back](docs/renders/board/back.png),
+[left](docs/renders/board/left.png), and [right](docs/renders/board/right.png).
+These views are generated from the current 120 x 32 x 1.6 mm KiCad board and are
+for placement review; they do not waive the documented DRC and HV-spacing issues.
+
+The refreshed assembly views are [assembled](docs/layout/assembled.png),
+[board-top](docs/layout/board-top.png), and [tube-side](docs/layout/tube-side.png).
+The updated sheet-metal clip preview is [C142864 preview](cad/models/C142864/preview.png),
+with the dimension comparison in [C142864-annotated-comparison.png](docs/kicad/C142864-annotated-comparison.png).
+
+#### Review notes
+
+- The clip drawing and datasheet agree on the dimensioned values: 7.6 mm tail pitch,
+  7.9 mm base width, 10.9 mm height, R3.2 bend, and 2.0 +/- 0.1 mm holes.
+- The generated clip is still a reconstruction. Its spring transitions are approximate,
+  and the STEP solid does not yet model the stamped tail holes.
+- The board render shows the compact placement under the tube, but the current KiCad
+  DRC still reports the known clearance errors listed above. Do not use these images
+  as fabrication approval.
+
 
 Vector images: [placement](docs/layout/placement.svg), [top copper](docs/layout/top-copper.svg),
 [bottom copper](docs/layout/bottom-copper.svg), [silkscreen](docs/layout/silkscreen.svg),

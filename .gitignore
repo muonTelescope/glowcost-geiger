@@ -8,3 +8,5 @@ __pycache__/
 *.blend1
 *.kicad_prl
 *.lck
+.agents/
+skills-lock.json
