@@ -61,6 +61,7 @@ spring deflection, and tail-hole stamping remain approximate.
 - [Footprints](kicad/glowcost.pretty)
 - [Parts selection](kicad/parts-selection.md) · [net classes](kicad/net-classes.md)
 - [ATtiny1616 / STEMMA QT revision specification](kicad/mcu-revision.md)
+- [Firmware bring-up and diagnostic tools](firmware/README.md)
 
 The study retains the routed HV prototype and 72 placements. Reroute the known
 clearance violations before ordering.

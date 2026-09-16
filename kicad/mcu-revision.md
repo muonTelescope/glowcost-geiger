@@ -12,6 +12,7 @@ telemetry functions into the ATtiny1616.
 | J4, J5 | JST-SH-4 STEMMA QT/Qwiic | Parallel SDA/SCL/3V3/GND pass-through |
 | JP2, JP3 | A0/A1 solder bridges | Open = pull-up/high; bridged = low |
 | TP23, TP24, TP25 | UPDI VCC/DATA/GND | Pogo-pad programming footprint |
+| TP28, TP29 | UART TX/RX | 3.3 V diagnostic serial pads; 115200 8-N-1 |
 | R_I2C | 4.7 kΩ selectable pull-ups | Populate one bus segment only |
 | R_HV1/R_HV2, C_HVADC | Protected HV ADC divider/filter | HV-service clearance applies |
 | R_3V3, C_3V3 | 3.3 V monitor divider/filter | Optional if rail is already measured at U3 |
