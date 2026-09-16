@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(general
-		(thickness 1.6)
+		(thickness 0.8)
 		(legacy_teardrops no)
 	)
 	(paper "A4")
@@ -802,9 +802,9 @@
 	(footprint "glowcost:J1"
 		(layer "F.Cu")
 		(uuid "06d7c200-5398-7be1-51f7-463e0878f7a3")
-		(at 57 113)
+		(at 4.5 100 90)
 		(property "Reference" "J1"
-			(at 0 -3 0)
+			(at 0 -3 90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "76011660-48dd-4d01-1bb9-83a2116a45bd")
@@ -816,7 +816,7 @@
 			)
 		)
 		(property "Value" "JST GH 4-pin"
-			(at 0 3 0)
+			(at 0 3 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "467a4a20-61c1-6901-7d08-87e267b0593d")
@@ -828,7 +828,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6c9dd7e0-663e-5ec1-391a-95620bf6cc03")
@@ -840,7 +840,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "16c4bcc0-75e4-51c1-028d-604270c9913d")
@@ -852,7 +852,7 @@
 			)
 		)
 		(property "Supplier Part Number" "C161692"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "004a928c-621d-6f94-3b7a-8e4c26ed73d4")
@@ -864,7 +864,7 @@
 			)
 		)
 		(property "MPN" "BM04B-GHS-TBT(LF)(SN)"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6c9dd7e0-663e-5ec1-391a-95620bf6cc03")
@@ -876,7 +876,7 @@
 			)
 		)
 		(property "LCSC" "C161692"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6c9dd7e0-663e-5ec1-391a-95620bf6cc03")
@@ -902,40 +902,40 @@
 			(uuid "b78b9a82-3251-453e-a364-50c5f163379c")
 		)
 		(pad "" smd rect
-			(at -3.725 -1.4)
+			(at -3.725 -1.4 90)
 			(size 1 2.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(uuid "56fc4b3e-13bc-34a2-7e74-b48216d2cb9e")
 		)
 		(pad "" smd rect
-			(at 3.725 -1.4)
+			(at 3.725 -1.4 90)
 			(size 1 2.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(uuid "72964da0-144e-497f-49f9-baa257be413d")
 		)
 		(pad "1" smd rect
-			(at -1.875 1.95)
+			(at -1.875 1.95 90)
 			(size 0.6 1.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "V3V3")
 			(uuid "7df9aa24-291e-ad24-2bbc-4fdc7f68b324")
 		)
 		(pad "2" smd rect
-			(at -0.625 1.95)
+			(at -0.625 1.95 90)
 			(size 0.6 1.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
 			(uuid "03a781e6-5133-7b1a-59f1-87e605168ae6")
 		)
 		(pad "3" smd rect
-			(at 0.625 1.95)
+			(at 0.625 1.95 90)
 			(size 0.6 1.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/TTL")
 			(uuid "0a99a2a0-4ab7-c05f-5ff6-dca20aa579a3")
 		)
 		(pad "4" smd rect
-			(at 1.875 1.95)
+			(at 1.875 1.95 90)
 			(size 0.6 1.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/EN")
