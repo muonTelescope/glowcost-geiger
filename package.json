@@ -13,7 +13,8 @@
     "analyze:performance": "python3 scripts/analyze_performance.py",
     "bom:review": "bun scripts/export-review-bom.ts",
     "build:layout": "tsci build board/layout.circuit.tsx --disable-parts-engine --pcb-svgs --3d-png",
-    "render:layout": "python3 scripts/export_layout.py"
+    "render:layout": "python3 scripts/export_layout.py",
+    "build:kicad": "python3 scripts/build_kicad.py"
   },
   "dependencies": {
     "circuit-json": "0.0.491",

@@ -6,3 +6,5 @@ __pycache__/
 
 .tscircuit/
 *.blend1
+*.kicad_prl
+*.lck

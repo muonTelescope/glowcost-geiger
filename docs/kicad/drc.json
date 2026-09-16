@@ -1,0 +1,1654 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-15T20:08:32",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "glowcost-geiger.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1149 mm)",
+            "items": [
+                {
+                    "description": "Track [V3V3] on F.Cu, length 7.0004 mm",
+                    "pos": {
+                        "x": 54.399098,
+                        "y": 115.000495
+                    },
+                    "uuid": "2895ef34-1b1c-62f4-0da2-d6b400294a74"
+                },
+                {
+                    "description": "Pad [<no net>] of J1 on F.Cu",
+                    "pos": {
+                        "x": 53.275,
+                        "y": 111.6
+                    },
+                    "uuid": "56fc4b3e-13bc-34a2-7e74-b48216d2cb9e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1356 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 5.7260 mm",
+                    "pos": {
+                        "x": 62.79032,
+                        "y": 89.998912
+                    },
+                    "uuid": "0e8ad316-1cf5-382a-4875-436a73f54eaa"
+                },
+                {
+                    "description": "Track [/DRIVE] on F.Cu, length 13.8401 mm",
+                    "pos": {
+                        "x": 65.574732,
+                        "y": 101.600268
+                    },
+                    "uuid": "12f33534-0d51-904c-2d96-55cc4ddb1b4c"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1892 mm)",
+            "items": [
+                {
+                    "description": "Via [/LED_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 48.298599,
+                        "y": 89.533
+                    },
+                    "uuid": "6df1a6fa-2c94-c89a-14c8-15c65624f426"
+                },
+                {
+                    "description": "Track [/LED_K] on F.Cu, length 5.8561 mm",
+                    "pos": {
+                        "x": 48.401612,
+                        "y": 90.298347
+                    },
+                    "uuid": "749a2a00-6b4d-9f7f-6201-14fe58b48a7d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Track [/LED_A] on F.Cu, length 3.4564 mm",
+                    "pos": {
+                        "x": 48.27,
+                        "y": 86.047985
+                    },
+                    "uuid": "3da6dbfe-5deb-a17e-7e30-66fe618ad382"
+                },
+                {
+                    "description": "Pad 1 [/LED_SUPPLY] of R6 on F.Cu",
+                    "pos": {
+                        "x": 49.0,
+                        "y": 86.825
+                    },
+                    "uuid": "4827d420-09cc-769f-5bc0-c15e524af3e3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Track [/DIV2] on F.Cu, length 11.4955 mm",
+                    "pos": {
+                        "x": 114.416,
+                        "y": 111.93
+                    },
+                    "uuid": "4a8cf954-64d0-432c-142d-7fac3c7543d4"
+                },
+                {
+                    "description": "Pad 2 [/DIV3] of R3 on F.Cu",
+                    "pos": {
+                        "x": 106.9625,
+                        "y": 110.0
+                    },
+                    "uuid": "7e51da00-2c5d-8f41-2596-bb7e778b063d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Via [/S4] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 138.014708,
+                        "y": 93.100005
+                    },
+                    "uuid": "649b7546-2574-4b9a-507b-f3863993cd5a"
+                },
+                {
+                    "description": "Track [/BL1] on F.Cu, length 6.5026 mm",
+                    "pos": {
+                        "x": 137.478803,
+                        "y": 89.048626
+                    },
+                    "uuid": "734c0b20-7c98-95a1-7a1a-dfde70ce555d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/P4] of C7 on F.Cu",
+                    "pos": {
+                        "x": 129.4625,
+                        "y": 96.0
+                    },
+                    "uuid": "5636d8c0-0442-8e01-4db1-bcbe6059f883"
+                },
+                {
+                    "description": "Track [/S4] on F.Cu, length 6.8542 mm",
+                    "pos": {
+                        "x": 131.007794,
+                        "y": 95.766297
+                    },
+                    "uuid": "6a361680-528a-00e1-3add-eb422331d5a3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.2141 mm)",
+            "items": [
+                {
+                    "description": "Track [/S4] on F.Cu, length 3.9218 mm",
+                    "pos": {
+                        "x": 131.939129,
+                        "y": 99.289129
+                    },
+                    "uuid": "00203c44-2024-893c-4069-4ebc60ae143c"
+                },
+                {
+                    "description": "Pad 1 [/P4] of D8 on F.Cu",
+                    "pos": {
+                        "x": 131.0,
+                        "y": 101.65
+                    },
+                    "uuid": "6e30863a-0bc8-841a-569f-7e0646f87fda"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1602 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [/S3] of C8 on F.Cu",
+                    "pos": {
+                        "x": 126.5375,
+                        "y": 104.0
+                    },
+                    "uuid": "5ae4574e-4779-648e-340e-71ce20a37f0e"
+                },
+                {
+                    "description": "Track [/P4] on F.Cu, length 3.4404 mm",
+                    "pos": {
+                        "x": 127.580693,
+                        "y": 104.797645
+                    },
+                    "uuid": "6c08c566-71cd-d8fa-4fa4-775a2d7b15ba"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1228 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [/S4] of R1 on F.Cu",
+                    "pos": {
+                        "x": 125.0375,
+                        "y": 110.0
+                    },
+                    "uuid": "0d85593c-20f0-4bfc-345b-3ebc47c6317c"
+                },
+                {
+                    "description": "Track [/P4] on F.Cu, length 4.5924 mm",
+                    "pos": {
+                        "x": 124.177232,
+                        "y": 107.230365
+                    },
+                    "uuid": "5742d320-7a45-a561-62b7-885e3fb4b61d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1315 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/S4] of C8 on F.Cu",
+                    "pos": {
+                        "x": 129.4625,
+                        "y": 104.0
+                    },
+                    "uuid": "31124720-7cf9-6e21-2b05-236226ef275d"
+                },
+                {
+                    "description": "Track [/P4] on F.Cu, length 1.7693 mm",
+                    "pos": {
+                        "x": 131.0,
+                        "y": 101.65
+                    },
+                    "uuid": "569a82fe-0acd-7902-6c35-750232628efe"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/S4] of C8 on F.Cu",
+                    "pos": {
+                        "x": 129.4625,
+                        "y": 104.0
+                    },
+                    "uuid": "31124720-7cf9-6e21-2b05-236226ef275d"
+                },
+                {
+                    "description": "Track [/P4] on F.Cu, length 1.7640 mm",
+                    "pos": {
+                        "x": 128.795868,
+                        "y": 102.868507
+                    },
+                    "uuid": "530bafe0-760e-8221-66ee-ab9e43ebd95d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1315 mm)",
+            "items": [
+                {
+                    "description": "Track [/P4] on F.Cu, length 0.9213 mm",
+                    "pos": {
+                        "x": 129.717153,
+                        "y": 102.868507
+                    },
+                    "uuid": "30cce0a0-53cf-b2e1-76d2-8522662aa89d"
+                },
+                {
+                    "description": "Pad 2 [/S4] of C8 on F.Cu",
+                    "pos": {
+                        "x": 129.4625,
+                        "y": 104.0
+                    },
+                    "uuid": "31124720-7cf9-6e21-2b05-236226ef275d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1635 mm)",
+            "items": [
+                {
+                    "description": "Track [/P4] on F.Cu, length 5.9075 mm",
+                    "pos": {
+                        "x": 124.177232,
+                        "y": 111.822768
+                    },
+                    "uuid": "067585c0-64bd-89e1-3cfa-71fe214d9223"
+                },
+                {
+                    "description": "Pad 1 [/S4] of R1 on F.Cu",
+                    "pos": {
+                        "x": 125.0375,
+                        "y": 110.0
+                    },
+                    "uuid": "0d85593c-20f0-4bfc-345b-3ebc47c6317c"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Via [/BASE] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 57.816797,
+                        "y": 96.067206
+                    },
+                    "uuid": "0759c0b0-6e96-7e70-1b79-42705a76fcb0"
+                },
+                {
+                    "description": "Track [V3V3] on B.Cu, length 3.3653 mm",
+                    "pos": {
+                        "x": 58.895412,
+                        "y": 96.380155
+                    },
+                    "uuid": "4f382b06-6f08-2046-7127-ea7a5157f53a"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1470 mm)",
+            "items": [
+                {
+                    "description": "Track [/DIV2] on F.Cu, length 11.4955 mm",
+                    "pos": {
+                        "x": 114.416,
+                        "y": 111.93
+                    },
+                    "uuid": "4a8cf954-64d0-432c-142d-7fac3c7543d4"
+                },
+                {
+                    "description": "Via [/P3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 104.536,
+                        "y": 112.502
+                    },
+                    "uuid": "7f467f48-1e51-7e98-4416-838859817a58"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1623 mm)",
+            "items": [
+                {
+                    "description": "Via [/S3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 117.932503,
+                        "y": 99.457495
+                    },
+                    "uuid": "692d89e0-4eba-d15f-06a3-2c9e41747823"
+                },
+                {
+                    "description": "Track [/P3] on F.Cu, length 3.7943 mm",
+                    "pos": {
+                        "x": 117.345209,
+                        "y": 96.200902
+                    },
+                    "uuid": "71460ac0-770d-dfa1-5f61-ca0247b5b463"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/S2] of D4 on F.Cu",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 98.35
+                    },
+                    "uuid": "1966e240-3418-579f-7e68-6e8230e934a3"
+                },
+                {
+                    "description": "Via [/P2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 107.921335,
+                        "y": 99.062619
+                    },
+                    "uuid": "6e39d000-2622-2b3f-21f5-79826a0d1e43"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1820 mm)",
+            "items": [
+                {
+                    "description": "Via [/P2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.6,
+                        "y": 93.2
+                    },
+                    "uuid": "20838660-19e4-17ff-1344-a99e0ca53b3d"
+                },
+                {
+                    "description": "Track [/OV2] on F.Cu, length 4.1772 mm",
+                    "pos": {
+                        "x": 117.780383,
+                        "y": 90.16117
+                    },
+                    "uuid": "7f3e1f80-7775-55ff-6e28-cb7e64dc40fd"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "Via [/P2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 108.0,
+                        "y": 97.6
+                    },
+                    "uuid": "143fd120-7869-3d61-0512-4be26e44a59d"
+                },
+                {
+                    "description": "Pad 2 [/S2] of D4 on F.Cu",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 98.35
+                    },
+                    "uuid": "1966e240-3418-579f-7e68-6e8230e934a3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1750 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/S2] of D4 on F.Cu",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 98.35
+                    },
+                    "uuid": "1966e240-3418-579f-7e68-6e8230e934a3"
+                },
+                {
+                    "description": "Track [/P2] on F.Cu, length 0.9370 mm",
+                    "pos": {
+                        "x": 107.063,
+                        "y": 97.6
+                    },
+                    "uuid": "331ccc40-28be-f69f-1e61-20fe14034b5d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1750 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [/S2] of D4 on F.Cu",
+                    "pos": {
+                        "x": 107.0,
+                        "y": 98.35
+                    },
+                    "uuid": "1966e240-3418-579f-7e68-6e8230e934a3"
+                },
+                {
+                    "description": "Track [/P2] on F.Cu, length 2.2631 mm",
+                    "pos": {
+                        "x": 105.4625,
+                        "y": 96.0
+                    },
+                    "uuid": "2d1248ce-754e-f4b2-17b0-323245ee904e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1254 mm)",
+            "items": [
+                {
+                    "description": "Via [/EN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 63.630506,
+                        "y": 114.081069
+                    },
+                    "uuid": "02979652-428b-766e-7851-7cd2332e7012"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 3.3634 mm",
+                    "pos": {
+                        "x": 62.485438,
+                        "y": 116.055
+                    },
+                    "uuid": "49e46d00-061d-70c1-3da9-8b7e7e8f7843"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1576 mm)",
+            "items": [
+                {
+                    "description": "Track [/S1] on F.Cu, length 3.3674 mm",
+                    "pos": {
+                        "x": 95.882616,
+                        "y": 99.232616
+                    },
+                    "uuid": "1275c770-29db-6810-4141-08b058a6a950"
+                },
+                {
+                    "description": "Pad 1 [/P1] of D2 on F.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 101.65
+                    },
+                    "uuid": "3faee3c4-5de9-1a1c-047e-e80466e6ea24"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1386 mm)",
+            "items": [
+                {
+                    "description": "Via [/DRIVE] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 60.474,
+                        "y": 107.554
+                    },
+                    "uuid": "1a48af20-67c7-e8ff-4ab8-dd2202c65cbd"
+                },
+                {
+                    "description": "Track [/TTL] on F.Cu, length 7.3539 mm",
+                    "pos": {
+                        "x": 57.625,
+                        "y": 111.2
+                    },
+                    "uuid": "7cb85620-66f7-43a1-5136-31223b751ea3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1839 mm)",
+            "items": [
+                {
+                    "description": "Track [/S4] on F.Cu, length 7.0177 mm",
+                    "pos": {
+                        "x": 125.0375,
+                        "y": 110.0
+                    },
+                    "uuid": "21519252-7ef0-54d2-2370-e8ae3a2dd9d2"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 129.209,
+                        "y": 113.31
+                    },
+                    "uuid": "58b6e380-0b37-a9a1-4247-903e703935e3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 96.879488,
+                        "y": 113.693546
+                    },
+                    "uuid": "320688c0-7a1e-2d81-3dca-2dbe0a4d7703"
+                },
+                {
+                    "description": "Track [/SENSE] on F.Cu, length 1.4709 mm",
+                    "pos": {
+                        "x": 97.413481,
+                        "y": 112.449998
+                    },
+                    "uuid": "366e4f80-3fba-da01-4907-64825253ef03"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.2094 mm)",
+            "items": [
+                {
+                    "description": "Track [V3V3] on F.Cu, length 7.0829 mm",
+                    "pos": {
+                        "x": 60.319283,
+                        "y": 100.811105
+                    },
+                    "uuid": "06829d00-26c7-6280-470c-28006750ed80"
+                },
+                {
+                    "description": "Pad 2 [/BASE] of D10 on F.Cu",
+                    "pos": {
+                        "x": 57.65,
+                        "y": 105.0
+                    },
+                    "uuid": "43eee820-6a1c-cd21-1828-826239cbc85d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1145 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3715 mm",
+                    "pos": {
+                        "x": 55.678165,
+                        "y": 115.968858
+                    },
+                    "uuid": "7e846e4e-5e3f-a8ce-3dfa-e34e1db61dce"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.2127 mm)",
+            "items": [
+                {
+                    "description": "Via [/COLLECTOR] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 63.428,
+                        "y": 92.047
+                    },
+                    "uuid": "71f72126-2524-92e6-27ad-fb5a7480899a"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 3.0233 mm",
+                    "pos": {
+                        "x": 62.79032,
+                        "y": 93.02218
+                    },
+                    "uuid": "7e206ee0-6a33-7b81-5287-65e23adb5043"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1712 mm)",
+            "items": [
+                {
+                    "description": "Pad 3 [/TTL] of J1 on F.Cu",
+                    "pos": {
+                        "x": 57.625,
+                        "y": 114.95
+                    },
+                    "uuid": "0a99a2a0-4ab7-c05f-5ff6-dca20aa579a3"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.8551 mm",
+                    "pos": {
+                        "x": 56.556539,
+                        "y": 115.450367
+                    },
+                    "uuid": "78368fe0-33b5-3301-10cc-29de554d86bd"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.2417 mm)",
+            "items": [
+                {
+                    "description": "Track [/P3] on F.Cu, length 4.6918 mm",
+                    "pos": {
+                        "x": 104.375698,
+                        "y": 112.682378
+                    },
+                    "uuid": "1a6bcc18-45eb-d758-716b-e29863141228"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 102.648,
+                        "y": 115.353
+                    },
+                    "uuid": "46261542-5771-e89e-0af6-19826d5e1ba2"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.2366 mm",
+                    "pos": {
+                        "x": 55.325303,
+                        "y": 116.084985
+                    },
+                    "uuid": "7511c340-466c-dfe1-01eb-83024295d9dd"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [/CATHODE] of R21 on F.Cu",
+                    "pos": {
+                        "x": 56.0,
+                        "y": 100.825
+                    },
+                    "uuid": "412477c0-568c-35c1-6bf3-f3c27ea44e3d"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 2.7614 mm",
+                    "pos": {
+                        "x": 56.713547,
+                        "y": 102.643225
+                    },
+                    "uuid": "6c917ce0-7bc2-6d81-6416-57e24c6a4243"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 1 [/OVP] of TP20",
+                    "pos": {
+                        "x": 83.0,
+                        "y": 84.0
+                    },
+                    "uuid": "44c1d6e0-2f5a-18df-19f2-5ade048a9cdd"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 8.8791 mm",
+                    "pos": {
+                        "x": 86.939547,
+                        "y": 85.239999
+                    },
+                    "uuid": "7a6191c0-7c51-e3bf-7305-593e69b8cebd"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 4.9730 mm",
+                    "pos": {
+                        "x": 54.599006,
+                        "y": 115.880789
+                    },
+                    "uuid": "6607cc60-2240-d021-2186-2c1e654d285d"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1793 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.1260 mm",
+                    "pos": {
+                        "x": 56.375,
+                        "y": 115.084445
+                    },
+                    "uuid": "69a5bf36-4ab0-01aa-00fa-3d764ca47c96"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1149 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3189 mm",
+                    "pos": {
+                        "x": 54.849884,
+                        "y": 116.075154
+                    },
+                    "uuid": "52c23c00-75c5-0e41-6738-1f7e44354d3d"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.0731 mm",
+                    "pos": {
+                        "x": 54.559833,
+                        "y": 115.942537
+                    },
+                    "uuid": "5e602176-3c36-bfd6-1a0d-5e36081c036a"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.2456 mm",
+                    "pos": {
+                        "x": 55.093,
+                        "y": 116.04
+                    },
+                    "uuid": "4221c0c0-1884-1bc1-1119-893e3ab72e3d"
+                },
+                {
+                    "description": "Pad 1 [V3V3] of J1 on F.Cu",
+                    "pos": {
+                        "x": 55.125,
+                        "y": 114.95
+                    },
+                    "uuid": "7df9aa24-291e-ad24-2bbc-4fdc7f68b324"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1313 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 2.7263 mm",
+                    "pos": {
+                        "x": 60.8625,
+                        "y": 94.95
+                    },
+                    "uuid": "3913f338-6e45-0ca8-159e-0c884308f398"
+                },
+                {
+                    "description": "Pad 3 [/COLLECTOR] of Q1 on F.Cu",
+                    "pos": {
+                        "x": 63.1375,
+                        "y": 94.0
+                    },
+                    "uuid": "39e745e0-7424-6f61-2230-24a22fc4261d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1356 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 5.7260 mm",
+                    "pos": {
+                        "x": 62.79032,
+                        "y": 89.998912
+                    },
+                    "uuid": "0e8ad316-1cf5-382a-4875-436a73f54eaa"
+                },
+                {
+                    "description": "Track [/DRIVE] on F.Cu, length 5.4347 mm",
+                    "pos": {
+                        "x": 65.574434,
+                        "y": 87.760169
+                    },
+                    "uuid": "458bd660-4ed8-60e1-5824-eb62617175e3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Track [V3V3] on F.Cu, length 7.0829 mm",
+                    "pos": {
+                        "x": 60.319283,
+                        "y": 100.811105
+                    },
+                    "uuid": "06829d00-26c7-6280-470c-28006750ed80"
+                },
+                {
+                    "description": "Via [/BASE] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 57.994215,
+                        "y": 103.897221
+                    },
+                    "uuid": "515127e0-0939-831f-3ede-21a2790a399d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of R21 on F.Cu",
+                    "pos": {
+                        "x": 56.0,
+                        "y": 99.175
+                    },
+                    "uuid": "27622f90-3b05-d290-6292-2b50002a2930"
+                },
+                {
+                    "description": "Track [/CATHODE] on F.Cu, length 5.2362 mm",
+                    "pos": {
+                        "x": 55.28311,
+                        "y": 100.118089
+                    },
+                    "uuid": "375a56a0-4f06-6c3f-66b2-81de7e5e977d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Pad 3 [/TTL] of J1 on F.Cu",
+                    "pos": {
+                        "x": 57.625,
+                        "y": 114.95
+                    },
+                    "uuid": "0a99a2a0-4ab7-c05f-5ff6-dca20aa579a3"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 5.3243 mm",
+                    "pos": {
+                        "x": 57.161172,
+                        "y": 116.055
+                    },
+                    "uuid": "1874abe0-2b52-505f-6f19-4c9e4d1fb723"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [/BL1] of R13 on F.Cu",
+                    "pos": {
+                        "x": 140.0,
+                        "y": 97.4625
+                    },
+                    "uuid": "4a70e14a-4d1f-20b6-1b50-dd4a7c3f24b6"
+                },
+                {
+                    "description": "Track [/BL2] on F.Cu, length 8.8046 mm",
+                    "pos": {
+                        "x": 141.13,
+                        "y": 95.597471
+                    },
+                    "uuid": "71509880-5a46-eb9f-25de-6fbe0e8a0c23"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Via [/BL3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 138.652674,
+                        "y": 111.76567
+                    },
+                    "uuid": "2f4f51e0-18c8-52e1-60df-f7a25708639d"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 3.5491 mm",
+                    "pos": {
+                        "x": 138.858247,
+                        "y": 110.794513
+                    },
+                    "uuid": "51908970-2f67-27d0-0d3d-c63014eb9b70"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Track [/OV1] on F.Cu, length 14.0840 mm",
+                    "pos": {
+                        "x": 128.985348,
+                        "y": 88.07
+                    },
+                    "uuid": "5e846f00-722c-f2ff-7a2a-890266820503"
+                },
+                {
+                    "description": "Pad 2 [/OV2] of R12 on F.Cu",
+                    "pos": {
+                        "x": 118.9625,
+                        "y": 90.0
+                    },
+                    "uuid": "71384320-3cd3-7221-1520-d89e6715235d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1154 mm)",
+            "items": [
+                {
+                    "description": "Track [/LED_K] on F.Cu, length 12.5770 mm",
+                    "pos": {
+                        "x": 52.544315,
+                        "y": 86.159224
+                    },
+                    "uuid": "409c7f40-1acb-31e1-0b06-1b7e30d768dd"
+                },
+                {
+                    "description": "Via [V3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 56.51,
+                        "y": 85.61977
+                    },
+                    "uuid": "4dd9ce20-0755-2b01-3f2f-781e7a4be4c3"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.2500 mm; actual 0.1574 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 5.9751 mm",
+                    "pos": {
+                        "x": 60.225,
+                        "y": 94.95
+                    },
+                    "uuid": "1d2ec3c4-242e-1a9c-658a-f8fc591828a4"
+                },
+                {
+                    "description": "Via [V3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 58.889608,
+                        "y": 97.109001
+                    },
+                    "uuid": "513f5540-04fa-3821-5b33-c5824e92ad1d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP1 V3V3' on F.Silkscreen",
+                    "pos": {
+                        "x": 49.5,
+                        "y": 108.0
+                    },
+                    "uuid": "3fc702ce-48e3-9a92-2e71-c80e5a38d552"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP2 GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 49.5,
+                        "y": 114.0
+                    },
+                    "uuid": "760763f0-014d-feb0-78a3-615010073c10"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP8 CATHODE' on F.Silkscreen",
+                    "pos": {
+                        "x": 53.0,
+                        "y": 92.0
+                    },
+                    "uuid": "5d33c606-2b76-d75a-4bde-8b463ccc121a"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP7 COLLECTOR' on F.Silkscreen",
+                    "pos": {
+                        "x": 60.0,
+                        "y": 86.0
+                    },
+                    "uuid": "13022cc4-75a8-709c-01ac-f204790254a4"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP6 BASE' on F.Silkscreen",
+                    "pos": {
+                        "x": 60.0,
+                        "y": 90.0
+                    },
+                    "uuid": "372f6c7e-4025-f622-4884-a73e2ed0bb62"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP9 GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 65.0,
+                        "y": 86.0
+                    },
+                    "uuid": "589aa0b8-1eba-c1e8-69ef-db780d658728"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP3 EN' on F.Silkscreen",
+                    "pos": {
+                        "x": 65.0,
+                        "y": 115.0
+                    },
+                    "uuid": "2bd5caae-4b7f-97f2-3d2b-056e3a2a5d32"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP4 TTL' on F.Silkscreen",
+                    "pos": {
+                        "x": 70.0,
+                        "y": 114.0
+                    },
+                    "uuid": "346d60fe-543d-3c62-2318-263e65927722"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP5 DRIVE' on F.Silkscreen",
+                    "pos": {
+                        "x": 77.0,
+                        "y": 114.0
+                    },
+                    "uuid": "7e9efa40-0a0b-a320-6d49-bf801b60dde0"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP20 OVP' on F.Silkscreen",
+                    "pos": {
+                        "x": 83.0,
+                        "y": 86.0
+                    },
+                    "uuid": "12677878-64ed-ea28-23bc-b3385398af68"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP19 SENSE' on F.Silkscreen",
+                    "pos": {
+                        "x": 83.0,
+                        "y": 114.0
+                    },
+                    "uuid": "5c9911ba-1abc-50e6-6dee-4c7a09671626"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP10 SW' on F.Silkscreen",
+                    "pos": {
+                        "x": 96.0,
+                        "y": 86.0
+                    },
+                    "uuid": "0e690776-68ec-5b2a-1fbe-42365797206a"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP15 P3' on F.Silkscreen",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 114.0
+                    },
+                    "uuid": "7aa0893e-0e0a-1422-694b-4e7e1f5f4ee2"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP11 P1' on F.Silkscreen",
+                    "pos": {
+                        "x": 104.0,
+                        "y": 86.0
+                    },
+                    "uuid": "3bc891cc-4ce2-0b94-2a73-570c5e374654"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP16 S3' on F.Silkscreen",
+                    "pos": {
+                        "x": 110.0,
+                        "y": 114.0
+                    },
+                    "uuid": "3b2ddd80-3c27-8520-4c83-18402ad24a60"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP12 S1' on F.Silkscreen",
+                    "pos": {
+                        "x": 112.0,
+                        "y": 86.0
+                    },
+                    "uuid": "7a05d4f2-02b0-7252-74a4-f04e1405ad12"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP13 P2' on F.Silkscreen",
+                    "pos": {
+                        "x": 120.0,
+                        "y": 86.0
+                    },
+                    "uuid": "2fd43bb0-4781-26f0-4129-7670362bec30"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP17 P4' on F.Silkscreen",
+                    "pos": {
+                        "x": 120.0,
+                        "y": 114.0
+                    },
+                    "uuid": "0f03bbc2-79a6-e19e-0251-7efe7503e3a2"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP14 S2' on F.Silkscreen",
+                    "pos": {
+                        "x": 128.0,
+                        "y": 86.0
+                    },
+                    "uuid": "306eeffc-583b-ad64-1f19-b53c6990e824"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP18 S4' on F.Silkscreen",
+                    "pos": {
+                        "x": 130.0,
+                        "y": 114.0
+                    },
+                    "uuid": "59355504-2f75-485c-47e0-1a4440ca831c"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP21 ANODE' on F.Silkscreen",
+                    "pos": {
+                        "x": 148.0,
+                        "y": 108.0
+                    },
+                    "uuid": "37ca20ca-50e0-7c96-2674-e60a6235b756"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.5500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'TP22 GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 148.0,
+                        "y": 114.0
+                    },
+                    "uuid": "7e0445f4-06ae-e354-70a6-7f4c18041e14"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.6500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'PULSE LED' on F.Silkscreen",
+                    "pos": {
+                        "x": 48.0,
+                        "y": 93.0
+                    },
+                    "uuid": "76a2183c-1208-8524-654c-dd7c235dbfe4"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.6500 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'CUT = LED OFF' on F.Silkscreen",
+                    "pos": {
+                        "x": 53.0,
+                        "y": 81.5
+                    },
+                    "uuid": "3f2c4e82-3829-141e-5081-894226d3d95e"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)",
+            "items": [
+                {
+                    "description": "PCB text '3V3 GND PULSE EN' on F.Silkscreen",
+                    "pos": {
+                        "x": 57.0,
+                        "y": 118.0
+                    },
+                    "uuid": "33cbafc8-54de-ed98-2276-750866342858"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of D9 on F.Silkscreen",
+                    "pos": {
+                        "x": 45.9,
+                        "y": 92.625
+                    },
+                    "uuid": "3942f94d-4c1d-4c7f-843c-f38968a7e540"
+                },
+                {
+                    "description": "PCB text 'PULSE LED' on F.Silkscreen",
+                    "pos": {
+                        "x": 48.0,
+                        "y": 93.0
+                    },
+                    "uuid": "76a2183c-1208-8524-654c-dd7c235dbfe4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of D9 on F.Silkscreen",
+                    "pos": {
+                        "x": 45.9,
+                        "y": 90.0875
+                    },
+                    "uuid": "63b10cbe-edb7-415d-8807-d83e0a1e4926"
+                },
+                {
+                    "description": "PCB text 'PULSE LED' on F.Silkscreen",
+                    "pos": {
+                        "x": 48.0,
+                        "y": 93.0
+                    },
+                    "uuid": "76a2183c-1208-8524-654c-dd7c235dbfe4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "PCB text 'PULSE LED' on F.Silkscreen",
+                    "pos": {
+                        "x": 48.0,
+                        "y": 93.0
+                    },
+                    "uuid": "76a2183c-1208-8524-654c-dd7c235dbfe4"
+                },
+                {
+                    "description": "Segment of D9 on F.Silkscreen",
+                    "pos": {
+                        "x": 48.1,
+                        "y": 92.625
+                    },
+                    "uuid": "b523058c-a26c-4017-875c-641edf683196"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of JP1",
+                    "pos": {
+                        "x": 54.27,
+                        "y": 82.15
+                    },
+                    "uuid": "1f6b9edb-8cfe-4a4f-bc60-e655c00d473b"
+                },
+                {
+                    "description": "PCB text 'CUT = LED OFF' on F.Silkscreen",
+                    "pos": {
+                        "x": 53.0,
+                        "y": 81.5
+                    },
+                    "uuid": "3f2c4e82-3829-141e-5081-894226d3d95e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        }
+    ]
+}

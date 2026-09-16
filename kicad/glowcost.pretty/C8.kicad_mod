@@ -1,0 +1,156 @@
+(footprint "C8"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -1.775 0)
+		(layer "F.SilkS")
+		(uuid "9884119e-11af-4ed0-903c-09db715125be")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "10 nF"
+		(at 0 3 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d1f5ebbe-e0e1-4e4e-95b8-5e81c3ff20bc")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a4935010-4155-417a-8dec-59853bf4d919")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "12cab663-65aa-415b-96bb-cdae707e7fb1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier Part Number" "C342714"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "670a0550-368d-f890-2bda-099071bdf450")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "C3216C0G2J103JT000N"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0e78b720-3b9c-807f-68c0-49de6a1becc3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C342714"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0e78b720-3b9c-807f-68c0-49de6a1becc3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetfile "glowcost-geiger.kicad_sch")
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -2.225 -1.275)
+		(end -2.225 1.275)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "f8d27ba3-a671-403d-b10f-b9ca70a761ce")
+	)
+	(fp_line
+		(start -2.225 1.275)
+		(end 1.4625 1.275)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "f4340870-f689-40b5-beff-17728c7adc74")
+	)
+	(fp_line
+		(start 1.4625 -1.275)
+		(end -2.225 -1.275)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "e9f1c5c1-5711-45d5-ac6a-7efe6374b65a")
+	)
+	(fp_rect
+		(start -2.28 -1.13)
+		(end 2.28 1.13)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "fb5d3b92-6a1f-45c1-959d-bb554a6ed858")
+	)
+	(pad "1" smd rect
+		(at -1.4625 0)
+		(size 1.125 1.75)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "5ae4574e-4779-648e-340e-71ce20a37f0e")
+	)
+	(pad "2" smd rect
+		(at 1.4625 0)
+		(size 1.125 1.75)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "31124720-7cf9-6e21-2b05-236226ef275d")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/models/C_1206_3216Metric.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

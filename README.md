@@ -4,15 +4,16 @@
 3.3 V pulse output and power enable. Uses the same **CTC-5 / STS-5 (СТС-5)**
 Geiger–Müller tube as geiger2, biased near 400 V.
 
-**Status: functional tscircuit schematic, reproducible SPICE study and compact routing study.** The HV
+**Status: tscircuit and native KiCad prototypes, reproducible SPICE study and compact routing study.** The HV
 oscillator/switch, comparator timing and output blanking contain behavioral
 models. JLC component candidates are documented; this is not a fabrication-qualified PCB,
 complete pin-level production schematic or fabrication release. HV protection
-is modeled, not bench-qualified.
+is modeled, not bench-qualified. **Native KiCad DRC finds 50 clearance violations in the preserved routing; do not fabricate this revision.**
 
 ## Contents
 
 - [Pi interface](#raspberry-pi-interface) and [schematic](#circuit)
+- [Native KiCad project, libraries and checks](#native-kicad-project)
 - [PCB renders and layers](#pcb-renders-and-layer-views)
 - [HV protection](#tube-and-hv-protection)
 - [Performance summary](#expected-dead-time-rate-and-current)
@@ -26,6 +27,101 @@ is modeled, not bench-qualified.
 
 All project documentation is consolidated here. The `docs/` directory holds
 rendered images, simulation results and machine-readable review data.
+
+
+## Native KiCad project
+
+Open [glowcost-geiger.kicad_pro](kicad/glowcost-geiger.kicad_pro) in **KiCad 10**. The
+[editable schematic](kicad/glowcost-geiger.kicad_sch) and
+[PCB](kicad/glowcost-geiger.kicad_pcb) live alongside the tscircuit sources.
+The conversion preserves the **120 × 40 mm outline, all 72 component placements,
+all pads and drills, 41 vias and routed copper geometry**. Four board-only mounting
+holes and one model-only tube footprint are also included. This is the same
+unfinished prototype: U1/U2 remain explicitly labeled functional boundaries,
+excluded from PCB placement; no MCU or new controller circuitry was introduced.
+
+![Native KiCad schematic](docs/kicad/schematic.png)
+
+[Vector schematic](docs/kicad/glowcost-geiger.svg) · [PDF schematic](docs/kicad/schematic.pdf) ·
+[Native netlist](docs/kicad/netlist.xml) · [Reference mapping](docs/kicad/reference-map.csv)
+
+### Local footprints and models
+
+- [glowcost.pretty](kicad/glowcost.pretty) contains the converted land patterns,
+  including 1 mm plated test points, the cuttable bridge, JST GH and C142864 clips.
+  Existing pad dimensions were retained; replacing them with nominal stock
+  footprints would change the routed board. The project-local `fp-lib-table` and
+  `sym-lib-table` resolve these without global library configuration.
+- [models](kicad/models) contains **10 STEP files** for the clips, connector and
+  package envelopes, plus the recovered tube as [tube.wrl](kicad/models/tube.wrl).
+  All model paths use `${KIPRJMOD}`. The tube is centered over the board, with its
+  axis 7.2 mm above the top surface. Its recovered mesh dimensions remain about
+  107.99 × 11.00 × 11.00 mm. See the existing tube/clip provenance and dimensional
+  limitations below; spring seating and tolerance clearance are still unverified.
+- [C142864.step](kicad/models/C142864.step) is the same datasheet-derived clip
+  model. J2/J3 retain **DNP** status. The tube uses a board-only assembly footprint
+  with no electrical pads; it does not create a second tube in the BOM.
+- Standard package and JST models come from the installed KiCad 10 libraries.
+  Package envelopes, especially the LED, are not exact manufacturer solids.
+  [Model validation](docs/kicad/model-audit.json) checks that all ten STEP shapes
+  load as valid geometry; it does not establish a tolerance-qualified assembly.
+  KiCad community library data uses [CC BY-SA 4.0 with the KiCad exception](https://www.kicad.org/libraries/license/).
+  Locally redistributed library symbols/models retain that attribution; diode/LED
+  symbol numbering was adapted from the standard symbols to match this board.
+
+### Conversion checks and unresolved routing
+
+| Check | Result |
+|---|---|
+| Schematic ERC | **0 violations** |
+| Source netlist comparison | **75 components / 34 nets match** |
+| PCB versus schematic parity | **0 issues** |
+| Unconnected copper | **0 items** |
+| Copper, pads, vias and placement versus native source export | **Geometry preserved** |
+| PCB DRC at 0.25 mm clearance | **50 clearance errors** |
+| Silkscreen | **25 small-text warnings; 4 overlap warnings** |
+
+[ERC report](docs/kicad/erc.json) · [DRC report](docs/kicad/drc.json) ·
+[Conversion checks](docs/kicad/conversion-checks.json)
+
+The first KiCad check at its default 0.20 mm clearance found 44 spacing errors;
+applying the source design's intended 0.25 mm rule finds 50. Some existing gaps
+are approximately **0.115 mm**. The earlier tscircuit “no errors” result was only
+that tool's check, **not** a passing KiCad DRC or an HV insulation assessment.
+A 0.25 mm default rule is also **not sufficient evidence for 400 V insulation**.
+The HV spacing rules, physical analog implementation, silkscreen and tube
+clearance must be resolved before fabrication. No errors are hidden or excluded.
+
+The exporter originally assigned the cuttable jumper's interchangeable pads to
+opposite logical nets and omitted the bridge's net. The KiCad conversion corrects
+those assignments and represents the **same 0.375 mm copper bridge** as a net tie.
+`JP1` is factory closed; cutting it isolates the LED supply, as in tscircuit.
+Standard diode/LED symbols were explicitly mapped to **pad 1 = anode, pad 2 =
+cathode**, preserving this board's numbering and polarity.
+
+KiCad requires numbered references. Underscore names therefore have native
+aliases—for example `SJ_LED → JP1`, `R_LED → R6`, `D_LED → D9` and `Q_LED → Q2`.
+The complete reference CSV maps every part back to the tscircuit name; local
+footprint names retain those source names. Values and LCSC/MPN fields are included
+in the native schematic and PCB. The surrounding design calculations continue
+to use the original tscircuit reference names.
+
+### Rebuilding KiCad
+
+Run `npm run build:kicad` with KiCad 10, its `pcbnew` Python runtime, FreeCAD, Bun and
+`rsvg-convert` installed. The script reads the checked-in routed circuit JSON,
+rebuilds the schematic/libraries, runs ERC/netlist/parity/geometry checks, and
+updates the reports. On this revision it deliberately ends with **FAILURE** at
+the PCB export gate because DRC errors remain. It preserves the native files and
+reports, but generates no manufacturing package or full-board 3D export.
+`KICAD_CLI` and `KICAD_PYTHON` can override the default macOS executable paths.
+The generator currently reads the standard symbol/model libraries from the
+macOS KiCad installation; project files themselves are portable.
+
+The schematic preview is generated from the ERC-clean native schematic. Existing
+board renders elsewhere in this README are the earlier tscircuit/Blender study,
+not a DRC-approved KiCad fabrication release.
+
 
 ## Raspberry Pi interface
 
