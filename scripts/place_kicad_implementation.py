@@ -3,6 +3,12 @@ from pathlib import Path
 import pcbnew
 ROOT=Path(__file__).resolve().parents[1]
 board=pcbnew.LoadBoard(str(ROOT/'kicad/glowcost-geiger.kicad_pcb'))
+board.SetThickness(0.8)
+j1=board.FindFootprintByReference('J1')
+if j1:
+ j1.SetPosition(pcbnew.VECTOR2I(int(4.5*1e6),int(100*1e6)))
+ j1.SetOrientationDegrees(90)
+ j1.SetLocked(False)
 lib=ROOT/'kicad/glowcost.pretty'
 for ref,fn,x,y,mpn,lcsc,model in [
  ('U1','U1.kicad_mod',-24,-13,'TLC555IDR','C6987','SOIC-8_3.9x4.9mm_P1.27mm.step'),

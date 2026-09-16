@@ -29,6 +29,12 @@ All project documentation is consolidated here. The `docs/` directory holds
 rendered images, simulation results and machine-readable review data.
 
 
+## Connector, board thickness and clip datasheet
+
+J1 is now placed at the left short end, centered on the tube axis and rotated so the cable exits inline with the tube. Pin 2/GND remains oriented toward the board ground side. The board stack thickness is set to **0.8 mm** for the compact assembly; confirm clip seating and enclosure stiffness before ordering.
+
+The C142864/Littelfuse 10207101009 clip datasheet is included locally as [C142864-datasheet.pdf](kicad/models/C142864-datasheet.pdf), alongside the [STEP model](kicad/models/C142864.step). The clip remains DNP for JLC and hand-installed.
+
 ## Selected implementation parts
 
 The former behavioral boundaries now have JLC candidates: [parts-selection](kicad/parts-selection.md). U1 is TLC555IDR (C6987), U2 is MCP6562T-E/MS (C625560), the boost inductor is TDK B82442T1105K050 (C2041861), and the HV switch is HL2310A (C7420347). Their footprints and STEP models are included in `kicad/`; the selected models still need pin-by-pin datasheet review before fabrication. U1 and U2 are placed in the reserved analog area with no new routing; lock their positions before the next routing pass.
