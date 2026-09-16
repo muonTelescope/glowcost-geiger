@@ -2,28 +2,28 @@
   "part": "Littelfuse 10207101009 / C142864",
   "units": "mm",
   "origin": "PCB top at tail midpoint",
-  "axes": "X tail pitch and tube axis; Z up",
-  "source": "datasheet.pdf, 102071 drawing, revised 2015-02-16",
+  "axes": "X axial width; Y transverse; Z up",
+  "source": "datasheet.pdf and supplied 102071 drawing",
   "source_sha256": "f91da54ea00dbca3608c6601e823b2907609950ed3b95f5a0c9fc50919c5121b",
-  "dimensions": {
+  "datasheet_dimensions": {
     "pin_pitch": 7.6,
-    "tail_section": [
-      0.5,
-      1.5
-    ],
+    "tail_width": 0.5,
+    "tail_length": 1.5,
     "tail_below_board": 3.6,
     "height_above_board": 10.9,
-    "body_axial_width": 7,
+    "body_axial_width": 7.0,
     "base_transverse_width": 7.9,
     "inner_radius": 3.2,
     "radius_center_height": 7.2,
     "mouth_inner_width": 4.5,
-    "throat_inner_width": 3.5
+    "throat_inner_width": 3.5,
+    "hole_diameter": 2.0,
+    "hole_tolerance": 0.1
   },
   "bounds_mm": [
     8.1,
     7.9,
-    14.5
+    14.500135441510553
   ],
   "checks": {
     "valid_solid": true,
@@ -31,10 +31,10 @@
     "step_roundtrip_valid": true
   },
   "approximations": [
-    "formed-sheet sidewall uses horizontal 0.5 mm offset rather than constant normal thickness",
-    "undimensioned spring transitions, flare heights, landing bends and bend radii",
-    "omits embossing, edge rounds, stamping details and spring deflection"
+    "0.5 mm sheet thickness is applied normal to the reconstructed spring centreline",
+    "undimensioned transition, flare, landing bends and radii are approximated",
+    "embossing, edge rounds, stamping marks and spring deflection omitted"
   ],
-  "usage": "placement visualization only; actual loaded seating and electrical clearances require validation",
+  "usage": "placement and enclosure visualization only; validate loaded seating and HV clearances with production clips",
   "assembly": "DNP at JLC, fitted by user"
 }

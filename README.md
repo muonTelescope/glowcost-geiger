@@ -31,9 +31,9 @@ rendered images, simulation results and machine-readable review data.
 
 ## Connector, board thickness and clip datasheet
 
-J1 is now placed at the left short end, centered on the tube axis and rotated so the cable exits inline with the tube. Pin 2/GND remains oriented toward the board ground side. The board stack thickness is set to **0.8 mm** for the compact assembly; confirm clip seating and enclosure stiffness before ordering.
+J1 is now placed at the left short end, centered on the tube axis and rotated so the cable exits inline with the tube. Pin 2/GND remains oriented toward the board ground side. The board stack thickness is **1.6 mm** as requested; the preliminary outline is narrowed to **120 x 32 mm** while retaining the tube envelope and end connector.
 
-The C142864/Littelfuse 10207101009 clip datasheet is included locally as [C142864-datasheet.pdf](kicad/models/C142864-datasheet.pdf), alongside the [STEP model](kicad/models/C142864.step). The clip remains DNP for JLC and hand-installed.
+The C142864/Littelfuse 10207101009 clip datasheet is included locally as [C142864-datasheet.pdf](kicad/models/C142864-datasheet.pdf), alongside the [STEP model](kicad/models/C142864.step). The clip remains DNP for JLC and hand-installed. The sheet-metal reconstruction is documented in [C142864-annotated-comparison.png](docs/kicad/C142864-annotated-comparison.png) and [C142864-annotated-comparison.pdf](docs/kicad/C142864-annotated-comparison.pdf); dimensioned envelopes are matched, while bend transitions and stamping details remain approximate.
 
 ## Selected implementation parts
 
@@ -46,7 +46,7 @@ Net classes are documented in [net-classes.md](kicad/net-classes.md) and stored 
 Open [glowcost-geiger.kicad_pro](kicad/glowcost-geiger.kicad_pro) in **KiCad 10**. The
 [editable schematic](kicad/glowcost-geiger.kicad_sch) and
 [PCB](kicad/glowcost-geiger.kicad_pcb) live alongside the KiCad sources.
-The conversion preserves the **120 × 40 mm outline, all 72 component placements,
+  The conversion preserves the **120 × 32 mm outline, all 72 component placements,
 all pads and drills, 41 vias and routed copper geometry**. Four board-only mounting
 holes and one model-only tube footprint are also included. This is the same
 unfinished prototype: U1/U2 remain explicitly labeled functional boundaries,
@@ -202,11 +202,11 @@ and 34 exposed nets against SPICE, including diode polarity and passive values.
 
 ## PCB renders and layer views
 
-The **120 × 40 mm, two-layer routing study** holds 72 footprints (including 22 bare test points), with all SMT
+The **120 × 32 mm, two-layer routing study** holds 72 footprints (including 22 bare test points), with all SMT
 parts on top. J2/J3 retain their holes and pads while remaining **C142864 DNP**.
 The reserved area is for analog HV control (timer, comparators and logic), with
 no microcontroller or board firmware. Circuitry now occupies the space beneath
-the tube; 120 × 40 mm is 43% less board area than the previous 140 × 60 mm study.
+the tube; 120 × 32 mm is 49% less board area than the previous 140 × 60 mm study.
 There are **93 routed trace objects and 41 vias**, with no copper planes.
 The previously open SW and DRIVE ports now connect to test points. The physical
 analog control circuitry is still missing; this is not a complete working board.
@@ -1115,7 +1115,7 @@ authorize purchasing or establish that the hardware is ready for manufacture.
 
 ### Placement-size update
 
-The basic layout now measures **120 × 40 mm**, superseding the 125 × 35 mm
+The basic layout now measures **120 × 32 mm**, superseding the 125 × 35 mm
 assumption used in the PCB allowances above. The component estimates are
 unchanged; the bare-board and shipping allowances require a new supplier quote.
 Do not treat the earlier totals as a quote for this larger board or scale the
@@ -1136,7 +1136,7 @@ soft-start parts still need a complete pin-level schematic and placement.
 
 | Item | Current placement |
 |---|---|
-| Board | 120 × 40 × 1.6 mm, two copper layers, 2 mm corner chamfers |
+| Board | 120 × 32 × 1.6 mm, two copper layers, 2 mm corner chamfers |
 | Assembly | All SMT on top; 72 PCB footprints, including 22 bare test points |
 | Mounting | Four 3.2 mm nonplated holes at (±56, ±16) mm |
 | Tube envelope | Assumed 110 × 12 mm, centered at (0, 0) mm |

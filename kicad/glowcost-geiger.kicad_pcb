@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(general
-		(thickness 0.8)
+		(thickness 1.6)
 		(legacy_teardrops no)
 	)
 	(paper "A4")
@@ -11532,8 +11532,8 @@
 		)
 	)
 	(gr_line
-		(start 40 82)
-		(end 40 118)
+		(start 40 86)
+		(end 40 114)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11542,8 +11542,8 @@
 		(uuid "8efdcd51-ec9b-422e-a334-04a93e9a5563")
 	)
 	(gr_line
-		(start 40 118)
-		(end 42 120)
+		(start 40 114)
+		(end 42 116)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11552,8 +11552,8 @@
 		(uuid "a9a51aca-6316-481f-8d34-0c803f836db0")
 	)
 	(gr_line
-		(start 42 80)
-		(end 40 82)
+		(start 42 84)
+		(end 40 86)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11562,8 +11562,8 @@
 		(uuid "910d881b-77dd-4c7f-8c04-1b7c2f7d7d3b")
 	)
 	(gr_line
-		(start 42 120)
-		(end 158 120)
+		(start 42 116)
+		(end 158 116)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11572,8 +11572,8 @@
 		(uuid "b49dd00e-6b1c-45b2-ab3a-74b3b4247b4e")
 	)
 	(gr_line
-		(start 158 80)
-		(end 42 80)
+		(start 158 84)
+		(end 42 84)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11582,8 +11582,8 @@
 		(uuid "6b05e131-45ab-4f08-b129-ae597944f63c")
 	)
 	(gr_line
-		(start 158 120)
-		(end 160 118)
+		(start 158 116)
+		(end 160 114)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11592,8 +11592,8 @@
 		(uuid "1de7c3f9-074e-4e32-88de-2ec369a8ec24")
 	)
 	(gr_line
-		(start 160 82)
-		(end 158 80)
+		(start 160 86)
+		(end 158 84)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -11602,8 +11602,8 @@
 		(uuid "784a5090-fade-4953-9946-0c41a457608f")
 	)
 	(gr_line
-		(start 160 118)
-		(end 160 82)
+		(start 160 114)
+		(end 160 86)
 		(stroke
 			(width 0.1)
 			(type solid)
