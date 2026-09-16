@@ -35,6 +35,25 @@ J1 is now placed at the left short end, centered on the tube axis and rotated so
 
 The C142864/Littelfuse 10207101009 clip datasheet is included locally as [C142864-datasheet.pdf](kicad/models/C142864-datasheet.pdf), alongside the [STEP model](kicad/models/C142864.step). The clip remains DNP for JLC and hand-installed. The sheet-metal reconstruction is documented in [C142864-annotated-comparison.png](docs/kicad/C142864-annotated-comparison.png) and [C142864-annotated-comparison.pdf](docs/kicad/C142864-annotated-comparison.pdf); dimensioned envelopes are matched, while bend transitions and stamping details remain approximate.
 
+## STEMMA QT address selection
+
+The ATtiny1616 revision uses two unused GPIOs as solder-selectable I²C address
+bits. Each bit is a small two-pad jumper in the style shown in the reference
+photograph: leave the link open for logic-high (the firmware enables the internal
+pull-up), or bridge the pads for logic-low. The resulting address table is:
+
+| A1 | A0 | 7-bit address |
+|---:|---:|---:|
+| open | open | `0x36` |
+| open | bridged | `0x37` |
+| bridged | open | `0x38` |
+| bridged | bridged | `0x39` |
+
+The two STEMMA QT connectors are wired in parallel for daisy chaining. Only one
+selectable pull-up set is populated per bus segment. Address pads are low-voltage
+signals and must remain outside the HV keepout; they are not connected to the tube
+or multiplier nets.
+
 ## Selected implementation parts
 
 The former behavioral boundaries now have JLC candidates: [parts-selection](kicad/parts-selection.md). U1 is TLC555IDR (C6987), U2 is MCP6562T-E/MS (C625560), the boost inductor is TDK B82442T1105K050 (C2041861), and the HV switch is HL2310A (C7420347). Their footprints and STEP models are included in `kicad/`; the selected models still need pin-by-pin datasheet review before fabrication. U1 and U2 are placed in the reserved analog area with no new routing; lock their positions before the next routing pass.
