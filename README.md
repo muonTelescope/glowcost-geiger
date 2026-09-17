@@ -1,9 +1,10 @@
 # Glowcost Geiger
 
-Compact Raspberry Pi Geiger counter for the CTC-5 / STS-5 tube. The board takes
-3.3 V, ground, power-enable, and pulse/I²C connections. HV generation and pulse
-shaping are hardware based; an ATtiny1616 option provides counting, diagnostics,
-and an I²C sensor interface.
+**Simple description:** this is a compact four-wire Geiger module for a Raspberry
+Pi. It powers a CTC-5 / STS-5 tube from 3.3 V, generates the tube's high voltage,
+and exposes raw TTL pulses plus a future STEMMA QT I²C telemetry interface.
+The ATtiny1616 is intended to count pulses and report diagnostics without
+changing the hardware pulse path.
 
 > **Prototype:** the KiCad routing has known DRC clearance errors. The HV design
 > is not bench-qualified or approved for fabrication. Use suitable HV procedures.
@@ -112,6 +113,46 @@ ATtiny1616-MNR (LCSC C507118) is the preferred MCU: QFN-20, 3 x 3 mm, 16 KB
 Flash, 2 KB SRAM, 10-bit ADC, I²C/TWI, timers, Event System, and UPDI. Current
 LCSC pricing is typically about $0.90–1.10. See [cost-parts.json](docs/cost-parts.json)
 and [review-bom.csv](docs/review-bom.csv) for the cost study.
+
+## SPICE and measured-design findings
+
+The simulations are behavioral planning models, not a substitute for a loaded
+tube test. Regenerated outputs are kept here:
+
+| Plot | What it shows |
+|---|---|
+| ![HV startup](docs/hv/startup.png) | HV rise and startup time |
+| ![HV load sweep](docs/hv/load-sweep.png) | HV regulation across modeled loads |
+| ![HV protection](docs/hv/protection.png) | Divider and clamp behavior |
+| ![Pulse](docs/hv/pulse.png) | Comparator/TTL pulse shape |
+| ![Dead-time pairs](docs/performance/pulse-pairs.png) | Synthetic pulse-pair response |
+| ![Rate limits](docs/performance/rate-limits.png) | Dead-time and rate-loss limits |
+
+Current planning values are approximately 399 V mean HV, 7 V peak-to-peak
+ripple, 37–39 ms startup, 190 µs reference dead time, and about 2.5 mA
+converter input current in the nominal model. These values still require bench
+validation with the actual tube and transformer.
+
+The rate model reaches 1% loss near 40–53 cps depending on the selected dead
+time, and the nominal 400 V / 10% loss point is about 2.55 µSv/min using the
+uncalibrated 2.9 cps per µSv/h conversion. Counts remain the primary output;
+the dose estimate is approximate.
+
+## Findings to resolve before fabrication
+
+- The KiCad prototype still has known DRC clearance violations.
+- The ATtiny1616, two STEMMA QT connectors, address bridges, and UART/UPDI pads
+  are specified but not yet integrated into the native schematic/PCB release.
+- The 1 mm HV slots are present as Edge.Cuts and must be checked against JLC's
+  routed-slot capability and the final Gerbers.
+- The C142864 STEP is a reconstructed formed-sheet model; stamped tail holes and
+  spring deflection are not production-qualified.
+- HV creepage, tube seating, conformal-coating boundaries, and loaded current
+  remain open hardware checks.
+
+The deterministic review report is [jev-review.json](docs/kicad/jev-review.json).
+Jev may rank legal routing candidates, but it does not replace KiCad DRC,
+clearance calculations, or human HV review.
 
 ## Reproduce outputs
 
