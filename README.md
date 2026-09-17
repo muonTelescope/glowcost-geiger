@@ -17,6 +17,7 @@ and an I²C sensor interface.
 - ATtiny1616 option for pulse counting, HV/3.3 V readback, fault flags, and I²C slave registers.
 - Two solder-selectable address pads on leftover MCU GPIOs.
 - 120 x 32 x 1.6 mm, two-layer compact PCB.
+- Two 1.0 mm routed Edge.Cuts isolation slots split the HV service region.
 
 ## STEMMA QT and address selection
 
@@ -67,7 +68,9 @@ spring deflection, and tail-hole stamping remain approximate.
 - [Firmware bring-up and diagnostic tools](firmware/README.md)
 
 The study retains the routed HV prototype and 72 placements. Reroute the known
-clearance violations before ordering.
+clearance violations before ordering. The internal slots are fabrication slots,
+not copper clearances; confirm JLC's minimum routed-slot width and keep them
+clear of clips, traces, and enclosure hardware.
 
 ## Render gallery
 
@@ -93,6 +96,11 @@ Additional views: [board-top](docs/layout/board-top.png),
 
 Renders are for review, not Gerber approval. Generic component bodies are
 illustrative; tube seating and HV clearance remain unverified.
+
+Assembly silkscreen now calls out the HV slots, discharge warning, raw pulse,
+test points, and tube/clip service area. Install the tube and DNP clips only
+after reflow and cleaning; keep conformal coating away from clip contacts,
+STEMMA QT contacts, and UPDI/UART pads.
 
 ## Electrical and sourcing notes
 
