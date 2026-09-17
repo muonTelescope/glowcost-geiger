@@ -146,4 +146,14 @@ export TYPESAFE_API_KEY='paste-a-new-key-here'
 
 Do not commit the key, put it in this README, or paste it into issue reports.
 The repository currently documents the semantic-review approach but does not
-call Jev during the KiCad build.
+call Jev during the KiCad build. Run the review explicitly with:
+
+```sh
+source .venv/bin/activate
+python scripts/jev_pcb_review.py
+```
+
+It writes `docs/kicad/jev-review.json`. With `TYPESAFE_API_KEY` set, Jev ranks
+the legal trace-width candidates; without a key, the deterministic rule gate
+still produces a useful report. Jev never edits the PCB and cannot override
+KiCad DRC, minimum widths, HV creepage, or the 1 mm isolation slots.

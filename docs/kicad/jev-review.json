@@ -1,0 +1,216 @@
+{
+  "state": {
+    "facts": {
+      "board": "glowcost-geiger",
+      "outline_mm": [
+        120,
+        32
+      ],
+      "stackup_mm": 1.6,
+      "footprints": 79,
+      "segments": 384,
+      "vias": 41,
+      "hv_slots_1mm": 2,
+      "net_classes": {
+        "PI_SIGNAL": {
+          "clearance_mm": 0.2,
+          "width_mm": 0.2
+        },
+        "LV_POWER": {
+          "clearance_mm": 0.25,
+          "width_mm": 0.3
+        },
+        "HV_SENSE": {
+          "clearance_mm": 0.5,
+          "width_mm": 0.25
+        },
+        "HV_SERVICE": {
+          "clearance_mm": 1.5,
+          "width_mm": 0.4
+        }
+      },
+      "nets": [
+        "/ANODE",
+        "/ANODE_MID",
+        "/BASE",
+        "/BL1",
+        "/BL2",
+        "/BL3",
+        "/CATHODE",
+        "/COLLECTOR",
+        "/DIV1",
+        "/DIV2",
+        "/DIV3",
+        "/DRIVE",
+        "/EN",
+        "/LED_A",
+        "/LED_BASE",
+        "/LED_K",
+        "/LED_SUPPLY",
+        "/OV1",
+        "/OV2",
+        "/OV3",
+        "/OVP",
+        "/P1",
+        "/P2",
+        "/P3",
+        "/P4",
+        "/S1",
+        "/S2",
+        "/S3",
+        "/S4",
+        "/SENSE",
+        "/SW",
+        "/TTL",
+        "GND",
+        "V3V3"
+      ]
+    },
+    "candidates": {
+      "PI_SIGNAL": [
+        {
+          "width_mm": 0.2,
+          "clearance_mm": 0.2,
+          "use": "SDA/SCL, raw pulse, enable"
+        },
+        {
+          "width_mm": 0.25,
+          "clearance_mm": 0.25,
+          "use": "more robust Pi wiring"
+        }
+      ],
+      "LV_POWER": [
+        {
+          "width_mm": 0.3,
+          "clearance_mm": 0.25,
+          "use": "3V3 and logic return"
+        },
+        {
+          "width_mm": 0.4,
+          "clearance_mm": 0.3,
+          "use": "higher transient margin"
+        }
+      ],
+      "HV_SENSE": [
+        {
+          "width_mm": 0.25,
+          "clearance_mm": 0.5,
+          "use": "high impedance divider"
+        },
+        {
+          "width_mm": 0.3,
+          "clearance_mm": 0.75,
+          "use": "extra contamination margin"
+        }
+      ],
+      "HV_SERVICE": [
+        {
+          "width_mm": 0.4,
+          "clearance_mm": 1.5,
+          "use": "tube and multiplier service"
+        },
+        {
+          "width_mm": 0.5,
+          "clearance_mm": 2.0,
+          "use": "preferred prototype margin"
+        }
+      ]
+    },
+    "requirements": [
+      "KiCad DRC is authoritative",
+      "HV creepage is human-reviewed",
+      "do not route through slots"
+    ]
+  },
+  "deterministic": {
+    "PI_SIGNAL": {
+      "legal": [
+        {
+          "width_mm": 0.2,
+          "clearance_mm": 0.2,
+          "use": "SDA/SCL, raw pulse, enable"
+        },
+        {
+          "width_mm": 0.25,
+          "clearance_mm": 0.25,
+          "use": "more robust Pi wiring"
+        }
+      ],
+      "selected": {
+        "width_mm": 0.2,
+        "clearance_mm": 0.2,
+        "use": "SDA/SCL, raw pulse, enable"
+      },
+      "rule": "minimum class width/clearance is deterministic"
+    },
+    "LV_POWER": {
+      "legal": [
+        {
+          "width_mm": 0.3,
+          "clearance_mm": 0.25,
+          "use": "3V3 and logic return"
+        },
+        {
+          "width_mm": 0.4,
+          "clearance_mm": 0.3,
+          "use": "higher transient margin"
+        }
+      ],
+      "selected": {
+        "width_mm": 0.3,
+        "clearance_mm": 0.25,
+        "use": "3V3 and logic return"
+      },
+      "rule": "minimum class width/clearance is deterministic"
+    },
+    "HV_SENSE": {
+      "legal": [
+        {
+          "width_mm": 0.25,
+          "clearance_mm": 0.5,
+          "use": "high impedance divider"
+        },
+        {
+          "width_mm": 0.3,
+          "clearance_mm": 0.75,
+          "use": "extra contamination margin"
+        }
+      ],
+      "selected": {
+        "width_mm": 0.25,
+        "clearance_mm": 0.5,
+        "use": "high impedance divider"
+      },
+      "rule": "minimum class width/clearance is deterministic"
+    },
+    "HV_SERVICE": {
+      "legal": [
+        {
+          "width_mm": 0.4,
+          "clearance_mm": 1.5,
+          "use": "tube and multiplier service"
+        },
+        {
+          "width_mm": 0.5,
+          "clearance_mm": 2.0,
+          "use": "preferred prototype margin"
+        }
+      ],
+      "selected": {
+        "width_mm": 0.4,
+        "clearance_mm": 1.5,
+        "use": "tube and multiplier service"
+      },
+      "rule": "minimum class width/clearance is deterministic"
+    },
+    "hv": {
+      "human_review": true,
+      "reason": "400 V insulation and creepage cannot be delegated to Jev"
+    }
+  },
+  "jev": {
+    "available": false,
+    "reason": "TYPESAFE_API_KEY is not set; deterministic gate retained"
+  },
+  "policy": "Jev ranks legal candidates only; it never edits the PCB"
+}
