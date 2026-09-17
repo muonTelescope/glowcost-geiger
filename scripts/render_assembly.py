@@ -9,7 +9,7 @@ rows=json.loads((OUT/'circuit.json').read_text());source={r['source_component_id
 bpy.ops.wm.read_factory_settings(use_empty=True)
 def mat(name,color,metal=0):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True;p=m.node_tree.nodes['Principled BSDF'];p.inputs['Base Color'].default_value=(*color,1);p.inputs['Metallic'].default_value=metal;p.inputs['Roughness'].default_value=.35;return m
-mask=mat('Green soldermask',(.015,.11,.047));gold=mat('Exposed pads',(.6,.42,.12),.7);tin=mat('Tin clips',(.65,.69,.72),.8);ceramic=mat('Generic capacitors',(.45,.40,.28));black=mat('Generic bodies',(.06,.065,.07));tubeMat=mat('Recovered tube metal',(.48,.40,.20),.7);green=mat('Green LED',(.08,.5,.03));copper=mat('Copper routing under mask',(.025,.19,.075))
+mask=mat('Green soldermask',(.025,.22,.09));gold=mat('Exposed pads',(.85,.62,.18),.7);tin=mat('Tin clips',(.78,.82,.86),.8);ceramic=mat('Generic capacitors',(.62,.55,.35));black=mat('Generic bodies',(.16,.17,.19));tubeMat=mat('Recovered tube metal',(.68,.55,.25),.7);green=mat('Green LED',(.12,.8,.05));copper=mat('Copper routing under mask',(.06,.34,.12))
 def box(name,center,dims,material):
  bpy.ops.mesh.primitive_cube_add(size=1,location=center);o=bpy.context.object;o.name=name;o.dimensions=dims;bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);o.data.materials.append(material);return o
 board=next(r for r in rows if r['type']=='pcb_board');outline=board['outline'];n=len(outline);verts=[(p['x'],p['y'],z) for z in [-1.6,0] for p in outline];faces=[tuple(reversed(range(n))),tuple(range(n,2*n))]+[(i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n)]
@@ -45,8 +45,8 @@ for r in rows:
  if name=='D_LED':w,h,height=2,1.25,.8
  obj=box(name+' illustrative body',(x,y,height/2+.05),(w,h,height),green if name=='D_LED' else (ceramic if name.startswith('C') else black))
 bpy.ops.wm.stl_import(filepath=str(ROOT/'cad/models/tube.stl'));tube=bpy.context.object;tube.name='Recovered tube - nominal seating';tube.location.z=7.2;tube.data.materials.append(tubeMat)
-scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=32;scene.cycles.use_denoising=True;scene.world=bpy.data.worlds.new('World');scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.1,.12,.15,1)
-for loc,power,size in [((0,-60,110),220000,90),((-70,30,70),160000,80),((70,50,60),190000,60)]:
+scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=48;scene.cycles.use_denoising=True;scene.world=bpy.data.worlds.new('World');scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.32,.36,.42,1);scene.view_settings.look='AgX - Medium High Contrast'
+for loc,power,size in [((0,-60,110),320000,100),((-70,30,70),240000,90),((70,50,60),280000,80)]:
  bpy.ops.object.light_add(type='AREA',location=loc);l=bpy.context.object;l.data.energy=power;l.data.shape='DISK';l.data.size=size;l.rotation_euler=(-l.location).to_track_quat('-Z','Y').to_euler()
 bpy.ops.object.camera_add();camera=bpy.context.object;camera.data.type='ORTHO';camera.data.ortho_scale=137;scene.camera=camera
 scene.render.resolution_x=1600;scene.render.resolution_y=850;scene.render.resolution_percentage=100;scene.render.image_settings.file_format='PNG'

@@ -128,3 +128,22 @@ kicad-cli pcb render -o docs/renders/board/top.png \
 Before fabrication: integrate and lock the ATtiny schematic/layout, define the
 I²C register map, verify address links, reroute DRC errors, confirm HV creepage,
 and test the loaded tube assembly.
+
+## Optional Jev semantic review
+
+KiCad DRC, geometry checks, and clearance calculations remain deterministic.
+Jev is optional for higher-level review such as ranking decoupler placement,
+flagging a switcher near sensitive analog, or prioritizing silkscreen and
+assembly risks. It should receive structured board facts, never replace DRC,
+and never receive API keys or private files in the repository.
+
+To enable a local TypeSafe integration, install the TypeSafe SDK in your own
+environment and provide the key only through an environment variable:
+
+```sh
+export TYPESAFE_API_KEY='paste-a-new-key-here'
+```
+
+Do not commit the key, put it in this README, or paste it into issue reports.
+The repository currently documents the semantic-review approach but does not
+call Jev during the KiCad build.
