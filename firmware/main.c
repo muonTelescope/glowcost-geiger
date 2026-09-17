@@ -9,7 +9,6 @@
 
 static volatile uint32_t pulse_count;
 static volatile uint16_t pulse_window;
-static volatile uint8_t pulse_out_ticks;
 
 static void uart_init(void) {
     PORTB.DIRSET = UART_TX_bm;
@@ -56,8 +55,7 @@ static void timer_init(void) {
 }
 
 static void gpio_init(void) {
-    PORTA.DIRSET = PULSE_OUT_bm;
-    PORTA.OUTCLR = PULSE_OUT_bm;
+    PORTA.DIRCLR = PULSE_OUT_bm;
     PORTB.DIRSET = HV_ENABLE_bm;
     PORTB.OUTCLR = HV_ENABLE_bm;
     PORTB.DIRCLR = ADDR_A0_bm | ADDR_A1_bm;
@@ -78,8 +76,6 @@ ISR(PORTA_PORT_vect) {
     if (flags & PULSE_IN_bm) {
         pulse_count++;
         pulse_window++;
-        PORTA.OUTSET = PULSE_OUT_bm;
-        pulse_out_ticks = 5; /* nominal 50 us at the 100 us service tick */
     }
 }
 
@@ -87,12 +83,14 @@ int main(void) {
     wdt_enable(WDT_PERIOD_1S_gc);
     gpio_init(); uart_init(); adc_init(); timer_init(); sei();
     uart_puts("GLOWCOST ATtiny1616 bringup\r\n");
-    uart_puts("I2C address=0x3"); uart_putc('6' + address_bits()); uart_puts("\r\n");
+    uart_puts("I2C address=0x");
+    if (address_bits() == 0) uart_puts("2F");
+    else { uart_putc('3'); uart_putc('0' + address_bits() - 1); }
+    uart_puts("\r\n");
     uint16_t tick = 0;
     for (;;) {
         wdt_reset();
         _delay_us(100);
-        if (pulse_out_ticks && --pulse_out_ticks == 0) PORTA.OUTCLR = PULSE_OUT_bm;
         if (++tick >= 10000) {
             tick = 0;
             uart_puts("count="); uart_u32(pulse_count);

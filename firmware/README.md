@@ -32,7 +32,7 @@ The output is `build/glowcost-geiger.elf`, `.hex`, and `.lst`.
 | Signal | ATtiny1616 | PCB label | Purpose |
 |---|---|---|---|
 | `PULSE_IN` | PA2 | TP23 | Raw comparator pulse; timer/event counter input |
-| `PULSE_OUT` | PA3 | TP24 | Firmware-stretched TTL output |
+| `PULSE_OUT` | PA3 | TP24 | Reserved; Pi TTL remains raw hardware pulse |
 | `SDA` | PA4 | J4/J5 SDA | STEMMA QT/Qwiic I²C |
 | `SCL` | PA5 | J4/J5 SCL | STEMMA QT/Qwiic I²C |
 | `HV_SENSE` | PA6/ADC | TP25 | Protected HV divider |
@@ -69,5 +69,5 @@ address and pin mux are verified on hardware.
 - Watchdog resets the MCU if the main loop stops servicing it.
 - ADC values are telemetry only; they do not replace the resistor-chain and
   clamp protection.
-- Pulse output is disabled during startup and can be software-stretched after
-  a raw pulse is accepted.
+- The Pi-facing pulse remains a raw hardware comparator signal; the MCU does not
+  stretch it in firmware.

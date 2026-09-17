@@ -29,13 +29,16 @@ internal pull-up; bridged is logic-low:
 
 | A1 | A0 | Address |
 |---:|---:|---:|
-| open | open | `0x36` |
-| open | bridged | `0x37` |
-| bridged | open | `0x38` |
-| bridged | bridged | `0x39` |
+| open | open | `0x2F` |
+| open | bridged | `0x30` |
+| bridged | open | `0x31` |
+| bridged | bridged | `0x32` |
 
-The ATtiny1616 uses UPDI programming pads (VCC, DATA, GND), not legacy six-wire
-AVR ISP. All programming and address pads stay on the low-voltage side.
+The default `0x2F` is intentionally outside the common addresses called out by
+Adafruit; firmware may later store another address. The ATtiny1616 uses UPDI
+programming pads (VCC, DATA, GND), not legacy six-wire AVR ISP. UART is exposed
+as through-hole debug pads only. All programming and address pads stay on the
+low-voltage side.
 
 ## Mechanical design
 

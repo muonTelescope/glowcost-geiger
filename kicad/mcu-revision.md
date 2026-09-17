@@ -12,17 +12,20 @@ telemetry functions into the ATtiny1616.
 | J4, J5 | JST-SH-4 STEMMA QT/Qwiic | Parallel SDA/SCL/3V3/GND pass-through |
 | JP2, JP3 | A0/A1 solder bridges | Open = pull-up/high; bridged = low |
 | TP23, TP24, TP25 | UPDI VCC/DATA/GND | Pogo-pad programming footprint |
-| TP28, TP29 | UART TX/RX | 3.3 V diagnostic serial pads; 115200 8-N-1 |
+| TP28, TP29 | UART TX/RX | 3.3 V through-hole diagnostic pads only; 115200 8-N-1 |
 | R_I2C | 4.7 kΩ selectable pull-ups | Populate one bus segment only |
 | R_HV1/R_HV2, C_HVADC | Protected HV ADC divider/filter | HV-service clearance applies |
 | R_3V3, C_3V3 | 3.3 V monitor divider/filter | Optional if rail is already measured at U3 |
 
-Suggested address base is `0x36`; JP2/JP3 select `0x36`–`0x39`.
+The default address is `0x2F`. Adafruit's common-device list does not list a
+device at `0x2F`; the nearby `0x36`–`0x39` range is already used by the Adafruit
+STEMMA QT rotary encoder and other sensors. JP2/JP3 provide a startup address
+selection, while firmware may later write a new address to non-volatile storage.
 
 ## MCU assignments
 
 - `PA2`: raw comparator pulse input; timer/Event System count source.
-- `PA3`: firmware pulse output to Pi-facing TTL net.
+- `PA3`: reserved; the Pi-facing TTL net remains the raw hardware comparator output.
 - `PA4/PA5`: SDA/SCL.
 - `PA6`: HV ADC sense.
 - `PA7`: 3.3 V ADC sense.
@@ -35,7 +38,7 @@ pinout are locked in the schematic.
 
 ## Parts removed or made optional
 
-- Remove the Pi-output-only pulse-stretch RC if firmware generates `PULSE_OUT`.
+- Keep the raw comparator pulse path; remove only RC parts that served output-only stretching.
 - Keep comparator input filtering and any HV pulse/noise filtering in hardware.
 - Remove a separate digital counter or timer IC if added during the analog-only study.
 - Make I²C pull-ups selectable; do not populate duplicate pull-ups on every bus node.
@@ -43,7 +46,8 @@ pinout are locked in the schematic.
 
 ## Firmware behavior
 
-The MCU counts raw pulses in hardware, produces a configurable 5–500 µs output
-pulse, maintains one-second and sixty-second rates, stores total counts, reads
-HV/3V3 ADC channels, and disables HV on watchdog or out-of-range conditions.
+The MCU counts raw pulses in hardware, maintains one-second and sixty-second
+rates, stores total counts, reads HV/3V3 ADC channels, and disables HV on
+watchdog or out-of-range conditions. The raw comparator pulse remains available
+to the Pi; no firmware pulse stretching is required.
 The I²C register map and calibration constants must be frozen before production.
