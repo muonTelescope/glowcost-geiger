@@ -21,6 +21,6 @@ for i in range(count):
  fx,fy,fz=[sum(v[k] for v in (a,b,c))/3 for k in range(3)]
  if nx*(fx-cx)+ny*(fy-cy)+nz*(fz-cz)<0: idx.reverse()
  faces.append(idx)
-out=root/'kicad/models/tube.wrl'
+out=root/'pcb/models/tube.wrl'
 out.write_text('#VRML V2.0 utf8\n# Derived from recovered tube.stl; KiCad uses 2.54 mm per VRML unit.\nShape { appearance Appearance { material Material { diffuseColor 0.65 0.49 0.23 transparency 0.0 specularColor 0.7 0.7 0.7 shininess 0.65 } } geometry IndexedFaceSet { solid TRUE ccw TRUE coord Coordinate { point [\n'+',\n'.join(' '.join(map(str,v)) for v in verts)+'\n] } coordIndex [\n'+',\n'.join(' '.join(map(str,f))+ ' -1' for f in faces)+'\n] } }\n')
 print(count,'tube triangles exported')

@@ -1,18 +1,8 @@
 {
   "name": "gLowCost-geiger",
   "private": true,
-  "type": "module",
   "scripts": {
     "sim": "python3 scripts/simulate.py",
-    "sim:sync": "python3 scripts/sync_spice_model.py",
-    "check": "python3 scripts/check_schematic.py",
-    "sim:plots": "python3 scripts/analyze_tsci.py",
-    "render:schematic": "python3 scripts/render_schematic.py",
-    "analyze:performance": "python3 scripts/analyze_performance.py",
-    "bom:review": "bun scripts/export-review-bom.ts",
-    "build:kicad": "python3 scripts/build_kicad.py"
-  },
-  "dependencies": {
-    "format-si-unit": "0.0.14"
+    "sim:sync": "python3 scripts/sync_spice_model.py"
   }
 }
