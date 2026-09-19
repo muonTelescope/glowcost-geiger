@@ -71,14 +71,13 @@ Clip CAD (Littelfuse 102071 / LCSC C142864):
 - [`pcb/models/C142864.step`](pcb/models/C142864.step)
 - [`cad/models/C142864/`](cad/models/C142864/) (FreeCAD, STL, datasheet)
 
-Tube mesh used in KiCad 3D: [`cad/models/tube.blend`](cad/models/tube.blend),
-[`cad/models/tube.stl`](cad/models/tube.stl), [`pcb/models/tube.wrl`](pcb/models/tube.wrl).
+Tube body for KiCad 3D: [`pcb/models/tube.step`](pcb/models/tube.step)
+(~108 × 11 × 11 mm, from the project STL/Blend). Sources:
+[`cad/models/tube.blend`](cad/models/tube.blend), [`cad/models/tube.stl`](cad/models/tube.stl).
+Re-export: `/Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd scripts/export_tube_step.py`.
 
-A reference Autodesk Inventor part for a **different** tube (SBM-20) is at
-[`cad/models/SBM-20-reference.ipt`](cad/models/SBM-20-reference.ipt). Inventor can
-export IPT → STEP (`File → Export → CAD Format → STEP`). That part is not a
-CTC-5 / STS-5; for this board prefer STEP from the Blend/STL tube assets
-(Blender/FreeCAD export).
+A reference Inventor part [`cad/models/SBM-20-reference.ipt`](cad/models/SBM-20-reference.ipt)
+is kept for history; the board STEP above is what KiCad uses.
 
 ## Firmware
 

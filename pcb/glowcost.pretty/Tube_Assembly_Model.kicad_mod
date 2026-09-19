@@ -49,7 +49,7 @@
 	(attr board_only exclude_from_pos_files exclude_from_bom)
 	(duplicate_pad_numbers_are_jumpers no)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/models/tube.wrl"
+	(model "${KIPRJMOD}/models/tube.step"
 		(offset
 			(xyz 0 0 7.2)
 		)

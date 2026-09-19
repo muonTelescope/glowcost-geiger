@@ -9,5 +9,8 @@
     11.000021696090698
   ],
   "origin": "body bounding-box center; long axis X",
-  "installed_height": "not established; requires clip seating geometry"
+  "installed_height": "not established; requires clip seating geometry",
+  "step": "pcb/models/tube.step",
+  "step_export": "scripts/export_tube_step.py via FreeCADCmd",
+  "note": "Mesh originally recovered from SBM-20 Blender asset; used as GM-tube stand-in (~108mm)."
 }
