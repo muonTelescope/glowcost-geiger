@@ -17,9 +17,10 @@ The schematic and PCB are authoritative.
 | --- | --- |
 | [`pcb/`](pcb/) | KiCad project, symbols, footprints, 3D models |
 | [`firmware/`](firmware/) | ATtiny1616 bring-up (`main.c`, `pins.h`) |
-| [`cad/models/`](cad/models/) | Tube / clip mechanical sources (Blend, STL, STEP) |
-| [`sim/`](sim/) | SPICE decks for the HV chain |
-| [`manufacturing/`](manufacturing/) | Fab notes (Gerbers go in GitHub Releases) |
+| [`cad/models/`](cad/models/) | Tube / clip mechanical sources |
+| [`sim/hv/`](sim/hv/) | ngspice HV deck (`converter.cir`) |
+| [`docs/sim/`](docs/sim/) | Latest SPICE metrics and plots |
+| [`manufacturing/`](manufacturing/) | Fab notes (Gerbers → GitHub Releases) |
 | [`docs/images/`](docs/images/) | README figures |
 
 ## Board and schematic
@@ -33,7 +34,7 @@ The schematic and PCB are authoritative.
 ## Design summary
 
 - Hardware HV boost, Cockcroft–Walton multiplier, protection, and pulse path
-- ATtiny1616-MNR drives `HV_PWM`, counts pulses, serves I²C, reads A0/A1 straps
+- ATtiny1616-MNR drives `HV_PWM`, counts pulses, serves I2C, reads A0/A1 straps
 - Dual STEMMA QT (JST-SH): pin 1 GND, 2 3V3, 3 SDA, 4 SCL
 - Horizontal CTC-5 / STS-5 under two DNP Littelfuse C142864 clips
 - Target outline about 120 × 32 × 1.6 mm, two-layer, with HV isolation slots
@@ -46,9 +47,6 @@ The schematic and PCB are authoritative.
 | open | bridged | `0x30` |
 | bridged | open | `0x31` |
 | bridged | bridged | `0x32` |
-
-UPDI pads for programming; UART TX on PA1 for debug. Keep programming and
-address pads on the low-voltage side.
 
 ### MCU pin map
 
@@ -64,33 +62,84 @@ address pads on the low-voltage side.
 | UPDI | PA0 |
 | UART TX | PA1 |
 
+## Electrical review (2026-09-19)
+
+### Fixed on the schematic
+
+- **Tube anode** — `R20` pad 2 had been left floating after layout cleanup; reattached to `ANODE` (J2 clips).
+- **Tube cathode** — `R21` / `R22` were not on `CATHODE`; reattached so J3 → R21→GND and R22→BASE→Q1.
+
+### Still open / firmware-owned
+
+| Issue | Notes |
+| --- | --- |
+| `/OVP` orphan (TP20 only) | Hardware OVP comparator went away with MCP6562. Board regulation is `SENSE`→PA6; firmware must stop PWM on over-voltage. SPICE still models a behavioral OVP clamp. |
+| TTL blanking | PCB TTL is `COLLECTOR` through R24. SPICE blanking (EN / HV-in-range / OVP) is **not** on copper — host/firmware must gate counts. |
+| L1 DCR ~9.5 Ω | B82442T1105K050 — efficiency / heating risk at high duty. |
+| GM1 SparkGap | `on_board=no` annotation only; real tube is J2/J3. |
+
+See also [`docs/sim/NOTES.md`](docs/sim/NOTES.md).
+
+## HV simulation
+
+Exploratory ngspice model in [`sim/hv/converter.cir`](sim/hv/converter.cir)
+(ATtiny-PWM era behavioral gate: clock × soft-start × EN × OVP). Controller and
+gate-drive supply current are **not** included.
+
+```bash
+python3 scripts/simulate.py
+python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
+```
+
+### Nominal (3.3 V, +1 µA HV load)
+
+| Metric | Value |
+| --- | --- |
+| HV mean (150–190 ms) | 399.3 V |
+| HV range | 397–404 V |
+| Startup to ~396 V | 34 ms |
+| Peak switch node | 106 V |
+| Peak inductor | 59 mA |
+| Modeled input current | 2.51 mA |
+
+### Fault / corner checks (PASS)
+
+| Case | Peak HV | Note |
+| --- | --- | --- |
+| feedback_open | 413 V | Behavioral OVP holds &lt; 440 V |
+| ovp_tolerance | 425 V | Worst-direction divider corner |
+| disabled | 1.7 V | No HV when EN stuck low |
+| tube_short | current-limited | Front-end survives 1 kΩ anode–cathode |
+
+### Diagrams
+
+![Startup / residual HV](docs/images/sim-startup.png)
+
+![Load sweep](docs/images/sim-load-sweep.png)
+
+![Synthetic pulse → TTL](docs/images/sim-pulse.png)
+
+![Protection / fault overlay](docs/images/sim-protection.png)
+
+Full CSV/JSON: [`docs/sim/results.csv`](docs/sim/results.csv),
+[`docs/sim/results.json`](docs/sim/results.json).
+
 ## Mechanical
 
 Clip CAD (Littelfuse 102071 / LCSC C142864):
 
 - [`pcb/models/C142864.step`](pcb/models/C142864.step)
-- [`cad/models/C142864/`](cad/models/C142864/) (FreeCAD, STL, datasheet)
+- [`cad/models/C142864/`](cad/models/C142864/)
 
 Tube body for KiCad 3D: [`pcb/models/tube.step`](pcb/models/tube.step)
-(~108 × 11 × 11 mm, from the project STL/Blend). Sources:
-[`cad/models/tube.blend`](cad/models/tube.blend), [`cad/models/tube.stl`](cad/models/tube.stl).
-Re-export: `/Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd scripts/export_tube_step.py`.
-
-A reference Inventor part [`cad/models/SBM-20-reference.ipt`](cad/models/SBM-20-reference.ipt)
-is kept for history; the board STEP above is what KiCad uses.
+(~108 × 11 × 11 mm). Sources: [`cad/models/tube.blend`](cad/models/tube.blend),
+[`cad/models/tube.stl`](cad/models/tube.stl). Re-export with FreeCADCmd +
+`scripts/export_tube_step.py`.
 
 ## Firmware
 
 Build with the Makefile in [`firmware/`](firmware/). Pins are in
-`firmware/pins.h` and match the table above.
-
-## Simulation
-
-```bash
-python3 scripts/simulate.py
-```
-
-Optional: `python3 scripts/sync_spice_model.py` then re-run.
+`firmware/pins.h`.
 
 ## Fabrication
 

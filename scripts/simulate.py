@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""Run ngspice HV transients for the ATtiny-PWM boost + CW ladder model.
+
+Decks live in sim/hv/converter.cir. Plots and metrics land in docs/sim/.
+"""
 """Run real ngspice transients; preserve decks, logs, sampled data and metrics."""
 from pathlib import Path
 import argparse, csv, hashlib, json, os, re, subprocess
@@ -8,7 +12,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'docs/hv'; BUILD=ROOT/'build/hv'; OUT.mkdir(parents=True,exist_ok=True); BUILD.mkdir(parents=True,exist_ok=True)
+OUT=ROOT/'docs/sim'; BUILD=ROOT/'build/hv'; OUT.mkdir(parents=True,exist_ok=True); BUILD.mkdir(parents=True,exist_ok=True)
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11,'axes.spines.top':False,'axes.spines.right':False,'axes.grid':True,'grid.alpha':.18,'figure.facecolor':'#f8fafc','axes.facecolor':'#f8fafc','savefig.facecolor':'#f8fafc'})
 parser=argparse.ArgumentParser(); parser.add_argument('--reuse',action='store_true'); args=parser.parse_args()
 base=(ROOT/'sim/hv/converter.cir').read_text()
