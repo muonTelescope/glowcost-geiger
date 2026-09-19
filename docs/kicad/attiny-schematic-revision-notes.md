@@ -54,3 +54,8 @@ Date: 2026-09-18 (ET)
 - Off-grid placement warnings on Conn/jumper pins — tidy in Eeschema.
 - PCB: place new footprints, clear ~79 DRC clearances — out of schematic-first scope.
 - Docs to sync: `kicad/mcu-revision.md`, `kicad/parts-selection.md`, `docs/GROKBOT_HANDOFF.md`, `firmware/pins.h`.
+
+## ERC cleanup (2026-09-18 evening)
+- Wired dangling probe TP labels to pins; connected TP1/#PWR22 (V3V3), TP2/#PWR23, TP9/#PWR24, TP22/#PWR25 (GND).
+- Re-anchored C11 V3V3/GND and Q3 SW/GND labels onto pins.
+- Result: **0 ERC errors**; remaining warnings are mostly `endpoint_off_grid` on legacy geometry, a few unconnected wire stubs, and missing global FP lib names (`Package_DFN_QFN`, `Inductor_SMD`, `Package_TO_SOT_SMD`) in this project table — footprints still assigned on symbols.
