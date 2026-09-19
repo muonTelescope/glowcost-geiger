@@ -209,8 +209,12 @@
     }
   },
   "jev": {
-    "available": false,
-    "reason": "TYPESAFE_API_KEY is not set; deterministic gate retained"
+    "available": true,
+    "answers": {
+      "trace_choice": "type='choice' choice='robust' confidence=0.76 probabilities={'robust': 0.83, 'minimum': 0.02, 'review': 0.15}",
+      "layout_risk": "type='score' score=1.7 confidence=0.52 legend={0: 'poor', 1: 'marginal', 2: 'good', 3: 'excellent'} probabilities={0: 0.04, 1: 0.32, 2: 0.55, 3: 0.09}",
+      "needs_review": "type='noul' noul=0.91"
+    }
   },
   "policy": "Jev ranks legal candidates only; it never edits the PCB"
 }

@@ -59,3 +59,12 @@ Date: 2026-09-18 (ET)
 - Wired dangling probe TP labels to pins; connected TP1/#PWR22 (V3V3), TP2/#PWR23, TP9/#PWR24, TP22/#PWR25 (GND).
 - Re-anchored C11 V3V3/GND and Q3 SW/GND labels onto pins.
 - Result: **0 ERC errors**; remaining warnings are mostly `endpoint_off_grid` on legacy geometry, a few unconnected wire stubs, and missing global FP lib names (`Package_DFN_QFN`, `Inductor_SMD`, `Package_TO_SOT_SMD`) in this project table — footprints still assigned on symbols.
+
+## Jev schematic tidy (2026-09-18 night)
+Applied ranked policies from `docs/kicad/jev-schematic-review.json`:
+- **block_layout:** left_to_right — annotated frames: STEMMA/I2C, MCU+BOOST, HV/TUBE/PULSE, PI HEADER, PROBE STRIP
+- **wiring_style:** labels_for_long_nets — pullups/straps use short wire stubs + labels
+- **probe_policy:** cluster_edge — TP1–TP29 relocated to bottom probe strip (~y=275)
+
+Core nets unchanged (HV_PWM, GATE, SW, SDA/SCL, COLLECTOR, SENSE, EN, UPDI, UART_TX, A0/A1).
+ERC errors targeted to 0 after tidy; warnings may remain (off-grid, FP lib paths).
