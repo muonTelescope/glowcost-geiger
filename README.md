@@ -1,10 +1,9 @@
-# Glowcost Geiger
+# gLowCost-geiger
 
 **Simple description:** this is a compact four-wire Geiger module for a Raspberry
 Pi. It powers a CTC-5 / STS-5 tube from 3.3 V, generates the tube's high voltage,
 and exposes raw TTL pulses plus a future STEMMA QT I²C telemetry interface.
-The ATtiny1616 is intended to count pulses and report diagnostics without
-changing the hardware pulse path.
+The ATtiny1616 is the production logic device: it counts pulses, serves I2C diagnostics, reads address straps, and reports HV/3V3 telemetry without changing the raw hardware pulse path.
 
 > **Prototype:** the KiCad routing has known DRC clearance errors. The HV design
 > is not bench-qualified or approved for fabrication. Use suitable HV procedures.
@@ -140,7 +139,7 @@ the dose estimate is approximate.
 
 ## Findings to resolve before fabrication
 
-- The KiCad prototype still has known DRC clearance violations.
+- The KiCad prototype still has known DRC clearance violations; resolve these before fabrication.
 - The ATtiny1616, two STEMMA QT connectors, address bridges, and UART/UPDI pads
   are specified but not yet integrated into the native schematic/PCB release.
 - The 1 mm HV slots are present as Edge.Cuts and must be checked against JLC's

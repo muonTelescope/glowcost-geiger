@@ -2,7 +2,7 @@ MCU=attiny1616
 CC=avr-gcc
 OBJCOPY=avr-objcopy
 CFLAGS=-std=c11 -Os -Wall -Wextra -mmcu=$(MCU) -DF_CPU=20000000UL
-TARGET=build/glowcost-geiger
+TARGET=build/gLowCost-geiger
 
 all: $(TARGET).hex $(TARGET).lst
 

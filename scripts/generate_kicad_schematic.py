@@ -54,11 +54,11 @@ def load(kind):
    n=child(p,'number');n[1]='2' if n[1]=='1' else '1'
   for p in children(s,'property'):
    if p[1]=='Sim.Pins':p[2]='1=A 2=K'
- s[1]='Glowcost:'+name
+ s[1]='gLowCost:'+name
  libsyms[kind]=s
  return s
 def custom(name,definitions,width=10.16):
- s=['symbol','Glowcost:'+name,['pin_names',['offset',1.016]],['in_bom','yes'],['on_board','yes'],['property','Reference','U',['at',0,10.16,0],E()],['property','Value',name,['at',0,-10.16,0],E()]]
+ s=['symbol','gLowCost:'+name,['pin_names',['offset',1.016]],['in_bom','yes'],['on_board','yes'],['property','Reference','U',['at',0,10.16,0],E()],['property','Value',name,['at',0,-10.16,0],E()]]
  body=['symbol',name+'_0_1',['rectangle',['start',-width,10.16],['end',width,-10.16],['stroke',['width',0],['type','default']],['fill',['type','background']]]]
  part=['symbol',name+'_1_1']
  for n,label,x,y,angle in definitions:
@@ -72,7 +72,7 @@ def val(ref):
   v=c['resistance'];return f'{v/1e6:g} MR' if v>=1e6 else f'{v/1e3:g} kR' if v>=1000 else f'{v:g} R'
  if 'capacitance' in c:
   v=c['capacitance'];return f'{v*1e12:g} pF' if v<1e-9 else f'{v*1e9:g} nF'
- return {'U1':'UNIMPLEMENTED HV','U2':'UNIMPLEMENTED LOGIC','GM1':'CTC-5 / STS-5','J1':'JST GH 4-pin','J2':'C142864 DNP','J3':'C142864 DNP','SJ_LED':'CUT = LED OFF','D_LED':'KT-0805YG'}.get(ref,c.get('manufacturer_part_number',ref))
+ return {'U1':'UNIMPLEMENTED HV','U2':'UNIMPLEMENTED LOGIC','GM1':'CTC-5 / STS-5','J1':'JST SH 4-pin (STEMMA QT / Qwiic)','J2':'C142864 DNP','J3':'C142864 DNP','SJ_LED':'CUT = LED OFF','D_LED':'KT-0805YG'}.get(ref,c.get('manufacturer_part_number',ref))
 def kindof(ref):
  if ref.startswith('TP'):return 'Connector:TestPoint'
  if ref.startswith('R'):return 'Device:R_Small_US'
@@ -107,7 +107,7 @@ def put(ref,x,y,angle=0,value=None):
  for p in walk(s,'pin'):
   n=child(p,'number')[1];at=child(p,'at');a=math.radians(angle);px=float(at[1]);py=float(at[2]);xx=x+px*math.cos(a)-py*math.sin(a);yy=y-(px*math.sin(a)+py*math.cos(a));coords[n]=(round(xx,6),round(yy,6),(float(at[3])+angle)%360)
   obj.append(['pin',n,['uuid',uid(ref+'/pin/'+n)]])
- obj.append(['instances',['project','glowcost-geiger',['path','/'+rootid,['reference',displayref],['unit',1]]]])
+ obj.append(['instances',['project','gLowCost-geiger',['path','/'+rootid,['reference',displayref],['unit',1]]]])
  items.append(obj);placed[ref]=(x,y);pins[ref]=coords
  return coords
 def wire(a,b):
@@ -192,7 +192,7 @@ items.append(['junction',['at',114.3,200.66],['diameter',0],['color',0,0,0,0],['
 wire(pins['R_PROTECT']['2'],(147.32,200.66));wire((147.32,200.66),(147.32,210.82));wire((147.32,210.82),pins['Q1']['1'])
 label('BASE',(147.32,210.82));used.update([('R_PROTECT','2'),('Q1','1')])
 put('J2',30.48,231.14);put('J3',68.58,231.14)
-note('R_A1/R_A2: 2.49 MR EACH, >=500 V working rating; ~88.4 uA maximum at 440 V.\nJ2/J3: C142864 DNP for JLC, hand-fit clips. Tube supplied by user.\nU2 inverts Q1 and blanks on EN / HV-ready / OVP. No MCU. Physical logic remains unfinished.\nPlan 250 us tube dead time (reference ~190 us); dose conversion is approximate.',12,251,1.25)
+note('R_A1/R_A2: 2.49 MR EACH, >=500 V working rating; ~88.4 uA maximum at 440 V.\nJ2/J3: C142864 DNP for JLC, hand-fit clips. Tube supplied by user.\nATtiny1616 is the production pulse counter, I2C slave, address strap reader, and diagnostic interface. Raw TTL remains available.\nPlan 250 us tube dead time (reference ~190 us); dose conversion is approximate.',12,251,1.25)
 # LED default bridge, resistor, LED and buffered sink.
 put('SJ_LED',320.04,45.72,0);put('R_LED',345.44,45.72,90);put('D_LED',375.92,45.72,180)
 join('SJ_LED',2,'R_LED',1);join('R_LED',2,'D_LED',1)
@@ -201,7 +201,7 @@ join('R_LB',2,'Q_LED',1)
 wire((365.76,68.58),pins['R_LPD']['1']);used.add(('R_LPD','1'))
 items.append(['junction',['at',365.76,68.58],['diameter',0],['color',0,0,0,0],['uuid',uid('LED-base-junction')]])
 note('Factory copper bridge: cut to disable; solder to restore.\n~1.28 mA LED during pulse. Q_LED buffers DRIVE.\nNo pulse stretching; flashes may be hard to see.',307,94,1.15)
-note('400 V present on exposed pads / tube clips.\nDischarge and verify before handling.\nDo not connect ordinary Pi / scope probes to HV.\n\nPreserved routing has unresolved clearances.\nU1/U2 have no physical implementation.\nThis is NOT a fabrication release.\n\n22 plated probe holes; 1 mm drill / 2 mm pads.\nSee README for model limits and DRC report.',307,191,1.3)
+note('400 V present on exposed pads / tube clips.\nDischarge and verify before handling.\nDo not connect ordinary Pi / scope probes to HV.\n\nPreserved routing has unresolved clearances.\nATtiny1616 production revision requires final pin and footprint review before fabrication.\nThis is NOT a fabrication release.\n\n22 plated probe holes; 1 mm drill / 2 mm pads.\nSee README for model limits and DRC report.',307,191,1.3)
 # Test points stay with their associated section; spread rows below circuit blocks.
 tppos=[(20.32,78.74),(43.18,78.74),(63.5,78.74),(281.94,238.76),(254,238.76),(154.94,243.84),(185.42,243.84),(109.22,243.84),(83.82,243.84),(104.14,78.74),(149.86,86.36),(170.18,86.36),(190.5,86.36),(210.82,86.36),(231.14,86.36),(251.46,86.36),(271.78,86.36),(287.02,86.36),(83.82,157.48),(218.44,157.48),(50.8,243.84),(391.16,157.48)]
 for i,(x,y) in enumerate(tppos,1):put('TP'+str(i),x,y,value=pinnets['TP'+str(i),'1'])
@@ -223,13 +223,13 @@ def normalize(x):
   else:out.append(v)
  return out
 symbols=[normalize(v) for v in libsyms.values()]
-sch=normalize(['kicad_sch',['version',20250114],['generator','eeschema'],['uuid',rootid],['paper','User',430,297],['title_block',['title','Glowcost Geiger - prototype conversion'],['rev','KiCad review 1'],['company','muonTelescope'],['comment',1,'U1/U2 unfinished; preserved PCB requires clearance review']],['lib_symbols',*symbols],*items,['embedded_fonts','no']])
+sch=normalize(['kicad_sch',['version',20250114],['generator','eeschema'],['uuid',rootid],['paper','User',430,297],['title_block',['title','gLowCost-geiger - prototype conversion'],['rev','KiCad review 1'],['company','muonTelescope'],['comment',1,'ATtiny1616 production logic; preserved PCB requires clearance review']],['lib_symbols',*symbols],*items,['embedded_fonts','no']])
 (OUT/'glowcost-geiger.kicad_sch').write_text(dump(sch)+'\n')
 # Local library avoids missing generated-symbol dependencies on other machines.
 local=copy.deepcopy(symbols)
 for s in local:s[1]=s[1].split(':')[-1]
-(OUT/'Glowcost.kicad_sym').write_text(dump(normalize(['kicad_symbol_lib',['version',20250114],['generator','kicad_symbol_editor'],*local]))+'\n')
-(OUT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "Glowcost") (type "KiCad") (uri "${KIPRJMOD}/Glowcost.kicad_sym") (options "") (descr "Stock symbols with explicit source pin numbering; prototype boundaries")))\n')
+(OUT/'gLowCost.kicad_sym').write_text(dump(normalize(['kicad_symbol_lib',['version',20250114],['generator','kicad_symbol_editor'],*local]))+'\n')
+(OUT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "gLowCost") (type "KiCad") (uri "${KIPRJMOD}/gLowCost.kicad_sym") (options "") (descr "Stock symbols with explicit source pin numbering; prototype boundaries")))\n')
 (OUT/'schematic-map.json').write_text(json.dumps({'root_uuid':rootid,'references':refmap,'symbols':{r:uid(r) for r in byref},'nets':{r:{n:net for (rr,n),net in pinnets.items() if rr==r} for r in byref}},indent=2)+'\n')
 print('Generated',len(byref),'components /',len(explicit),'nets')
 

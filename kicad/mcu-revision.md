@@ -1,53 +1,50 @@
-# ATtiny1616 / STEMMA QT revision
+# ATtiny1616 / STEMMA QT revision (ATtiny-only)
 
-This is the implementation specification for the next KiCad revision. It keeps
-the existing HV analog front end and moves only the Pi-facing timing and
-telemetry functions into the ATtiny1616.
+Schematic rewrite in progress on `kicad/glowcost-geiger.kicad_sch`.
+Snapshot before edit: `kicad/.history/glowcost-geiger.kicad_sch.before-attiny-20260918-225646`.
+Detail notes: `docs/kicad/attiny-schematic-revision-notes.md`.
 
-## New low-voltage block
+## Architecture
+
+- **ATtiny-only:** MCU PWM-drives the HV boost FET and handles pulse count / I2C / ADC.
+- **Removed:** TLC555, MCP6562, and behavioral U1/U2 boundary symbols.
+- **Kept:** CW multiplier, protection discretes, tube clips, Q1 pulse amp, LED, J1 Pi header.
+
+## Low-voltage / boost block
 
 | Ref | Function | Notes |
 |---|---|---|
-| U3 | ATtiny1616-MNR, LCSC C507118 | 3 x 3 mm QFN-20; 3.3 V; UPDI |
-| J4, J5 | JST-SH-4 STEMMA QT/Qwiic | Parallel SDA/SCL/3V3/GND pass-through |
-| JP2, JP3 | A0/A1 solder bridges | Open = pull-up/high; bridged = low |
-| TP23, TP24, TP25 | UPDI VCC/DATA/GND | Pogo-pad programming footprint |
-| TP28, TP29 | UART TX/RX | 3.3 V through-hole diagnostic pads only; 115200 8-N-1 |
-| R_I2C | 4.7 kΩ selectable pull-ups | Populate one bus segment only |
-| R_HV1/R_HV2, C_HVADC | Protected HV ADC divider/filter | HV-service clearance applies |
-| R_3V3, C_3V3 | 3.3 V monitor divider/filter | Optional if rail is already measured at U3 |
+| U1 | ATtiny1616-MNR, LCSC C507118 | Stock KiCad `ATtiny1616-M` VQFN-20; 3.3 V; UPDI |
+| L1 | 1 mH boost inductor | B82442T1105K050, LCSC C2041861 (DCR 9.5 Ω — efficiency risk) |
+| Q3 | HL2310A boost FET | LCSC C7420347; SOT-23 1=G 2=S 3=D |
+| R25 | Gate series | `HV_PWM` (U1.PB2) → `GATE` → Q3.G |
+| J4, J5 | STEMMA QT SM04B-SRSS-TB | LCSC C160404; 1=GND 2=V+ 3=SDA 4=SCL |
+| JP2, JP3 | A0/A1 solder bridges | to GND |
+| R26, R27 | I2C pull-ups | SDA/SCL to V3V3 |
+| R28, R29 | 3V3 sense divider | to PA7 |
+| C11 | V3V3 local decap | |
+| TP23–25 | V3V3 / UPDI / GND | programming |
+| TP28–29 | UART TX / GND | PA1 alternate TX |
 
-The default address is `0x2F`. Adafruit's common-device list does not list a
-device at `0x2F`; the nearby `0x36`–`0x39` range is already used by the Adafruit
-STEMMA QT rotary encoder and other sensors. JP2/JP3 provide a startup address
-selection, while firmware may later write a new address to non-volatile storage.
+Default I2C address `0x2F` (JP2/JP3 select).
 
 ## MCU assignments
 
-- `PA2`: raw comparator pulse input; timer/Event System count source.
-- `PA3`: reserved; the Pi-facing TTL net remains the raw hardware comparator output.
-- `PA4/PA5`: SDA/SCL.
-- `PA6`: HV ADC sense.
-- `PA7`: 3.3 V ADC sense.
-- `PB0/PB1`: A0/A1 solder links.
-- `PB2`: HV enable watchdog gate.
-- `UPDI`: dedicated programming pad.
-
-Pin assignments are provisional until the ATtiny symbol and final package
-pinout are locked in the schematic.
-
-## Parts removed or made optional
-
-- Keep the raw comparator pulse path; remove only RC parts that served output-only stretching.
-- Keep comparator input filtering and any HV pulse/noise filtering in hardware.
-- Remove a separate digital counter or timer IC if added during the analog-only study.
-- Make I²C pull-ups selectable; do not populate duplicate pull-ups on every bus node.
-- Keep the hardware HV disable path and protection clamps independent of firmware.
+| Pad | Pin | Net |
+|-----|-----|-----|
+| 1 | PA2 | COLLECTOR (pulse in) |
+| 4 | VCC | V3V3 |
+| 5–6 | PA4/PA5 | SDA/SCL |
+| 7 | PA6 | SENSE (HV ADC) |
+| 8 | PA7 | V3V3_SENSE |
+| 11 | PB3 | EN |
+| 12 | PB2 | HV_PWM |
+| 13–14 | PB1/PB0 | A1/A0 |
+| 19 | PA0 | UPDI |
+| 20 | PA1 | UART_TX (USART0 alternate) |
+| 3/21 | GND/EP | GND |
 
 ## Firmware behavior
 
-The MCU counts raw pulses in hardware, maintains one-second and sixty-second
-rates, stores total counts, reads HV/3V3 ADC channels, and disables HV on
-watchdog or out-of-range conditions. The raw comparator pulse remains available
-to the Pi; no firmware pulse stretching is required.
-The I²C register map and calibration constants must be frozen before production.
+MCU generates boost PWM, counts pulses, maintains rates/totals, reads HV/3V3 ADC,
+exposes I2C at 0x2F, and gates EN. Raw pulse still available on J1 TTL via Q1 path.

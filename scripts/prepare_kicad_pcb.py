@@ -25,7 +25,7 @@ for typ,source in {
  'SOD':'Diode_SMD.3dshapes/D_SOD-123.step',
  'SOT':'Package_TO_SOT_SMD.3dshapes/SOT-23.step',
  'LED':'LED_SMD.3dshapes/LED_0805_2012Metric.step',
- 'JST':'Connector_JST.3dshapes/JST_GH_BM04B-GHS-TBT_1x04-1MP_P1.25mm_Vertical.step',
+ 'JST':'Connector_JST.3dshapes/JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal.step',
 }.items():modelmap[typ]=model(source)
 shutil.copy2(ROOT/'cad/models/C142864/C142864.step',OUT/'models/C142864.step')
 def atomtree(x):

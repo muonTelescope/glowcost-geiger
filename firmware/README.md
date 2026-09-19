@@ -1,4 +1,4 @@
-# Glowcost Geiger firmware
+# gLowCost-geiger firmware
 
 Open-source ATtiny1616 bring-up firmware for the low-voltage revision. The
 firmware is intentionally conservative: HV is disabled until the watchdog and
@@ -25,7 +25,7 @@ Build:
 make
 ```
 
-The output is `build/glowcost-geiger.elf`, `.hex`, and `.lst`.
+The output is `build/gLowCost-geiger.elf`, `.hex`, and `.lst`.
 
 ## Bring-up pads and provisional pin map
 

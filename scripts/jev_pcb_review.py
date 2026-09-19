@@ -9,6 +9,18 @@ from __future__ import annotations
 import json, os, re, sys
 from pathlib import Path
 
+# Some macOS shells are configured with an ASCII locale.  The TypeSafe SDK
+# serializes structured text and can fail before the HTTP request is made in
+# that environment.  Prefer UTF-8 without changing the user's global shell.
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("LANG", "C.UTF-8")
+os.environ.setdefault("LC_ALL", "C.UTF-8")
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
+
 ROOT = Path(__file__).resolve().parents[1]
 BOARD = ROOT / "kicad/glowcost-geiger.kicad_pcb"
 OUT = ROOT / "docs/kicad/jev-review.json"
@@ -20,7 +32,7 @@ def facts():
     vias = len(re.findall(r'^\s*\(via\s*$', text, re.M))
     footprints = len(re.findall(r'^\s*\(footprint\s', text, re.M))
     slots = sum(text.count(u) for u in ("e6d4d7a9-4f35-4a6c-9d81-1a1f76a3a001", "e6d4d7a9-4f35-4a6c-9d81-1a1f76a3a002"))
-    return {"board":"glowcost-geiger","outline_mm":[120,32],"stackup_mm":1.6,
+    return {"board":"gLowCost-geiger","outline_mm":[120,32],"stackup_mm":1.6,
             "footprints":footprints,"segments":segments,"vias":vias,"hv_slots_1mm":slots,
             "net_classes":{"PI_SIGNAL":{"clearance_mm":0.2,"width_mm":0.2},
                             "LV_POWER":{"clearance_mm":0.25,"width_mm":0.3},
@@ -55,8 +67,15 @@ def jev_rank(state):
         return {"available":False,"reason":"TYPESAFE_API_KEY is not set; deterministic gate retained"}
     try:
         from typesafe_sdk import Choice, Noul, Score, TypeSafeClient
+        # The 0.6.x SDK expects Choice criteria as a mapping of stable keys to
+        # descriptions.  Keep the semantic question policy-level: the
+        # deterministic gate below still selects the actual legal dimensions.
         questions = {
-          "trace_choice": Choice(instructions="Choose the best legal trace option per class for a compact Geiger PCB; preserve HV margin and serviceability.", criteria=["minimum legal option","higher robustness option","review"]),
+          "trace_choice": Choice(instructions="Choose the preferred policy for legal trace candidates on a compact Geiger PCB; preserve HV margin and serviceability.", criteria={
+              "minimum": "Prefer the smallest candidate that satisfies the deterministic minimum.",
+              "robust": "Prefer the wider candidate when it materially improves wiring robustness.",
+              "review": "Request an engineer review when the trade-off is ambiguous."
+          }),
           "layout_risk": Score(instructions="Rate semantic layout risk using the supplied structured board facts; exact geometry remains outside your authority.", criteria=["poor","marginal","good","excellent"]),
           "needs_review": Noul(instructions="Should an engineer review the proposed routing choices despite passing deterministic rules?")
         }
@@ -64,7 +83,16 @@ def jev_rank(state):
             result = client.system_one(state=state, questions=questions)
         return {"available":True,"answers":result.answers}
     except Exception as exc:
-        return {"available":False,"error":type(exc).__name__,"reason":"Jev call failed; deterministic gate retained"}
+        detail = str(exc)
+        response = getattr(exc, "response", None)
+        if response is not None:
+            try:
+                detail = response.text or detail
+            except Exception:
+                pass
+        return {"available":False,"error":type(exc).__name__,
+                "reason":"Jev call failed; deterministic gate retained",
+                "detail":detail[:1000]}
 
 def main():
     state={"facts":facts(),"candidates":candidates(),"requirements":["KiCad DRC is authoritative","HV creepage is human-reviewed","do not route through slots"]}
