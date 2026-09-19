@@ -19,3 +19,7 @@ MCU `HV_PWM` → R25 → Q3. Re-run: `python3 scripts/simulate.py`.
 
 ### Expected probe-only nets
 - `UART_TX`, `UPDI` — MCU pin + TP only.
+
+## L1 (2026-09-19)
+
+Replaced B82442T1105K050 (DCR 9.5 Ω, 5.6×5 mm on a 1210 footprint) with **YNR6045-102M** / LCSC C497845 (1 mH, DCR 4.5 Ω, Isat 300 mA, 6×6 mm shielded). SPICE `DCR=4.5`.

@@ -27,6 +27,11 @@ for name,params in cases:
         deck=deck.replace('Rtop1 hv div1 33Meg','Rtop1 hv div1 1e15')
         for n in range(1,5): deck=deck.replace(f'Rovp{n} '+['hv ov1','ov1 ov2','ov2 ov3','ov3 ovp'][n-1]+' 33Meg',f'Rovp{n} '+['hv ov1','ov1 ov2','ov2 ov3','ov3 ovp'][n-1]+' 33.33Meg')
         deck=deck.replace('Rovpbot ovp 0 402k','Rovpbot ovp 0 397.98k').replace('v(ovp)<1.242','v(ovp)<1.25442')
+        # Lower DCR stiffens the boost; soften numerical options for this corner.
+        deck=deck.replace('.options method=gear reltol=0.001 abstol=1p vntol=1u',
+                          '.options method=gear reltol=0.003 abstol=10p vntol=10u chgtol=1e-14')
+        if 'Rgate_ser' not in deck:
+            deck=deck.replace('Bgate gate 0 V=', 'Rgate_ser gate gatesrc 22\nBgate gatesrc 0 V=')
     if name=='tube_short': deck=deck.replace('Ctube anode cathode 5p','Ctube anode cathode 5p\nRfault anode cathode 1k')
     if name=='disabled': deck=deck.replace('PULSE(0 3.3 5m 1u 1u 195m 500m)', '0')
     work=BUILD/name; work.mkdir(exist_ok=True)

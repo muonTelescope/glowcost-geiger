@@ -22,7 +22,6 @@ The schematic and PCB are authoritative.
 | [`docs/sim/`](docs/sim/) | Latest SPICE metrics and plots |
 | [`manufacturing/`](manufacturing/) | Fab notes (Gerbers → GitHub Releases) |
 | [`docs/images/`](docs/images/) | README figures |
-
 ## Board and schematic
 
 ![Board top](docs/images/board-top.png)
@@ -47,7 +46,6 @@ The schematic and PCB are authoritative.
 | open | bridged | `0x30` |
 | bridged | open | `0x31` |
 | bridged | bridged | `0x32` |
-
 ### MCU pin map
 
 | Net | Pin |
@@ -61,7 +59,6 @@ The schematic and PCB are authoritative.
 | Enable | PB3 |
 | UPDI | PA0 |
 | UART TX | PA1 |
-
 ## Electrical review (2026-09-19)
 
 ### Fixed on the schematic
@@ -75,9 +72,8 @@ The schematic and PCB are authoritative.
 | --- | --- |
 | `/OVP` orphan (TP20 only) | Hardware OVP comparator went away with MCP6562. Board regulation is `SENSE`→PA6; firmware must stop PWM on over-voltage. SPICE still models a behavioral OVP clamp. |
 | TTL blanking | PCB TTL is `COLLECTOR` through R24. SPICE blanking (EN / HV-in-range / OVP) is **not** on copper — host/firmware must gate counts. |
-| L1 DCR ~9.5 Ω | B82442T1105K050 — efficiency / heating risk at high duty. |
+| L1 DCR ~4.5 Ω | **YNR6045-102M** (LCSC C497845), 6×6 mm shielded, Isat 300 mA — replaced B82442T1105K050 (9.5 Ω DCR on a mismatched 1210 footprint). |
 | GM1 SparkGap | `on_board=no` annotation only; real tube is J2/J3. |
-
 See also [`docs/sim/NOTES.md`](docs/sim/NOTES.md).
 
 ## HV simulation
@@ -95,22 +91,20 @@ python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
 
 | Metric | Value |
 | --- | --- |
-| HV mean (150–190 ms) | 399.3 V |
-| HV range | 397–404 V |
-| Startup to ~396 V | 34 ms |
+| HV mean (150–190 ms) | 399.2 V |
+| HV range | 396–404 V |
+| Startup to ~396 V | 30 ms |
 | Peak switch node | 106 V |
-| Peak inductor | 59 mA |
-| Modeled input current | 2.51 mA |
-
+| Peak inductor | 62 mA |
+| Modeled input current | 2.35 mA |
 ### Fault / corner checks (PASS)
 
 | Case | Peak HV | Note |
 | --- | --- | --- |
 | feedback_open | 413 V | Behavioral OVP holds &lt; 440 V |
-| ovp_tolerance | 425 V | Worst-direction divider corner |
+| ovp_tolerance | 426 V | Worst-direction divider corner |
 | disabled | 1.7 V | No HV when EN stuck low |
 | tube_short | current-limited | Front-end survives 1 kΩ anode–cathode |
-
 ### Diagrams
 
 ![Startup / residual HV](docs/images/sim-startup.png)
@@ -137,6 +131,9 @@ Tube body for KiCad 3D: [`pcb/models/tube.step`](pcb/models/tube.step)
 `scripts/export_tube_step.py`.
 
 ## Firmware
+
+See [`firmware/`](firmware/). ATtiny1616 drives `HV_PWM`, soft-starts the boost, and enforces **software OVP** from `SENSE` (PA6) — trip ~420 V, recover ~390 V. There is no hardware OVP comparator on this revision.
+
 
 Build with the Makefile in [`firmware/`](firmware/). Pins are in
 `firmware/pins.h`.

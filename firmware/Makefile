@@ -1,8 +1,11 @@
 MCU=attiny1616
 CC=avr-gcc
 OBJCOPY=avr-objcopy
+OBJDUMP=avr-objdump
 CFLAGS=-std=c11 -Os -Wall -Wextra -mmcu=$(MCU) -DF_CPU=20000000UL
 TARGET=build/gLowCost-geiger
+
+.PHONY: all flash clean
 
 all: $(TARGET).hex $(TARGET).lst
 
@@ -16,12 +19,10 @@ $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
 $(TARGET).lst: $(TARGET).elf
-	$(CC) $(CFLAGS) -mmcu=$(MCU) -Wl,-Map=$(TARGET).map -o /tmp/glowcost-size.elf main.c
-	avr-objdump -S $< > $@
+	$(OBJDUMP) -S $< > $@
 
 flash: $(TARGET).hex
 	pymcuprog write -d $(MCU) -t uart -u /dev/cu.usbserial-* -f $<
 
 clean:
 	rm -rf build
-.PHONY: all flash clean
