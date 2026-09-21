@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "sim": "python3 scripts/simulate.py",
+    "sim:duty": "python3 scripts/duty_sweep.py",
     "sim:sync": "python3 scripts/sync_spice_model.py"
   }
 }

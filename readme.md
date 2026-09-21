@@ -72,7 +72,7 @@ The schematic and PCB are authoritative.
 | --- | --- |
 | `/OVP` orphan (TP20 only) | Hardware OVP comparator went away with MCP6562. Board regulation is `SENSE`→PA6; firmware must stop PWM on over-voltage. SPICE still models a behavioral OVP clamp. |
 | TTL blanking | PCB TTL is `COLLECTOR` through R24. SPICE blanking (EN / HV-in-range / OVP) is **not** on copper — host/firmware must gate counts. |
-| L1 DCR ~4.5 Ω | **YNR6045-102M** (LCSC C497845), 6×6 mm shielded, Isat 300 mA — replaced B82442T1105K050 (9.5 Ω DCR on a mismatched 1210 footprint). |
+| L1 DCR 4.5 Ω | **YNR6045-102M** (LCSC C497845), 6×6 mm shielded, Isat 300 mA. |
 | GM1 SparkGap | `on_board=no` annotation only; real tube is J2/J3. |
 See also [`docs/sim/NOTES.md`](docs/sim/NOTES.md).
 
@@ -83,7 +83,8 @@ Exploratory ngspice model in [`sim/hv/converter.cir`](sim/hv/converter.cir)
 gate-drive supply current are **not** included.
 
 ```bash
-python3 scripts/simulate.py
+python3 scripts/simulate.py           # regulated suite
+python3 scripts/duty_sweep.py         # HV and switch stress versus PWM duty
 python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
 ```
 
@@ -97,6 +98,8 @@ python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
 | Peak switch node | 106 V |
 | Peak inductor | 62 mA |
 | Modeled input current | 2.35 mA |
+
+Q3 is an HL2310A (60 V Vds). The 106 V switch peak at this regulated point is above that rating. See the duty sweep below.
 ### Fault / corner checks (PASS)
 
 | Case | Peak HV | Note |
@@ -115,8 +118,45 @@ python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
 
 ![Protection / fault overlay](docs/images/sim-protection.png)
 
+![Duty sweep](docs/images/sim-duty-sweep.png)
+
 Full CSV/JSON: [`docs/sim/results.csv`](docs/sim/results.csv),
-[`docs/sim/results.json`](docs/sim/results.json).
+[`docs/sim/results.json`](docs/sim/results.json),
+[`docs/sim/duty-sweep.csv`](docs/sim/duty-sweep.csv).
+
+## MCU control and readback
+
+PB2 is TCA0 WO2. The timer is single-slope at 20 MHz with a period of 2000 counts, so the PWM is 10 kHz and one count is 50 ns (0.05% duty). `firmware/main.c` ramps CMP2 from 20 to 400 (1% to 20%). A fault clears the duty and `EN` until `SENSE` falls back through the recover code.
+
+Divider values are from the schematic netlist (KiCad 10.0.6 BOM export): R1–R4 are 33 MΩ 1% (FRG2512F3305TS) and R5 is 412 kΩ 0.1% (PTFR0603B412KP9).
+
+```
+k = 412 kΩ / (132 MΩ + 412 kΩ) = 0.0031115
+```
+
+PA6 is a 10-bit conversion with the VDD reference. The firmware scale is `code = 1023 × Vpin / VDD` (0.965 counts per volt at 3.3 V). One count is **1.04 V** at the tube. The tinyAVR 1-series electrical definition uses `VREF/1024` per step; that changes the trip by 0.4 V.
+
+| | Code | HV at 3.135 V | HV at 3.3 V | HV at 3.465 V |
+| --- | --- | --- | --- | --- |
+| Recover | 376 | 370 V | 390 V | 409 V |
+| 400 V | 386 | 380 V | 400 V | 420 V |
+| Trip | 405 | 399 V | 420 V | 441 V |
+
+The same codes move ±5% with the 3.3 V rail because that rail is the ADC reference. R28/R29 (values 10 kΩ / 10 kΩ, midpoint on PA7) divide that same rail by two, so the 3V3 code stays near 512 and cannot correct the scale. Both of those MPNs are still FRG2512F3305TS, the 33 MΩ HV part, which does not match the 10 kΩ value.
+
+Worst-case divider stack (all four 33 MΩ at +1% and R5 at −0.1%, or the opposite) moves a 420 V reading by about ±4.6 V. That is a few counts. The VDD reference error is about ±21 V at the trip.
+
+`scripts/duty_sweep.py` (3.3 V, 1 µA, 340–390 ms) is the plant behind those codes:
+
+| Duty | CMP2 | HV, PWM only | Switch peak |
+| --- | --- | --- | --- |
+| 1% | 20 | 37 V | 10 V |
+| 6% | 120 | 188 V | 49 V |
+| ~7.5% | ~149 | ~233 V | 60 V (HL2310A limit) |
+| 12% | 240 | 371 V | 95 V |
+| 20% | 400 | 604 V | 155 V |
+
+Through 2–12% the slope is 30.5 V per percent of duty, **1.5 V per timer count**. The sense switch inside `converter.cir` (1.242 V on this divider, 399 V) flattens the curve once duty can reach it, which is why the regulated suite sits at 399 V with a 106 V switch peak. That switch exists only in the SPICE deck. Firmware holds one window, codes 376 to 405 (390 V to 420 V at exactly 3.3 V). Duty left at 20% with that loop stopped runs to about 604 V in this model, and the switch is already above 60 V at the 399 V clamp.
 
 ## Mechanical
 
