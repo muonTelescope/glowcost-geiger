@@ -13175,7 +13175,7 @@
 )
 (property
 "Value"
-"CTC-5 / STS-5"
+"STS-5 / SBM-20"
 (at 63.5 172.72 0)
 (show_name no)
 (do_not_autoplace no)
@@ -16427,7 +16427,7 @@
 (uuid "1c306972-af55-42f4-97e4-8dcf4710c469")
 )
 (text
-"SENSE AND TUBE\n\nR1-R4 33 MOhm 1% plus R5 412 kOhm 0.1%.\nPA6, VDD reference. About 1.04 V per count\nat the tube when VDD is 3.3 V.\nR11 R13 R15 R17 10 MOhm bleed HV to ground.\nR19 and R20 2.49 MOhm in series to the anode.\nD10 cathode clamps Q1 base. Clips are DNP.\nAbout 400 V. Discharge before handling."
+"SENSE AND TUBE\n\nR1-R4 33 MOhm 1% plus R5 412 kOhm 0.1%.\nPA6, VDD reference. About 1.04 V per count\nat the tube when VDD is 3.3 V.\nR11 R13 R15 R17 10 MOhm bleed HV to ground.\nR19 and R20 2.49 MOhm in series to the anode.\nD10 cathode clamps Q1 base. Clips are DNP.\nCTC-5, STS-5, and SBM-20 share this bias.\nAbout 400 V. Discharge before handling."
 (at 165.1 254 0)
 (effects
 (font

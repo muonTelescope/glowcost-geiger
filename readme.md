@@ -1,6 +1,6 @@
 # gLowCost-geiger
 
-A 3.3 V Geiger module for a CTC-5 / STS-5 tube. An ATtiny1616 PWM-drives a boost into a 4-stage Cockcroft–Walton ladder, counts pulses, and reads the tube voltage on PA6. Power and I²C come in on STEMMA QT. TTL is a test point. Enable is firmware.
+A 3.3 V Geiger module for a CTC-5 / STS-5 or an SBM-20. Both use the same ~400 V bias. An ATtiny1616 PWM-drives a boost into a 4-stage Cockcroft–Walton ladder, counts pulses, and regulates the tube voltage from PA6. Power and I²C come in on STEMMA QT. TTL is a test point. Enable is firmware.
 
 > Prototype. The PCB is still the previous layout, and the high-voltage design is not bench-qualified.
 
@@ -55,7 +55,7 @@ ngspice, 3.3 V, 1 µA, re-run 2026-09-21. The deck’s sense clamp is the firmwa
 
 ![Duty](docs/images/sim-duty-sweep.png)
 
-From 2% to 12% the plant rises about 30.5 V per percent of duty, about 1.5 V per timer count. The model holds 399 V once the sense node reaches 1.242 V. With that clamp removed, 20% duty runs to 604 V and the switch node to 155 V. TN2404K is 240 V, so that fault is inside the drain rating. Firmware uses 1–20% (CMP2 20–400 at 10 kHz) and stops inside codes 376–405.
+From 2% to 12% the plant rises about 30.5 V per percent of duty, about 1.5 V per timer count. The model holds 399 V once the sense node reaches 1.242 V. With that clamp removed, 20% duty runs to 604 V and the switch node to 155 V. TN2404K is 240 V, so that fault is inside the drain rating. Firmware stays at 0% until the host enables it, then starts at 1% and steps one count every 10 ms until PA6 is near 386. Duty cannot pass 20% (CMP2 400). Codes 405 and 376 remain the trip and the recover point.
 
 ![Readback](docs/images/sim-readback.png)
 
@@ -85,7 +85,7 @@ python3 scripts/duty_sweep.py
 
 ## Firmware
 
-`firmware/main.c` soft-starts PWM on boot and clamps PA6. Trip is code 405 (~420 V at 3.3 V), recover is 376 (~390 V). This bring-up prints the strapped address and does not yet serve I²C. Build with `make -C firmware` (`avr-gcc`, UPDI).
+`firmware/main.c` is the I²C slave and the HV loop. Boot leaves the boost off. A write to CTRL bit 0 starts at 1% and steps duty until PA6 is near code 386 (~400 V at 3.3 V). Trip is 405, recover is 376, and a 20% ceiling that still reads low latches off. Counts are a running total plus the previous second, on the strapped address (`0x2F` open). The register map is in [`firmware/README.md`](firmware/README.md). Build with `make -C firmware` (`avr-gcc`, UPDI).
 
 ## Still open
 
