@@ -11,8 +11,10 @@
 /*
  * gLowCost-geiger HV firmware (ATtiny1616).
  *
- * No hardware OVP comparator on this revision. PA6 SENSE
+ * No hardware OVP comparator and no enable pin. PA6 SENSE
  * (4 x 33 MOhm + 412 kOhm => ~1.24 V at 400 V) is the clamp input.
+ * The boost starts in this bring-up. A later I2C command can gate it.
+ * TWI0 is PB1 SDA / PB0 SCL. Address straps are PC0 / PC1.
  *
  *   ADC (VDD=3.3 V, 10-bit) ≈ HV_volts * 0.964
  *   400 V -> ~386,  420 V -> ~405,  390 V -> ~376
@@ -76,17 +78,14 @@ static void hv_set_duty(uint16_t duty) {
 }
 
 static void hv_enable(bool on) {
-    if (on) {
-        PORTB.OUTSET = HV_ENABLE_bm;
-    } else {
-        PORTB.OUTCLR = HV_ENABLE_bm;
+    if (!on) {
         hv_set_duty(0);
     }
 }
 
 static void hv_pwm_init(void) {
-    PORTB.DIRSET = HV_PWM_bm | HV_ENABLE_bm;
-    PORTB.OUTCLR = HV_PWM_bm | HV_ENABLE_bm;
+    PORTB.DIRSET = HV_PWM_bm;
+    PORTB.OUTCLR = HV_PWM_bm;
     TCA0.SINGLE.PER = HV_PWM_PERIOD - 1u;
     TCA0.SINGLE.CMP2 = 0;
     TCA0.SINGLE.CTRLB =
@@ -122,15 +121,15 @@ static void pulse_init(void) {
 }
 
 static void gpio_init(void) {
-    PORTB.DIRCLR = ADDR_A0_bm | ADDR_A1_bm;
-    PORTB.PIN0CTRL = PORT_PULLUPEN_bm;
-    PORTB.PIN1CTRL = PORT_PULLUPEN_bm;
+    PORTC.DIRCLR = ADDR_A0_bm | ADDR_A1_bm;
+    PORTC.PIN0CTRL = PORT_PULLUPEN_bm;
+    PORTC.PIN1CTRL = PORT_PULLUPEN_bm;
 }
 
 static uint8_t address_bits(void) {
     uint8_t a = 0;
-    if (!(PORTB.IN & ADDR_A0_bm)) a |= 1u;
-    if (!(PORTB.IN & ADDR_A1_bm)) a |= 2u;
+    if (!(PORTC.IN & ADDR_A0_bm)) a |= 1u;
+    if (!(PORTC.IN & ADDR_A1_bm)) a |= 2u;
     return a;
 }
 
@@ -179,8 +178,6 @@ int main(void) {
             uart_u32(pulse_count);
             uart_puts(" hv=");
             uart_u32(adc_read(HV_SENSE_ADC));
-            uart_puts(" v3=");
-            uart_u32(adc_read(V3V3_SENSE_ADC));
             uart_puts(" duty=");
             uart_u32(hv_duty);
             uart_puts(hv_fault ? " FAULT\r\n" : "\r\n");

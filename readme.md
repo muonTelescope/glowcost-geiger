@@ -1,185 +1,95 @@
 # gLowCost-geiger
 
-Compact four-wire Geiger module for a Raspberry Pi. It powers a CTC-5 / STS-5
-tube from 3.3 V, generates the tube high voltage, exposes raw TTL pulses, and
-uses an ATtiny1616 for pulse counting, STEMMA QT / Qwiic I²C telemetry, address
-straps, and HV/3V3 readback.
+A 3.3 V Geiger module for a CTC-5 / STS-5 tube. An ATtiny1616 PWM-drives a boost into a 4-stage Cockcroft–Walton ladder, counts pulses, and reads the tube voltage on PA6. Power and I²C come in on STEMMA QT. TTL is a test point. Enable is firmware.
 
-> **Prototype.** The PCB still has known DRC clearance issues. The HV design is
-> not bench-qualified. Use appropriate high-voltage procedures.
+> Prototype. The PCB is still the previous layout, and the high-voltage design is not bench-qualified.
 
-## Design files
+![Signal flow](docs/images/signal-flow.png)
 
-Open [`pcb/glowcost-geiger.kicad_pro`](pcb/glowcost-geiger.kicad_pro) in KiCad.
-The schematic and PCB are authoritative.
-
-| Path | Contents |
-| --- | --- |
-| [`pcb/`](pcb/) | KiCad project, symbols, footprints, 3D models |
-| [`firmware/`](firmware/) | ATtiny1616 bring-up (`main.c`, `pins.h`) |
-| [`cad/models/`](cad/models/) | Tube / clip mechanical sources |
-| [`sim/hv/`](sim/hv/) | ngspice HV deck (`converter.cir`) |
-| [`docs/sim/`](docs/sim/) | Latest SPICE metrics and plots |
-| [`manufacturing/`](manufacturing/) | Fab notes (Gerbers → GitHub Releases) |
-| [`docs/images/`](docs/images/) | README figures |
-## Board and schematic
-
-![Board top](docs/images/board-top.png)
-
-![Board bottom](docs/images/board-bottom.png)
+## Schematic
 
 ![Schematic](docs/images/schematic.png)
 
-## Design summary
+![Power and I2C](docs/images/sch-power.png)
 
-- Hardware HV boost, Cockcroft–Walton multiplier, protection, and pulse path
-- ATtiny1616-MNR drives `HV_PWM`, counts pulses, serves I2C, reads A0/A1 straps
-- Dual STEMMA QT (JST-SH): pin 1 GND, 2 3V3, 3 SDA, 4 SCL
-- Horizontal CTC-5 / STS-5 under two DNP Littelfuse C142864 clips
-- Target outline about 120 × 32 × 1.6 mm, two-layer, with HV isolation slots
+![MCU](docs/images/sch-mcu.png)
 
-### STEMMA address straps
+![Boost and multiplier](docs/images/sch-boost.png)
 
-| A1 | A0 | Address |
-| --- | --- | --- |
-| open | open | `0x2F` |
-| open | bridged | `0x30` |
-| bridged | open | `0x31` |
-| bridged | bridged | `0x32` |
-### MCU pin map
+![Tube and pulse](docs/images/sch-tube.png)
+
+STEMMA QT pins are 1 GND, 2 3V3, 3 SDA, 4 SCL. Open address straps read `0x2F`; bridging A0, A1, or both selects `0x30`, `0x31`, or `0x32`.
 
 | Net | Pin |
 | --- | --- |
-| Pulse / collector | PA2 |
-| SDA / SCL | PA4 / PA5 |
-| HV sense ADC | PA6 |
-| 3V3 sense ADC | PA7 |
-| A0 / A1 | PB0 / PB1 |
-| HV_PWM | PB2 |
-| Enable | PB3 |
-| UPDI | PA0 |
+| Collector / count | PA2 |
+| HV sense | PA6 |
+| SDA / SCL | PB1 / PB0 |
+| A0 / A1 | PC0 / PC1 |
+| HV PWM | PB2 |
 | UART TX | PA1 |
-## Electrical review (2026-09-19)
+| UPDI | PA0 |
+| TTL | TP4, from the collector through R24 |
 
-### Fixed on the schematic
+PA3, PA4, PA5, PA7, PB3, PB4, PB5, PC2, and PC3 are no-connect. PA4 and PA5 are not I²C on this part.
 
-- **Tube anode** — `R20` pad 2 had been left floating after layout cleanup; reattached to `ANODE` (J2 clips).
-- **Tube cathode** — `R21` / `R22` were not on `CATHODE`; reattached so J3 → R21→GND and R22→BASE→Q1.
+Q3 is a TN2404K-T1-GE3 (240 V, SOT-23, 1 gate, 2 source, 3 drain). L1 is a YNR6045-102M, 1 mH, 4.5 Ω. The ladder is 10 nF C0G 630 V and BAV21W, pin 1 cathode. Clips are DNP.
 
-### Still open / firmware-owned
+![Clip dimensions](docs/images/clip-comparison.png)
 
-| Issue | Notes |
+## High voltage
+
+ngspice, 3.3 V, 1 µA, re-run 2026-09-21. The deck’s sense clamp is the firmware loop, not a comparator on the board. Numbers: [`docs/sim/results.csv`](docs/sim/results.csv), [`docs/sim/duty-sweep.csv`](docs/sim/duty-sweep.csv).
+
+| At 3.3 V, 1 µA | |
 | --- | --- |
-| `/OVP` orphan (TP20 only) | Hardware OVP comparator went away with MCP6562. Board regulation is `SENSE`→PA6; firmware must stop PWM on over-voltage. SPICE still models a behavioral OVP clamp. |
-| TTL blanking | PCB TTL is `COLLECTOR` through R24. SPICE blanking (EN / HV-in-range / OVP) is **not** on copper — host/firmware must gate counts. |
-| L1 DCR 4.5 Ω | **YNR6045-102M** (LCSC C497845), 6×6 mm shielded, Isat 300 mA. |
-| GM1 SparkGap | `on_board=no` annotation only; real tube is J2/J3. |
-See also [`docs/sim/NOTES.md`](docs/sim/NOTES.md).
+| Tube voltage, 150–190 ms | 399 V (396–404 V) |
+| Time to ~396 V | 30 ms |
+| Switch peak | 106 V |
+| Inductor peak | 62 mA |
+| Input current | 2.35 mA |
 
-## HV simulation
+![Startup](docs/images/sim-startup.png)
 
-Exploratory ngspice model in [`sim/hv/converter.cir`](sim/hv/converter.cir)
-(ATtiny-PWM era behavioral gate: clock × soft-start × EN × OVP). Controller and
-gate-drive supply current are **not** included.
+![Load](docs/images/sim-load-sweep.png)
 
-```bash
-python3 scripts/simulate.py           # regulated suite
-python3 scripts/duty_sweep.py         # HV and switch stress versus PWM duty
-python3 scripts/sync_spice_model.py   # refresh sim/hv/model.ts
-```
+![Duty](docs/images/sim-duty-sweep.png)
 
-### Nominal (3.3 V, +1 µA HV load)
+From 2% to 12% the plant rises about 30.5 V per percent of duty, about 1.5 V per timer count. The model holds 399 V once the sense node reaches 1.242 V. With that clamp removed, 20% duty runs to 604 V and the switch node to 155 V. TN2404K is 240 V, so that fault is inside the drain rating. Firmware uses 1–20% (CMP2 20–400 at 10 kHz) and stops inside codes 376–405.
 
-| Metric | Value |
-| --- | --- |
-| HV mean (150–190 ms) | 399.2 V |
-| HV range | 396–404 V |
-| Startup to ~396 V | 30 ms |
-| Peak switch node | 106 V |
-| Peak inductor | 62 mA |
-| Modeled input current | 2.35 mA |
+![Readback](docs/images/sim-readback.png)
 
-Q3 is an HL2310A (60 V Vds). The 106 V switch peak at this regulated point is above that rating. See the duty sweep below.
-### Fault / corner checks (PASS)
-
-| Case | Peak HV | Note |
-| --- | --- | --- |
-| feedback_open | 413 V | Behavioral OVP holds &lt; 440 V |
-| ovp_tolerance | 426 V | Worst-direction divider corner |
-| disabled | 1.7 V | No HV when EN stuck low |
-| tube_short | current-limited | Front-end survives 1 kΩ anode–cathode |
-### Diagrams
-
-![Startup / residual HV](docs/images/sim-startup.png)
-
-![Load sweep](docs/images/sim-load-sweep.png)
-
-![Synthetic pulse → TTL](docs/images/sim-pulse.png)
-
-![Protection / fault overlay](docs/images/sim-protection.png)
-
-![Duty sweep](docs/images/sim-duty-sweep.png)
-
-Full CSV/JSON: [`docs/sim/results.csv`](docs/sim/results.csv),
-[`docs/sim/results.json`](docs/sim/results.json),
-[`docs/sim/duty-sweep.csv`](docs/sim/duty-sweep.csv).
-
-## MCU control and readback
-
-PB2 is TCA0 WO2. The timer is single-slope at 20 MHz with a period of 2000 counts, so the PWM is 10 kHz and one count is 50 ns (0.05% duty). `firmware/main.c` ramps CMP2 from 20 to 400 (1% to 20%). A fault clears the duty and `EN` until `SENSE` falls back through the recover code.
-
-Divider values are from the schematic netlist (KiCad 10.0.6 BOM export): R1–R4 are 33 MΩ 1% (FRG2512F3305TS) and R5 is 412 kΩ 0.1% (PTFR0603B412KP9).
-
-```
-k = 412 kΩ / (132 MΩ + 412 kΩ) = 0.0031115
-```
-
-PA6 is a 10-bit conversion with the VDD reference. The firmware scale is `code = 1023 × Vpin / VDD` (0.965 counts per volt at 3.3 V). One count is **1.04 V** at the tube. The tinyAVR 1-series electrical definition uses `VREF/1024` per step; that changes the trip by 0.4 V.
-
-| | Code | HV at 3.135 V | HV at 3.3 V | HV at 3.465 V |
+| | Code | 3.135 V | 3.3 V | 3.465 V |
 | --- | --- | --- | --- | --- |
 | Recover | 376 | 370 V | 390 V | 409 V |
 | 400 V | 386 | 380 V | 400 V | 420 V |
 | Trip | 405 | 399 V | 420 V | 441 V |
 
-The same codes move ±5% with the 3.3 V rail because that rail is the ADC reference. R28/R29 (values 10 kΩ / 10 kΩ, midpoint on PA7) divide that same rail by two, so the 3V3 code stays near 512 and cannot correct the scale. Both of those MPNs are still FRG2512F3305TS, the 33 MΩ HV part, which does not match the 10 kΩ value.
+The ADC reference is VDD, so those codes move about ±5% with the rail.
 
-Worst-case divider stack (all four 33 MΩ at +1% and R5 at −0.1%, or the opposite) moves a 420 V reading by about ±4.6 V. That is a few counts. The VDD reference error is about ±21 V at the trip.
+![Pulse](docs/images/sim-pulse.png)
 
-`scripts/duty_sweep.py` (3.3 V, 1 µA, 340–390 ms) is the plant behind those codes:
+![Faults](docs/images/sim-protection.png)
 
-| Duty | CMP2 | HV, PWM only | Switch peak |
-| --- | --- | --- | --- |
-| 1% | 20 | 37 V | 10 V |
-| 6% | 120 | 188 V | 49 V |
-| ~7.5% | ~149 | ~233 V | 60 V (HL2310A limit) |
-| 12% | 240 | 371 V | 95 V |
-| 20% | 400 | 604 V | 155 V |
+| Case | Peak tube voltage |
+| --- | --- |
+| Sense path open | 413 V |
+| Divider tolerance corner | 426 V |
+| Enable held off | 1.7 V |
+| 1 kΩ across the tube | 277 V, TTL stays low |
 
-Through 2–12% the slope is 30.5 V per percent of duty, **1.5 V per timer count**. The sense switch inside `converter.cir` (1.242 V on this divider, 399 V) flattens the curve once duty can reach it, which is why the regulated suite sits at 399 V with a 106 V switch peak. That switch exists only in the SPICE deck. Firmware holds one window, codes 376 to 405 (390 V to 420 V at exactly 3.3 V). Duty left at 20% with that loop stopped runs to about 604 V in this model, and the switch is already above 60 V at the 399 V clamp.
-
-## Mechanical
-
-Clip CAD (Littelfuse 102071 / LCSC C142864):
-
-- [`pcb/models/C142864.step`](pcb/models/C142864.step)
-- [`cad/models/C142864/`](cad/models/C142864/)
-
-Tube body for KiCad 3D: [`pcb/models/tube.step`](pcb/models/tube.step)
-(~108 × 11 × 11 mm). Sources: [`cad/models/tube.blend`](cad/models/tube.blend),
-[`cad/models/tube.stl`](cad/models/tube.stl). Re-export with FreeCADCmd +
-`scripts/export_tube_step.py`.
+```bash
+python3 scripts/simulate.py
+python3 scripts/duty_sweep.py
+```
 
 ## Firmware
 
-See [`firmware/`](firmware/). ATtiny1616 drives `HV_PWM`, soft-starts the boost, and enforces **software OVP** from `SENSE` (PA6) — trip ~420 V, recover ~390 V. There is no hardware OVP comparator on this revision.
+`firmware/main.c` soft-starts PWM on boot and clamps PA6. Trip is code 405 (~420 V at 3.3 V), recover is 376 (~390 V). This bring-up prints the strapped address and does not yet serve I²C. Build with `make -C firmware` (`avr-gcc`, UPDI).
 
+## Still open
 
-Build with the Makefile in [`firmware/`](firmware/). Pins are in
-`firmware/pins.h`.
-
-## Fabrication
-
-Treat this as a study board until DRC and HV clearance are clean. Order notes
-belong under [`manufacturing/`](manufacturing/); release Gerbers via GitHub
-Releases rather than committing them here.
+- The PCB copper is the previous board. Do not treat the layout as this schematic.
+- J4 and J5 are SM04B-SRSS-TB parts on the `glowcost:J1` GH footprint.
+- C11 is valued 100 nF and still carries the 10 nF, 630 V high-voltage part number.
+- Creepage is not fab-qualified. Discharge the multiplier before handling.

@@ -33,7 +33,7 @@ CLAMP_DUTY_PCT = (8, 12, 20)
 PLANT_DUTY_PCT = (8, 12, 15, 20)
 VBAT = 3.3
 ILOAD = 1e-6
-FET_VDS_MAX = 60.0  # HL2310A / C7420347
+FET_VDS_MAX = 240.0  # TN2404K-T1-GE3
 
 
 def deck_for(duty_pct: float, clamp: bool, plant: bool = False) -> str:
@@ -122,7 +122,7 @@ def run_case(duty_pct: float, clamp: bool, plant: bool = False) -> dict:
         "peak_inductor_mA": parse_meas(log, "il_pk") * 1e3,
         "input_mA": -parse_meas(log, "iin") * 1e3,
         "sense_V": parse_meas(log, "sense_avg"),
-        "fet_within_60V": parse_meas(log, "sw_pk") <= FET_VDS_MAX,
+        "within_fet_rating": parse_meas(log, "sw_pk") <= FET_VDS_MAX,
     }
     print(name, {k: row[k] for k in ("hv_mean_V", "peak_switch_V", "peak_inductor_mA", "settled")}, flush=True)
     return row
@@ -159,28 +159,48 @@ def main() -> None:
     })
     sense_rows = [r for r in rows if not r.get("plant") and not r["clamp"]]
     plant_rows = [r for r in rows if r.get("plant")]
-    fig, ax = plt.subplots(2, 1, figsize=(10, 7), layout="constrained")
+    fig, ax = plt.subplots(2, 1, figsize=(10, 7.4), layout="constrained")
+    ax[0].axhspan(390, 420, color="#16a34a", alpha=0.15, label="Firmware window at 3.3 V")
+    ax[0].axvspan(1, 20, color="#2563eb", alpha=0.06)
     if plant_rows:
-        ax[0].plot([r["duty_pct"] for r in plant_rows], [r["hv_mean_V"] for r in plant_rows], "-o", label="PWM only (sense clamp removed)")
-    ax[0].plot([r["duty_pct"] for r in sense_rows], [r["hv_mean_V"] for r in sense_rows], "-s", label="Sense comparator holds the gate")
-    ax[0].axvspan(1, 20, color="green", alpha=0.08, label="Firmware uses 1–20%")
-    ax[0].axhline(440, color="red", ls="--", label="440 V model ceiling")
-    ax[0].set(xlabel="PWM duty (%)", ylabel="HV (V)", title="3.3 V, 1 µA · 340–390 ms mean")
+        ax[0].plot([r["duty_pct"] for r in plant_rows], [r["hv_mean_V"] for r in plant_rows], "-o", color="#c2410c", label="PWM only")
+    ax[0].plot([r["duty_pct"] for r in sense_rows], [r["hv_mean_V"] for r in sense_rows], "-s", color="#1d4ed8", label="Sense clamp in the model")
+    ax[0].set(xlabel="PWM duty (%)", ylabel="Tube voltage (V)", title="3.3 V, 1 µA · mean from 340–390 ms")
     ax[0].legend()
-    ax[1].plot([r["duty_pct"] for r in sense_rows], [r["peak_switch_V"] for r in sense_rows], "-s", label="With sense clamp")
+    ax[1].axvspan(1, 20, color="#2563eb", alpha=0.06, label="Firmware uses 1–20%")
+    ax[1].plot([r["duty_pct"] for r in sense_rows], [r["peak_switch_V"] for r in sense_rows], "-s", color="#1d4ed8", label="With sense clamp")
     if plant_rows:
-        ax[1].plot([r["duty_pct"] for r in plant_rows], [r["peak_switch_V"] for r in plant_rows], "-o", label="PWM only")
-    ax[1].axhline(FET_VDS_MAX, color="red", ls="--", label="HL2310A 60 V")
-    ax[1].set(xlabel="PWM duty (%)", ylabel="Switch node peak (V)", title="Q3 drain stress versus duty")
+        ax[1].plot([r["duty_pct"] for r in plant_rows], [r["peak_switch_V"] for r in plant_rows], "-o", color="#c2410c", label="PWM only")
+    ax[1].axhline(FET_VDS_MAX, color="#b91c1c", ls="--", label="TN2404K 240 V")
+    ax[1].set(xlabel="PWM duty (%)", ylabel="Switch node peak (V)", title="Q3 drain versus duty")
     ax[1].legend()
-    fig.savefig(OUT / "duty-sweep.png", dpi=180, bbox_inches="tight")
-    fig.savefig(OUT / "duty-sweep.svg", bbox_inches="tight")
+    fig.savefig(ROOT / "docs/images/sim-duty-sweep.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
-    svg = OUT / "duty-sweep.svg"
-    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
-    image = ROOT / "docs/images/sim-duty-sweep.png"
-    image.write_bytes((OUT / "duty-sweep.png").read_bytes())
+    plot_readback()
     print("wrote", OUT / "duty-sweep.csv")
+
+
+def plot_readback() -> None:
+    """PA6 code versus tube voltage. VDD is the ADC reference."""
+    k = 412e3 / (132e6 + 412e3)
+    codes = list(range(280, 521))
+    fig, ax = plt.subplots(figsize=(10, 5.2), layout="constrained")
+    colors = {3.135: "#0369a1", 3.3: "#1d4ed8", 3.465: "#7c3aed"}
+    for vdd in (3.135, 3.3, 3.465):
+        hv = [code * vdd / (1023 * k) for code in codes]
+        ax.plot(codes, hv, color=colors[vdd], label=f"VDD {vdd:g} V")
+    ax.axvspan(376, 405, color="#16a34a", alpha=0.15, label="Codes 376–405")
+    ax.axhline(400, color="#64748b", ls=":", lw=1)
+    ax.set(
+        xlim=(300, 480),
+        ylim=(320, 520),
+        xlabel="PA6 code",
+        ylabel="Tube voltage (V)",
+        title="Sense readback. About 1.04 V per count when VDD is 3.3 V",
+    )
+    ax.legend()
+    fig.savefig(ROOT / "docs/images/sim-readback.png", dpi=180, bbox_inches="tight")
+    plt.close(fig)
 
 
 if __name__ == "__main__":

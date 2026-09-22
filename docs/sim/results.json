@@ -4,7 +4,7 @@
     0.15,
     0.19
   ],
-  "netlist_sha256": "122b244d08f88ad7c0f1e2557afffb7253458830aaf9eefe441afd30e450b5e6",
+  "netlist_sha256": "1d8e6e25201d29ab1161fe7d3ca1cbb1485a46c6b19ae616a2a482a19a649f23",
   "ngspice": "** ngspice-47 : Circuit level simulation program",
   "cases": [
     {

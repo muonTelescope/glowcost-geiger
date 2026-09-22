@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <rect width="1100" height="560" fill="#ffffff"/>
+  <style>
+    text { font-family: "DejaVu Sans", sans-serif; fill: #0f172a; }
+    .box { fill: #f8fafc; stroke: #334155; stroke-width: 1.4; }
+    .hv { fill: #fff7ed; stroke: #c2410c; }
+    .mcu { fill: #fef9c3; stroke: #a16207; }
+    .io { fill: #eff6ff; stroke: #1d4ed8; }
+    .title { font-size: 20px; font-weight: 700; }
+    .h { font-size: 14px; font-weight: 700; }
+    .s { font-size: 12px; fill: #334155; }
+    .arr { stroke: #334155; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.2 L 8 5 L 0 8.8" fill="none" stroke="#334155" stroke-width="1.4"/>
+    </marker>
+  </defs>
+  <text class="title" x="32" y="36">Signal flow</text>
+  <text class="s" x="160" y="36">3.3 V in, about 400 V on the tube, counts on the MCU</text>
+
+  <rect class="box io" x="32" y="64" width="150" height="64" rx="6"/>
+  <text class="h" x="48" y="90">STEMMA QT</text>
+  <text class="s" x="48" y="110">J4 / J5 · 3V3</text>
+
+  <path class="arr" d="M182 96 H214"/>
+  <rect class="box hv" x="214" y="64" width="130" height="64" rx="6"/>
+  <text class="h" x="230" y="90">L1</text>
+  <text class="s" x="230" y="110">1 mH · 4.5 Ω</text>
+
+  <path class="arr" d="M344 96 H376"/>
+  <rect class="box hv" x="376" y="56" width="150" height="80" rx="6"/>
+  <text class="h" x="392" y="86">SW</text>
+  <text class="s" x="392" y="106">Q3 drain</text>
+  <text class="s" x="392" y="122">~106 V at 400 V</text>
+
+  <path class="arr" d="M526 96 H558"/>
+  <rect class="box hv" x="558" y="56" width="170" height="80" rx="6"/>
+  <text class="h" x="574" y="86">4-stage ladder</text>
+  <text class="s" x="574" y="106">10 nF · BAV21W</text>
+  <text class="s" x="574" y="122">node HV</text>
+
+  <path class="arr" d="M728 96 H760"/>
+  <rect class="box hv" x="760" y="64" width="150" height="64" rx="6"/>
+  <text class="h" x="776" y="90">R19 + R20</text>
+  <text class="s" x="776" y="110">2.49 MΩ each</text>
+
+  <path class="arr" d="M910 96 H942"/>
+  <rect class="box hv" x="942" y="64" width="126" height="64" rx="6"/>
+  <text class="h" x="958" y="90">ANODE</text>
+  <text class="s" x="958" y="110">J2 · ~400 V</text>
+
+  <path class="arr" d="M451 136 V168"/>
+  <rect class="box mcu" x="376" y="168" width="150" height="72" rx="6"/>
+  <text class="h" x="392" y="196">Q3 TN2404K</text>
+  <text class="s" x="392" y="216">240 V · PB2 PWM</text>
+
+  <path class="arr" d="M643 136 V168"/>
+  <rect class="box" x="558" y="168" width="170" height="72" rx="6"/>
+  <text class="h" x="574" y="196">Sense divider</text>
+  <text class="s" x="574" y="216">4×33 MΩ + 412 kΩ</text>
+
+  <path class="arr" d="M728 204 H760"/>
+  <rect class="box mcu" x="760" y="168" width="150" height="72" rx="6"/>
+  <text class="h" x="776" y="196">PA6</text>
+  <text class="s" x="776" y="216">~1.04 V / count</text>
+
+  <rect class="box io" x="32" y="300" width="150" height="64" rx="6"/>
+  <text class="h" x="48" y="326">CATHODE</text>
+  <text class="s" x="48" y="346">J3</text>
+  <path class="arr" d="M182 332 H214"/>
+  <rect class="box" x="214" y="300" width="130" height="64" rx="6"/>
+  <text class="h" x="230" y="326">R22 · D10</text>
+  <text class="s" x="230" y="346">base clamp</text>
+  <path class="arr" d="M344 332 H376"/>
+  <rect class="box mcu" x="376" y="292" width="150" height="80" rx="6"/>
+  <text class="h" x="392" y="322">Q1</text>
+  <text class="s" x="392" y="342">pulse to PA2</text>
+  <text class="s" x="392" y="358">TTL at TP4</text>
+
+  <rect class="box io" x="32" y="420" width="220" height="88" rx="6"/>
+  <text class="h" x="48" y="448">I²C</text>
+  <text class="s" x="48" y="468">SDA PB1 · SCL PB0</text>
+  <text class="s" x="48" y="486">A0 PC0 · A1 PC1</text>
+  <text class="s" x="48" y="504">open straps → 0x2F</text>
+
+  <rect class="box" x="558" y="300" width="510" height="208" rx="6"/>
+  <text class="h" x="574" y="328">On the sheet, not in the SPICE rating</text>
+  <text class="s" x="574" y="356">Enable is firmware. There is no EN pin.</text>
+  <text class="s" x="574" y="378">The OVP divider exists only in the SPICE deck.</text>
+  <text class="s" x="574" y="400">Firmware holds codes 376–405 (390–420 V at 3.3 V).</text>
+  <text class="s" x="574" y="422">20% duty with that loop stopped is a fault, about 600 V.</text>
+  <text class="s" x="574" y="444">TN2404K is 240 V. The switch node is about 106 V</text>
+  <text class="s" x="574" y="466">while the tube is regulated, and about 155 V at 20%.</text>
+  <text class="s" x="574" y="488">The PCB has not been updated to this schematic.</text>
+</svg>
