@@ -4,4 +4,6 @@
 	(lib (name "Package_DFN_QFN") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Package_DFN_QFN.pretty") (options "") (descr "U1 VQFN-20"))
 	(lib (name "Package_TO_SOT_SMD") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Package_TO_SOT_SMD.pretty") (options "") (descr "Q3 SOT-23"))
 	(lib (name "Inductor_SMD") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Inductor_SMD.pretty") (options "") (descr "L1"))
+	(lib (name "Connector_JST") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Connector_JST.pretty") (options "") (descr "J4 J5 SM04B-SRSS-TB"))
+	(lib (name "Capacitor_SMD") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Capacitor_SMD.pretty") (options "") (descr "C11 0603"))
 )

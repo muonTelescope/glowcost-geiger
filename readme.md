@@ -33,7 +33,7 @@ STEMMA QT pins are 1 GND, 2 3V3, 3 SDA, 4 SCL. Open address straps read `0x2F`; 
 
 PA3, PA4, PA5, PA7, PB3, PB4, PB5, PC2, and PC3 are no-connect. PA4 and PA5 are not I²C on this part.
 
-Q3 is a TN2404K-T1-GE3 (240 V, SOT-23, 1 gate, 2 source, 3 drain). L1 is a YNR6045-102M, 1 mH, 4.5 Ω. The ladder is 10 nF C0G 630 V and BAV21W, pin 1 cathode. Clips are DNP.
+Q3 is a TN2404K-T1-GE3 (240 V, SOT-23, 1 gate, 2 source, 3 drain). L1 is a YNR6045-102M, 1 mH, 4.5 Ω. The ladder is 10 nF C0G 630 V and BAV21W, pin 1 cathode. Clips are DNP. J4 and J5 are SM04B-SRSS-TB (C160404) on the stock 1.00 mm JST SH footprint. C11, across VDD, is 100 nF, 50 V, X7R, 0603 (CL10B104KB8NNNC, C1591).
 
 ![Clip dimensions](docs/images/clip-comparison.png)
 
@@ -89,7 +89,6 @@ python3 scripts/duty_sweep.py
 
 ## Still open
 
-- The PCB copper is the previous board. Do not treat the layout as this schematic.
-- J4 and J5 are SM04B-SRSS-TB parts on the `glowcost:J1` GH footprint.
-- C11 is valued 100 nF and still carries the 10 nF, 630 V high-voltage part number.
+- The PCB copper is the previous board. J4, J5, and C11 are not placed. The connector on the board is still J1, the old GH header. `glowcost:J1` in the footprint library is the SRSS land, so updating footprints from the library would change that header’s copper.
 - Creepage is not fab-qualified. Discharge the multiplier before handling.
+- C142864 clip seating comes from a reconstructed model. Clearance under the tube is not checked.

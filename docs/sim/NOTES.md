@@ -2,6 +2,10 @@
 
 `sim/hv/converter.cir` is an exploratory ngspice deck. The switch is an ideal 2 Ω device, the diodes break at 250 V, and controller current is not included. L1 is 1 mH at 4.5 Ω.
 
+D1–D8 on the sheet are BAV21W-7-F (LCSC C155214), catalog 200 V DC reverse. The deck’s 250 V breakdown is a generic diode, not that part. A stuck 20% duty puts about 155 V on the switch node. Per-diode reverse voltage and hot leakage were not remeasured. The ladder stays 10 nF C0G. The X7R voltage-bias warning belongs to that high-voltage chain, not to C11 at 3.3 V.
+
+A 2026-09-15 study quoted 250 µs as a planning dead time, taken from a counter manual’s 190 µs STS-5/SBM-20 figure, and about 5.1 mA for a controller this sheet no longer has. Neither number was remeasured here. This deck’s 2.35 mA excludes the MCU. Dose rate was not calculated.
+
 What the deck adds, and the board does not:
 
 - `EN` is the firmware enable bit, modeled as a voltage source.
