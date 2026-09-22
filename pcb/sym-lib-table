@@ -1,1 +1,5 @@
-(sym_lib_table (version 7) (lib (name "Glowcost") (type "KiCad") (uri "${KIPRJMOD}/Glowcost.kicad_sym") (options "") (descr "Stock symbols with explicit source pin numbering; prototype boundaries")))
+(sym_lib_table
+	(version 7)
+	(lib (name "Glowcost") (type "KiCad") (uri "${KIPRJMOD}/Glowcost.kicad_sym") (options "") (descr "Stock symbols with explicit source pin numbering; prototype boundaries"))
+	(lib (name "MY-AA-03") (type "KiCad") (uri "${KIPRJMOD}/components/MY-AA-03/MY-AA-03.kicad_sym") (options "") (descr "C19184098 tube-end spring"))
+)

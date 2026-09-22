@@ -17,23 +17,36 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11,'axes.spines.top
 parser=argparse.ArgumentParser(); parser.add_argument('--reuse',action='store_true'); args=parser.parse_args()
 base=(ROOT/'sim/hv/converter.cir').read_text()
 cases=[(f'v{v:g}_load{i:g}',{'VBAT':v,'ILOAD':i*1e-6}) for v in (3.135,3.3,3.465) for i in (0,1,5,20)]
-cases += [('feedback_open',{'VBAT':3.3,'ILOAD':1e-6}),('ovp_tolerance',{'VBAT':3.465,'ILOAD':1e-6}),('tube_short',{'VBAT':3.3,'ILOAD':1e-6}),('disabled',{'VBAT':3.3,'ILOAD':1e-6})]
+cases += [('enable_off',{'VBAT':3.3,'ILOAD':1e-6}),('sense_open',{'VBAT':3.3,'ILOAD':1e-6}),('sense_trip',{'VBAT':3.3,'ILOAD':1e-6}),('tube_short',{'VBAT':3.3,'ILOAD':1e-6})]
 metrics=[]; waves={}
 for name,params in cases:
     deck=base
     for key,value in params.items(): deck=re.sub(rf'\b{key}=\S+',f'{key}={value:g}',deck,count=1)
-    if name=='feedback_open': deck=deck.replace('Rtop1 hv div1 33Meg','Rtop1 hv div1 1e15')
-    if name=='ovp_tolerance':
-        deck=deck.replace('Rtop1 hv div1 33Meg','Rtop1 hv div1 1e15')
-        for n in range(1,5): deck=deck.replace(f'Rovp{n} '+['hv ov1','ov1 ov2','ov2 ov3','ov3 ovp'][n-1]+' 33Meg',f'Rovp{n} '+['hv ov1','ov1 ov2','ov2 ov3','ov3 ovp'][n-1]+' 33.33Meg')
-        deck=deck.replace('Rovpbot ovp 0 402k','Rovpbot ovp 0 397.98k').replace('v(ovp)<1.242','v(ovp)<1.25442')
-        # Lower DCR stiffens the boost; soften numerical options for this corner.
-        deck=deck.replace('.options method=gear reltol=0.001 abstol=1p vntol=1u',
-                          '.options method=gear reltol=0.003 abstol=10p vntol=10u chgtol=1e-14')
-        if 'Rgate_ser' not in deck:
-            deck=deck.replace('Bgate gate 0 V=', 'Rgate_ser gate gatesrc 22\nBgate gatesrc 0 V=')
+    if name in ('enable_off','sense_open','sense_trip','tube_short'):
+        # The 402 kΩ chain and the sense switch are not on the sheet.
+        # Fault traces follow the firmware: duty 0 until enabled, a PA6
+        # trip, and a 200 ms latch once duty is already at the 20% ceiling.
+        deck=deck.replace('Sinhibit enable 0 sense 0 HYST OFF\n','')
+        deck=deck.replace('*(v(ovp)<1.242)','')
+        deck=deck.replace('Bgate gate 0 V={v(clock)*(v(delayed)>0.5)*(v(en)>2)*(v(ovp)<1.242)}','Bgate gate 0 V={v(clock)*(v(delayed)>0.5)*(v(en)>2)}')
+        for line in ('Rovp1 hv ov1 33Meg\n','Rovp2 ov1 ov2 33Meg\n','Rovp3 ov2 ov3 33Meg\n','Rovp4 ov3 ovp 33Meg\n','Rovpbot ovp 0 402k\n','Covp ovp 0 10p\n'):
+            deck=deck.replace(line,'')
+        deck=deck.replace('* Separate HV divider/reference channel: nominal 409.02 V shutdown.\n','Vovp ovp 0 0\n')
+    if name=='enable_off': deck=deck.replace('PULSE(0 3.3 5m 1u 1u 195m 500m)','0')
+    if name in ('sense_open','tube_short'):
+        # Already at the 20% ceiling. Firmware latches off 200 ms later
+        # because PA6 is still below the setpoint.
+        deck=deck.replace('PULSE(0 3.3 5m 1u 1u 195m 500m)','PULSE(0 3.3 0 1u 1u 200m 1)')
+    if name=='sense_open': deck=deck.replace('Rtop1 hv div1 33Meg','Rtop1 hv div1 1e12')
+    if name=='sense_trip':
+        deck=deck.replace('PULSE(0 3.3 5m 1u 1u 195m 500m)','DC 3.3')
+        deck=deck.replace('Bgate gate 0 V={v(clock)*(v(delayed)>0.5)*(v(en)>2)}',
+            'Bgate gate 0 V={v(clock)*(v(delayed)>0.5)*(v(en)>2)*(v(run)>0.5)}\n'
+            '* Code 405 at 3.3 V is 1.306 V on the PA6 divider. Duty stays off after that.\n'
+            'Bfwrun run 0 V={v(sense)>1.306 ? 0 : v(runlag)}\n'
+            'Rfw run runlag 10k\n'
+            'Cfw runlag 0 50n ic=1')
     if name=='tube_short': deck=deck.replace('Ctube anode cathode 5p','Ctube anode cathode 5p\nRfault anode cathode 1k')
-    if name=='disabled': deck=deck.replace('PULSE(0 3.3 5m 1u 1u 195m 500m)', '0')
     work=BUILD/name; work.mkdir(exist_ok=True)
     if args.reuse:
         assert (work/'converter.cir').read_text()==deck, f'{name}: stale deck; rerun without --reuse'
@@ -74,22 +87,27 @@ ax[0].set(xlabel='Additional HV load (µA)',ylabel='HV (V)',title='150–190 ms 
 x=waves['v3.3_load1']; fig,ax=plt.subplots(2,1,figsize=(10,6),layout='constrained'); mask=(x[:,0]>.0999)&(x[:,0]<.1004)
 ax[0].plot(x[mask,0]*1000,x[mask,7]); ax[0].set(ylabel='Cathode (V)',title='Synthetic 20 µA / 100 µs event · assumed detector threshold')
 ax[1].plot(x[mask,0]*1000,x[mask,6]); ax[1].set(ylabel='TTL output (V)',xlabel='Time (ms)'); save(fig,'pulse')
-assert metrics[-1]['hv_max']<1, 'Disabled converter generated HV'
-nominal=metrics[4+1]; assert nominal['within_360_440'], 'Nominal HV outside target window'
+nominal=next(r for r in metrics if r['case']=='v3.3_load1'); assert nominal['within_360_440'], 'Nominal HV outside target window'
 assert x[:,6].max()>3.0, 'No TTL output'
 assert abs(x[x[:,0]>.201,9]).max()<1e-6, 'Switch active while disabled'
 assert abs(x[x[:,0]>.201,6]).max()<1e-6, 'TTL active while disabled'
 print('PASS: nominal regulation, pulse output, disabled startup and shutdown blanking')
 
-fault=next(r for r in metrics if r['case']=='feedback_open')
-assert fault['peak_hv_V']<440, 'Independent OVP did not bound feedback-open fault'
-corner=next(r for r in metrics if r['case']=='ovp_tolerance')
-assert corner['peak_hv_V']<440, 'OVP worst-direction tolerance corner exceeded 440 V'
+off=next(r for r in metrics if r['case']=='enable_off')
+opened=next(r for r in metrics if r['case']=='sense_open')
+trip=next(r for r in metrics if r['case']=='sense_trip')
 short=next(r for r in metrics if r['case']=='tube_short')
-assert short['base_peak_V']<1 and short['ttl_max_V']<3.4, 'Tube-short front end out of bounds'
-fig,ax=plt.subplots(2,1,figsize=(10,7),layout='constrained')
-for name in ('v3.3_load1','feedback_open','ovp_tolerance','tube_short'):
-    z=waves[name]; ax[0].plot(z[:,0]*1000,z[:,1],label=name); ax[1].plot(z[:,0]*1000,z[:,6],label=name)
-ax[0].axhline(440,color='red',ls='--',label='SPICE clamp ceiling'); ax[0].legend(); ax[0].set(ylabel='Tube voltage (V)',title='Normal, open sense, tolerance corner, tube short')
-ax[1].set(xlabel='Time (ms)',ylabel='TTL test point (V)'); ax[1].legend(); save(fig,'protection')
-print('PASS: independent OVP and current-limited tube-short front end')
+assert off['peak_hv_V']<5, 'Enable-off case produced HV'
+assert opened['peak_hv_V']>500, 'Open sense was still clamped by the removed divider'
+assert opened['hv_at_300ms_V']<opened['peak_hv_V']*0.6, 'Open-sense ceiling did not latch off'
+assert 400<trip['peak_hv_V']<520, 'PA6 trip did not cut near the firmware threshold'
+assert trip['hv_at_300ms_V']<trip['peak_hv_V']*0.6, 'PA6 trip did not shut the converter off'
+assert short['peak_hv_V']<400 and short['hv_at_300ms_V']<short['peak_hv_V']*0.6, 'Tube short did not leave the ceiling'
+labels={'enable_off':'Enable off','sense_open':'Sense open, 20% then latch','sense_trip':'PA6 trip, then off','tube_short':'Tube short, 20% then latch'}
+fig,ax=plt.subplots(figsize=(10,4.8),layout='constrained')
+for name,label in labels.items():
+    z=waves[name]; ax.plot(z[:,0]*1000,z[:,1],label=label)
+ax.axhline(420,color='green',ls='--',lw=1,label='PA6 trip, about 420 V')
+ax.legend(); ax.set(xlabel='Time (ms)',ylabel='Tube voltage (V)',title='Firmware faults: enable off, open sense, PA6 trip, tube short')
+save(fig,'protection')
+print('PASS: firmware enable, PA6 trip, and 20% ceiling latch')

@@ -13,6 +13,162 @@
 		(comment 2 "Prototype — HV not fab-qualified")
 	)
 	(lib_symbols
+	(symbol "MY-AA-03:MY-AA-03"
+				(pin_names
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(in_pos_files yes)
+				(duplicate_pin_numbers_are_jumpers no)
+				(property "Reference" "BT"
+					(at 2.286 1.016 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(property "Value" "MY-AA-03"
+					(at 2.286 -1.016 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(property "Footprint" "MY-AA-03:MY-AA-03"
+					(at 0 -12.7 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Datasheet" "${KIPRJMOD}/components/MY-AA-03/MY-AA-03.pdf"
+					(at 0 -10.16 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Description" "BAT: SMD Negative Spring AA Contact"
+					(at 0 -7.62 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Manufacturer" "MYOUNG"
+					(at 0 -15.24 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "LCSC Part #" "C19184098"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "MPN" "MY-AA-03"
+					(at 0 -5.08 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "ki_keywords" "Battery Negative Contact AA"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(symbol "MY-AA-03_0_1"
+					(polyline
+						(pts
+							(xy 0 1.27) (xy 0 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0 1.27) (xy -1.27 5.08) (xy 0 6.35)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "MY-AA-03_1_0"
+					(pin passive line
+						(at -2.54 0 0)
+						(length 2.54)
+						(name "CONTACT"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
 		(symbol "Glowcost:ATtiny1616-M"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -12757,20 +12913,20 @@
 (uuid "71d3b0d9-31ac-44f1-8b39-611e875a783f")
 )
 (symbol
-(lib_id "Glowcost:Conn_01x02")
-(at 30.48 157.48 0)
+(lib_id "MY-AA-03:MY-AA-03")
+(at 22.86 158.75 0)
 (unit 1)
 (body_style 1)
 (exclude_from_sim no)
 (in_bom yes)
 (on_board yes)
 (in_pos_files yes)
-(dnp yes)
+(dnp no)
 (uuid "fc431649-7414-5725-8d7e-6732f715c280")
 (property
 "Reference"
 "J2"
-(at 30.48 151.13 0)
+(at 33.02 152.4 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12781,8 +12937,8 @@
 )
 (property
 "Value"
-"C142864 DNP"
-(at 30.48 163.83 0)
+"C19184098"
+(at 33.02 155.0 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12793,8 +12949,8 @@
 )
 (property
 "Footprint"
-"glowcost:J2"
-(at 30.48 157.48 0)
+"MY-AA-03:MY-AA-03"
+(at 22.86 158.75 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12806,8 +12962,8 @@
 )
 (property
 "Datasheet"
-""
-(at 30.48 157.48 0)
+"${KIPRJMOD}/components/MY-AA-03/MY-AA-03.pdf"
+(at 22.86 158.75 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12819,8 +12975,8 @@
 )
 (property
 "Description"
-""
-(at 30.48 157.48 0)
+"SMD negative spring, both tube ends"
+(at 22.86 158.75 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12832,8 +12988,8 @@
 )
 (property
 "MPN"
-"10207101009"
-(at 30.48 157.48 0)
+"MY-AA-03"
+(at 22.86 158.75 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12845,8 +13001,8 @@
 )
 (property
 "LCSC"
-"C142864"
-(at 30.48 157.48 0)
+"C19184098"
+(at 22.86 158.75 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12860,10 +13016,6 @@
 "1"
 (uuid "d91a078a-a7da-58ae-80ae-7ff8c63c6af2")
 )
-(pin
-"2"
-(uuid "8a33419b-9fc4-55e5-9d34-2e38820a16bb")
-)
 (instances
 (project
 "glowcost-geiger"
@@ -12876,20 +13028,20 @@
 )
 )
 (symbol
-(lib_id "Glowcost:Conn_01x02")
-(at 30.48 175.26 0)
+(lib_id "MY-AA-03:MY-AA-03")
+(at 22.86 176.53 0)
 (unit 1)
 (body_style 1)
 (exclude_from_sim no)
 (in_bom yes)
 (on_board yes)
 (in_pos_files yes)
-(dnp yes)
+(dnp no)
 (uuid "03e3b697-20fa-553b-9338-f2c5bddb2541")
 (property
 "Reference"
 "J3"
-(at 30.48 168.91 0)
+(at 33.02 170.18 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12900,8 +13052,8 @@
 )
 (property
 "Value"
-"C142864 DNP"
-(at 30.48 181.61 0)
+"C19184098"
+(at 33.02 172.72 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12912,8 +13064,8 @@
 )
 (property
 "Footprint"
-"glowcost:J3"
-(at 30.48 175.26 0)
+"MY-AA-03:MY-AA-03"
+(at 22.86 176.53 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12925,8 +13077,8 @@
 )
 (property
 "Datasheet"
-""
-(at 30.48 175.26 0)
+"${KIPRJMOD}/components/MY-AA-03/MY-AA-03.pdf"
+(at 22.86 176.53 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12938,8 +13090,8 @@
 )
 (property
 "Description"
-""
-(at 30.48 175.26 0)
+"SMD negative spring, both tube ends"
+(at 22.86 176.53 0)
 (show_name no)
 (do_not_autoplace no)
 (effects
@@ -12951,8 +13103,8 @@
 )
 (property
 "MPN"
-"10207101009"
-(at 30.48 175.26 0)
+"MY-AA-03"
+(at 22.86 176.53 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12964,8 +13116,8 @@
 )
 (property
 "LCSC"
-"C142864"
-(at 30.48 175.26 0)
+"C19184098"
+(at 22.86 176.53 0)
 (hide yes)
 (show_name no)
 (do_not_autoplace no)
@@ -12979,10 +13131,6 @@
 "1"
 (uuid "2e90266e-abbf-5439-a5f9-4d2775c0fa19")
 )
-(pin
-"2"
-(uuid "a633e8d8-daa6-5f5b-a64f-3336c47b756a")
-)
 (instances
 (project
 "glowcost-geiger"
@@ -12993,42 +13141,6 @@
 )
 )
 )
-)
-(wire
-(pts
-(xy 25.4 157.48)
-(xy 20.32 157.48)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 160 40 40 1)
-)
-(uuid "28b8e05f-a732-4a53-8b60-304397fb9e02")
-)
-(wire
-(pts
-(xy 25.4 160.02)
-(xy 20.32 160.02)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 160 40 40 1)
-)
-(uuid "98e8ab7e-8900-421a-8633-7218edacb7a0")
-)
-(wire
-(pts
-(xy 20.32 157.48)
-(xy 20.32 160.02)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 160 40 40 1)
-)
-(uuid "077237ad-bb18-49ef-b43f-e86483e35ea6")
 )
 (wire
 (pts
@@ -13060,54 +13172,6 @@
 (color 0 0 0 0)
 (uuid "c1ed8109-bcbc-44cf-b9ce-d9a1c683a0a0")
 )
-(junction
-(at 20.32 157.48)
-(diameter 0)
-(color 0 0 0 0)
-(uuid "debbcc84-f060-4ea0-af4f-a6b4dab836aa")
-)
-(junction
-(at 20.32 160.02)
-(diameter 0)
-(color 0 0 0 0)
-(uuid "4d0fb254-da2b-4d7d-b311-d34019856a01")
-)
-(wire
-(pts
-(xy 25.4 175.26)
-(xy 20.32 175.26)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 60 80 80 1)
-)
-(uuid "71a6db6b-06f9-424a-b3d0-c417b87cac08")
-)
-(wire
-(pts
-(xy 25.4 177.8)
-(xy 20.32 177.8)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 60 80 80 1)
-)
-(uuid "70820e93-772f-4d7e-8bc2-8ffb2da194d8")
-)
-(wire
-(pts
-(xy 20.32 175.26)
-(xy 20.32 177.8)
-)
-(stroke
-(width 0.1524)
-(type default)
-(color 60 80 80 1)
-)
-(uuid "3dbc0f68-7ba1-40f6-bf3d-8e065750fba8")
-)
 (wire
 (pts
 (xy 20.32 176.53)
@@ -13138,18 +13202,6 @@
 (color 0 0 0 0)
 (uuid "ea7c0279-5eed-43fc-877c-b4bcb48f62a8")
 )
-(junction
-(at 20.32 175.26)
-(diameter 0)
-(color 0 0 0 0)
-(uuid "e27cdd29-6761-45fd-bbd3-f982fece3538")
-)
-(junction
-(at 20.32 177.8)
-(diameter 0)
-(color 0 0 0 0)
-(uuid "02ca62fa-e97b-41df-877e-257508889322")
-)
 (symbol
 (lib_id "Glowcost:SparkGap")
 (at 63.5 166.37 0)
@@ -13175,7 +13227,7 @@
 )
 (property
 "Value"
-"STS-5 / SBM-20"
+"SBM-20"
 (at 63.5 172.72 0)
 (show_name no)
 (do_not_autoplace no)
@@ -16427,7 +16479,7 @@
 (uuid "1c306972-af55-42f4-97e4-8dcf4710c469")
 )
 (text
-"SENSE AND TUBE\n\nR1-R4 33 MOhm 1% plus R5 412 kOhm 0.1%.\nPA6, VDD reference. About 1.04 V per count\nat the tube when VDD is 3.3 V.\nR11 R13 R15 R17 10 MOhm bleed HV to ground.\nR19 and R20 2.49 MOhm in series to the anode.\nD10 cathode clamps Q1 base. Clips are DNP.\nCTC-5, STS-5, and SBM-20 share this bias.\nAbout 400 V. Discharge before handling."
+"SENSE AND TUBE\n\nR1-R4 33 MOhm 1% plus R5 412 kOhm 0.1%.\nPA6, VDD reference. About 1.04 V per count\nat the tube when VDD is 3.3 V.\nR11 R13 R15 R17 10 MOhm bleed HV to ground.\nR19 and R20 2.49 MOhm in series to the anode.\nD10 cathode clamps Q1 base.\nSBM-20, about 108 mm. Both ends are\nC19184098 springs. A spacer holds the tube.\nAbout 400 V. Discharge before handling."
 (at 165.1 254 0)
 (effects
 (font

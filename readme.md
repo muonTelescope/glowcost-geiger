@@ -1,8 +1,8 @@
 # gLowCost-geiger
 
-A 3.3 V Geiger module for a CTC-5 / STS-5 or an SBM-20. Both use the same ~400 V bias. An ATtiny1616 PWM-drives a boost into a 4-stage Cockcroft–Walton ladder, counts pulses, and regulates the tube voltage from PA6. Power and I²C come in on STEMMA QT. TTL is a test point. Enable is firmware.
+A 3.3 V Geiger module for an SBM-20. An ATtiny1616 PWM-drives a boost into a 4-stage Cockcroft–Walton ladder, counts pulses, and regulates the tube voltage from PA6. Power and I²C come in on STEMMA QT. TTL is a test point. Enable is firmware.
 
-> Prototype. The PCB is still the previous layout, and the high-voltage design is not bench-qualified.
+> Prototype. The board matches this schematic's parts. New nets are not fully routed, and the high-voltage design is not bench-qualified.
 
 ![Signal flow](docs/images/signal-flow.png)
 
@@ -33,9 +33,7 @@ STEMMA QT pins are 1 GND, 2 3V3, 3 SDA, 4 SCL. Open address straps read `0x2F`; 
 
 PA3, PA4, PA5, PA7, PB3, PB4, PB5, PC2, and PC3 are no-connect. PA4 and PA5 are not I²C on this part.
 
-Q3 is a TN2404K-T1-GE3 (240 V, SOT-23, 1 gate, 2 source, 3 drain). L1 is a YNR6045-102M, 1 mH, 4.5 Ω. The ladder is 10 nF C0G 630 V and BAV21W, pin 1 cathode. Clips are DNP. J4 and J5 are SM04B-SRSS-TB (C160404) on the stock 1.00 mm JST SH footprint. C11, across VDD, is 100 nF, 50 V, X7R, 0603 (CL10B104KB8NNNC, C1591).
-
-![Clip dimensions](docs/images/clip-comparison.png)
+Q3 is a TN2404K-T1-GE3 (240 V, SOT-23, 1 gate, 2 source, 3 drain). L1 is a YNR6045-102M, 1 mH, 4.5 Ω. The ladder is 10 nF C0G 630 V and BAV21W, pin 1 cathode. Both tube ends are JLC C19184098 (MY-AA-03). A printed spacer holds the SBM-20. J4 and J5 are SM04B-SRSS-TB (C160404) on the stock 1.00 mm JST SH footprint. C11, across VDD, is 100 nF, 50 V, X7R, 0603 (CL10B104KB8NNNC, C1591).
 
 ## High voltage
 
@@ -71,12 +69,14 @@ The ADC reference is VDD, so those codes move about ±5% with the rail.
 
 ![Faults](docs/images/sim-protection.png)
 
+The fault traces follow the firmware. With the sense path open, nothing trips, so the converter sits at the 20% ceiling until the latch. With PA6 working, the duty clears when that divider crosses the trip. The ceiling traces start already at 20%; the climb from 1% takes about 3.8 s. After a real trip the firmware starts again at 1% once PA6 falls to code 376. This trip trace leaves the duty off.
+
 | Case | Peak tube voltage |
 | --- | --- |
-| Sense path open | 413 V |
-| Divider tolerance corner | 426 V |
 | Enable held off | 1.7 V |
-| 1 kΩ across the tube | 277 V, TTL stays low |
+| Sense open, 20% for 200 ms, then latch | 705 V, switch 179 V |
+| PA6 reaches the trip | 423 V, then the duty stays off |
+| 1 kΩ across the tube, 20% for 200 ms, then latch | 281 V |
 
 ```bash
 python3 scripts/simulate.py
@@ -87,8 +87,10 @@ python3 scripts/duty_sweep.py
 
 `firmware/main.c` is the I²C slave and the HV loop. Boot leaves the boost off. A write to CTRL bit 0 starts at 1% and steps duty until PA6 is near code 386 (~400 V at 3.3 V). Trip is 405, recover is 376, and a 20% ceiling that still reads low latches off. Counts are a running total plus the previous second, on the strapped address (`0x2F` open). The register map is in [`firmware/README.md`](firmware/README.md). Build with `make -C firmware` (`avr-gcc`, UPDI).
 
-## Still open
+## Board
 
-- The PCB copper is the previous board. J4, J5, and C11 are not placed. The connector on the board is still J1, the old GH header. `glowcost:J1` in the footprint library is the SRSS land, so updating footprints from the library would change that header’s copper.
-- Creepage is not fab-qualified. Discharge the multiplier before handling.
-- C142864 clip seating comes from a reconstructed model. Clearance under the tube is not checked.
+The outline is 120 × 48 mm. J2 and J3 are both JLC C19184098, at the ends of the SBM-20. The ATtiny, inductor, switch, and STEMMA QT connectors sit on the bay along the lower edge. Multiplier copper was kept where it still matched the sheet. DRC reports 56 open connections, so the new nets are not fully routed. The 0.4 mm VQFN is tighter than the 0.25 mm clearance rule. Creepage is not fab-qualified. Discharge the multiplier before handling. The printed spacer is not in the board file.
+
+![Top](docs/images/board-top.png)
+
+![Bottom](docs/images/board-bottom.png)

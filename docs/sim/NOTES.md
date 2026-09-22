@@ -9,8 +9,9 @@ A 2026-09-15 study quoted 250 µs as a planning dead time, taken from a counter 
 What the deck adds, and the board does not:
 
 - `EN` is the firmware enable bit, modeled as a voltage source.
-- The 402 kΩ chain on `ovp` is only in this deck. The sheet regulates from PA6.
-- A stuck 20% duty is a fault in the open-loop sweep (~604 V, switch peak ~155 V). Q3 on the sheet is a 240 V TN2404K.
+- The regulated traces still use a fast clamp at the setpoint, including the 402 kΩ `ovp` chain. That chain is not on the sheet. The sheet regulates from PA6.
+- The fault traces delete that clamp. Enable off stays at 1.7 V. An open sense path has no trip, so 20% duty runs to about 705 V with a 179 V switch peak, then the 200 ms ceiling latch drops the duty. A working PA6 divider cuts the duty at about 423 V. A 1 kΩ tube short peaks at about 281 V and then latches the same way. Those ceiling traces start at 20%; the firmware takes about 3.8 s to climb there from 1%, and a real trip restarts at 1% after code 376.
+- With the sense divider still connected, the open-loop duty sweep at 20% is about 604 V and the switch peak is about 155 V. Q3 on the sheet is a 240 V TN2404K. The diodes in this deck break at 250 V.
 
 Re-run:
 

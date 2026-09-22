@@ -6,4 +6,5 @@
 	(lib (name "Inductor_SMD") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Inductor_SMD.pretty") (options "") (descr "L1"))
 	(lib (name "Connector_JST") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Connector_JST.pretty") (options "") (descr "J4 J5 SM04B-SRSS-TB"))
 	(lib (name "Capacitor_SMD") (type "KiCad") (uri "${KICAD10_FOOTPRINT_DIR}/Capacitor_SMD.pretty") (options "") (descr "C11 0603"))
+	(lib (name "MY-AA-03") (type "KiCad") (uri "${KIPRJMOD}/components/MY-AA-03/MY-AA-03.pretty") (options "") (descr "J2 J3 C19184098"))
 )
